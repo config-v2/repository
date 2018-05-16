@@ -1,0 +1,10 @@
+body{margin-top: 70px; margin-bottom: 70px;}
+em {color: red;}
+.panel-heading-info{
+	float: right !important;
+	
+}
+.panel-heading-info small {
+color: red;
+}
+.footer{font-size: 10px;}

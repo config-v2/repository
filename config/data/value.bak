@@ -1,0 +1,93 @@
+<?php
+/* * * * * * * * * * * * * * * * * * * * * * * 
+ *   Configuration v.2.0 for LandingPage:    *
+ *                 config_v2                 *
+ *   Last edition by 15.05.2018, 11:14:51    *
+ * * * * * * * * * * * * * * * * * * * * * * */
+
+$product = "Демонстрационный ленд Конфигуратора v.2.0";
+$og_tag = "1";
+$og_title = "Демонстрационный ленд Конфигуратора v.2.0";
+$og_desc = "Демонстрационное описание ленда";
+$btn = "Сохранить";
+$valuta = "руб";
+$price_new = "490";
+$price_old_select = "1";
+$skidka = "53";
+$country_script = "auto";
+$mask_phone = "-";
+$head_index64 = "";
+$head_thanks64 = "";
+$body_index64 = "";
+$body_thanks64 = "";
+$email = "Ваш EMAIL";
+$sender = "%product% <noreply@%host%>";
+$subject = "Заказ товара - %product%";
+$message = "										<table border='0'>
+	<tr><td colspan='2' height='40' ><p align='center'><i>Информация о покупателе:</i></td></tr>
+	<tr><td><b>IP покупателя:</b></td><td>%ip%</td></tr><tr>
+	<td><b>Использование прокси:</b></td><td>%proxy%</td></tr>
+	<tr><td><b>Страна (по IP):</b></td><td>%country_code%</td></tr>
+	<tr><td><b>Город (по IP):</b></td><td>%city%</td></tr>
+	<tr><td><b>Установленный язык:</b> </td><td>%lang%</td></tr>
+	<tr><td><b>Браузер: </b> </td><td>%browser%</td></tr>
+	<tr><td><b>Устройство:</b></td><td>%device%</td></tr>
+	<tr><td><b>ОС:</b></td><td>%os%</td></tr>
+	<tr><td><b>Время на ленде:</b></td><td>%time_land%</td></tr>
+	<tr><td><b>Кол-во визитов:</b></td><td>%visit%</td></tr>
+	<tr><td valign='top'><b>Прошлые визиты:</b></td>
+	<td>%visit_text%</td></tr>
+	<tr><td><b>Разрешение экрана:</b></td><td>%screen%</td></tr>
+	<tr><td><b>Заряд батареи:</b></td><td>%batery_proc%</td></tr>
+	<tr><td><b>Зарядное устройство:</b></td><td>%batery_zar%</td></tr>
+	<tr><td><b>Реферер:</b></td><td><a href='%refer%' target='_blank'>%refer%</a></td></tr>
+	<tr><td colspan='2'><p align='center'><b>UTM-метки: </b></p>%utm% </td></tr>
+	<tr><td><b>Комментарий к заказу:  </b></td><td><p>%comment%</p></td></tr>
+	</table>";
+$comment = "";
+$tele_id = "";
+$seller = "Название предприятия";
+$seller_adress = "Адрес предприятия";
+$contact_phone1 = "Телефон1";
+$contact_phone2 = "Телефон2";
+$contact_phone3 = "Телефон3";
+$contact_email = "Контактный e-mail";
+$script_pokup = "1";
+$pokup1 = "21";
+$pokup1n = "15";
+$pokup2 = "24";
+$pokup2n = "23";
+$script = "1";
+$auditoria = "all";
+$title = "Демонстрационный ленд Конфигуратора v.2.0";
+$tovar = "1";
+$vsego = "10";
+$delay2 = "10";
+$delay1 = "30";
+$modal = "1";
+$modal_title = "Понравилось это предложение?";
+$modal_text = "Мы расскажем Вам все о нашем товаре, предложим наилучшие условия и ознакомим с подходящими акционными предложениями!";
+$modal_text2 = "Оператор перезвонит Вам через 15-30 минут.";
+$button = "ПЕРЕЗВОНИТЬ МНЕ";
+$modal_delay = "30";
+$upsel = "1";
+$upsel_title = "C этим товаром обычно покупают";
+$upsel_pic = "8047920-12534469.jpg";
+$upsel_pic_h = "150";
+$upsel_url = "";
+$upsel_url_title = "Заказывайте у менеджера при звонке";
+$upsel_delay = "";
+$price_old = floor(($price_new/(100-$skidka))*100);
+$og_pic = 'd51bb65016fa2140dc4b8f7ef6614359.jpg';
+$ver='2.0';
+$power1='Powered by GreyGler';
+$power2='https://greygler.github.io';
+$time_land=3;
+
+/* * * * * * * * * * * * * * * * * * * * * * * 
+ *           Created for config_v2           *
+ *            Powered by GreyGler            *
+ *        https://greygler.github.io         *
+ * * * * * * * * * * * * * * * * * * * * * * */
+
+?>
