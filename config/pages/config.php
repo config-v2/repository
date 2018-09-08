@@ -256,7 +256,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 	  	<label class="col-sm-3 control-label">Способ отправки: <em>*</em></label><div class="col-sm-9">
 		
 		
-		<select group="eml" class="form-control" name="mail_type" id="mail_type">
+		<select group="eml" class="form-control" name="mail_type" id="mail_type" >
 		 <option <? if ($mail_type!='1') echo('selected') ?> value="">Прямая отправка (по умолчанию) </option>
 		 <option <? if ($mail_type=='1') echo('selected') ?> value="1">Отправка через SMTP</option>
 		
@@ -267,7 +267,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 		<div id="smtp_group" class="form-group <? if ($mail_type!='1') echo('hidden') ?>" >
 	  	<label class="col-sm-3 control-label">SMTP-сервер: <em>*</em></label>
 		<div class="col-sm-2">
-		<select class="form-control" name="smtp_prot" id="smtp_prot" <? if ($mail_type!='1') echo('disabled') ?>>
+		<select class="form-control" name="smtp_prot" id="smtp_prot" <? if ($mail_type!='1') echo('disabled') ?> onchange="mailtype(this.value)">
 		<option <? if ($smtp_prot=='') echo('selected') ?>  value="">Без сертификата</option>
 		<option <? if ($smtp_prot!='') echo('selected') ?> value="ssl">SSL</option>
 		</select>
@@ -275,13 +275,13 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 		</div>
 		
 		<div class="col-sm-6"><input group="eml" <? if ($mail_type!='1') echo('disabled') ?> class="form-control" required id="smtp" type="text" name="smtp" value="<?= $smtp ?>" placeholder="Адрес SMTP сервера."><span class="help-block">Адрес SMTP сервера</span></div>
-		<div class="col-sm-1"><input group="eml" <? if ($mail_type!='1') echo('disabled') ?> class="form-control" required id="port" type="text" name="port" value="<?= $port ?>" placeholder="Порт"><span class="help-block">Порт</span></div>
+		<div class="col-sm-1"><input group="eml" <? if ($mail_type!='1') echo('disabled') ?> class="form-control" required id="port" type="text" name="port" value="<? if ($port!="") echo $port; else echo ("25"); ?>" placeholder="Порт"><span class="help-block">Порт</span></div>
 		
 		</div>
 		
 		  <div id="smtp_log_group" class="form-group <? if ($mail_type!='1') echo('hidden') ?>">
 	  	<label class="col-sm-3 control-label">Доступ: <em>*</em></label>
-		<div class="col-sm-5"><input group="eml" <? if ($mail_type!='1') echo('disabled') ?> class="form-control" required id="smtp_log" type="text" name="smtp_log" value="<?= $smtp_log ?>" placeholder="Логин к SMPT-серверу"></div>
+		<div class="col-sm-5"><input group="eml" <? if ($mail_type!='1') echo('disabled') ?> class="form-control" required id="smtp_log" type="text" name="smtp_log" value="<?= $smtp_log ?>" placeholder="Логин к SMPT-серверу" oninput="tologin(this.value)"></div>
 		<div class="col-sm-4"><input group="eml" <? if ($mail_type!='1') echo('disabled') ?> class="form-control" required id="smtp_pass" type="text" name="smtp_pass" value="<?= $smtp_pass?>" placeholder="Пароль к SMTP-серверу"></div>
 		</div>
 		

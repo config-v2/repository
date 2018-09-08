@@ -316,6 +316,18 @@ document.getElementById("price_new").oninput = function() {
 	
 	
 	};
+	
+	function tologin(login){
+		var sender="Уведомление;"+login;
+		$('#sender_smtp').prop('value',sender);
+		
+	}
+	
+	function mailtype(mt)
+	{
+		if (mt=='ssl') var port='465'; else var port='25';
+		$("#port").prop('value',port);
+	}
  
  $('document').ready(function() {
 	 var r=0;
