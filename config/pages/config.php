@@ -295,7 +295,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 		 
 	<div id="sender_group_smtp" class="form-group <? if ($mail_type!='1') echo('hidden') ?>">
 	  	<label class="col-sm-3 control-label">Отправитель: <em>*</em></label><div class="col-sm-9"><input group="eml" <? if ($mail_type!='1') echo('disabled') ?> class="form-control" required id="sender_smtp" type="text" name="sender_smtp" value="<? if ($sender_smtp!="") echo $sender_smtp; else echo ($config['email']['sender_smtp']); ?>" placeholder="Имя и адрес отправителя, от которого будут приходить уведомления о покупке.">
-		<span class="help-block"><i>Формат: </i>Имя_отправителя;e-mail_отправителя (через ;)<br><strong>Важно! E-mail отправителя должен быть указан тот, которому принадлежит указанный SMTP-сервер!</strong></span>
+		<span class="help-block"><i>Формат: </i>Имя_отправителя;e-mail_отправителя (через ;)<br><strong>Важно! E-mail отправителя должен быть указан тот, который принадлежит указаннлму SMTP-серверу!</strong></span>
 	 	 </div></div>
 		 
 	 <div id="subject_group" class="form-group">
