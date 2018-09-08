@@ -4,16 +4,10 @@ require_once('data/logins.php');
 if (isset($_SERVER['HTTPS'])) $scheme = $_SERVER['HTTPS']; else $scheme = '';
 if (($scheme) && ($scheme != 'off')) $scheme = 'https'; else $scheme = 'http';
 $host_path=str_ireplace('index.php','', $_SERVER['PHP_SELF']);
-$host=$_SERVER['HTTP_HOST'].$host_path;
-$server="{$scheme}://{$host}";
-//print_r($_SESSION);
+$host=$_SERVER['HTTP_HOST'].$host_path; $server="{$scheme}://{$host}";
 if (($_SESSION['login']==$login) AND ($_SESSION['password'])==$password) {
-require_once('data/array.php');
-
-$filename = "data/value.php";
-
+require_once('data/array.php'); $filename = "data/value.php";
 if (file_exists($filename)) include ($filename);
-
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +15,7 @@ if (file_exists($filename)) include ($filename);
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Конфигуратор v.<?= $config['ver']?> для <?= $_SERVER['SERVER_NAME']; ?></title>
+  <title><?= $config['name'] ?> v.<?= $config['ver']?> для <?= $_SERVER['SERVER_NAME']; ?></title>
   <meta name="author" content="GreyGler" />
     <meta name="copyright" content="https://greygler.github.io" />
 	 <link rel="shortcut icon" href="favicon.png" type="image/png">
@@ -36,58 +30,13 @@ if (file_exists($filename)) include ($filename);
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.34.0/mode/htmlmixed/htmlmixed.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.34.0/addon/edit/matchbrackets.js"></script>
 	<script type="text/javascript" id="widget-wfp-script" src="https://secure.wayforpay.com/server/pay-widget.js?ref=button"></script> 
-	<script type="text/javascript">function runWfpWdgt() {var wayforpay = new Wayforpay(); wayforpay.invoice('https://secure.wayforpay.com/button/b44c537ac9673');}</script>
-	<script type="text/javascript" language="javascript">
- 	function pass() {
- 	  var msg   = $('#pass_form').serialize();
-        $.ajax({
-          type: 'POST',
-          url: 'options/password_save.php',
-          data: msg,
-          success: function(data) {
-			$('#pass_block').addClass('hidden');
-			$('#no').addClass('hidden');
-			$('#ok').removeClass('hidden');
-            $('#results').html(data);
-            $('#success').addClass('hidden');
-         
-          },
-          error:  function(xhr, str){
-	    alert('Возникла ошибка: ' + xhr.responseCode);
-          }
-        });
- 
-    }
-	</script>
-	<script type="text/javascript" language="javascript">
-	 	function clearfunc() {
- 	  var msg   = $('#clear_form').serialize();
-        $.ajax({
-          type: 'POST',
-          url: 'options/clear.php',
-          data: msg,
-          success: function(data) {
-			$('#clear_block').addClass('hidden');
-			$('#no-clear').addClass('hidden');
-			$('#ok-clear').removeClass('hidden');
-            $('#results-clear').html(data);
-            $('#suc-clear').addClass('hidden');
-         
-          },
-          error:  function(xhr, str){
-	    alert('Возникла ошибка: ' + xhr.responseCode);
-          }
-        });
- 
-    }
-</script>
-
-	  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
+	<script type="text/javascript">function runWfpWdgt(){(new Wayforpay).invoice("https://secure.wayforpay.com/button/b44c537ac9673")}function pass(){var s=$("#pass_form").serialize();$.ajax({type:"POST",url:"options/password_save.php",data:s,success:function(s){$("#pass_block").addClass("hidden"),$("#no").addClass("hidden"),$("#ok").removeClass("hidden"),$("#results").html(s),$("#success").addClass("hidden")},error:function(s,a){alert("Возникла ошибка: "+s.responseCode)}})}function clearfunc(){var s=$("#clear_form").serialize();$.ajax({type:"POST",url:"options/clear.php",data:s,success:function(s){$("#clear_block").addClass("hidden"),$("#no-clear").addClass("hidden"),$("#ok-clear").removeClass("hidden"),$("#results-clear").html(s),$("#suc-clear").addClass("hidden")},error:function(s,a){alert("Возникла ошибка: "+s.responseCode)}})}</script>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
 	<style>
  .CodeMirror { height: auto; border: 1px solid #ddd; }
  .CodeMirror-scroll { max-height: 200px; }
@@ -106,16 +55,16 @@ if (file_exists($filename)) include ($filename);
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
      </button>
-     <a class="navbar-brand" href="/config"><strong>Конфигуратор</strong> v.<?= $config['ver']?> </a>
+     <a class="navbar-brand" href="/config"><strong><?= $config['name'] ?></strong> v.<?= $config['ver']?> </a>
     </div>
     <div class="navbar-collapse collapse">
      
      <ul class="nav navbar-nav navbar-right">
-      <li><a data-toggle="modal" data-target="#pass" href="#">Сменить пароль</a></li>
-	    <li ><a data-toggle="modal" data-target="#clear" href="#">Очистить настройки</a></a></li>
-      <li <? if ($_GET['page']=="help") echo('class="active"'); ?>><a  href="?page=help">Помощь</a></li>
-		<li> <a href="#" onclick="runWfpWdgt();">Поддержать проект</a></li>
-      <li class="active"><a data-toggle="modal" data-target="#exit" href="#"><i class="fa fa-power-off" aria-hidden="true"></i> Выход</a></a></li>
+      <li><a data-toggle="modal" data-target="#pass" href="<?= $config['menu_link']['pass'] ?>"><?= $config['menu_name']['pass'] ?></a></li>
+	    <li ><a data-toggle="modal" data-target="#clear" href="<?= $config['menu_link']['clear'] ?>"><?= $config['menu_name']['clear'] ?></a></a></li>
+      <li <? if ($_GET['page']=="help") echo('class="active"'); ?>><a  href="<?= $config['menu_link']['help'] ?>"><?= $config['menu_name']['help'] ?></a></li>
+		<li> <a href="<?= $config['menu_link']['don'] ?>" onclick="runWfpWdgt();"><?= $config['menu_name']['don'] ?></a></li>
+      <li class="active"><a data-toggle="modal" data-target="#exit" href="<?= $config['menu_link']['exit'] ?>"><i class="fa fa-power-off" aria-hidden="true"></i> <?= $config['menu_name']['exit'] ?></a></li>
      </ul>
     </div><!--/.nav-collapse -->
    </div>
@@ -126,7 +75,7 @@ if (file_exists($filename)) include ($filename);
 
   	<div class="alert alert-danger alert-dismissable text-center">
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
- <a href="#" class="alert-link "><strong>Внимание!</strong> В целях безопасности поменяйте пароль для входа в админ-панель конфигуратора</a>
+ <a href="#" class="alert-link "><strong>Внимание!</strong> В целях безопасности поменяйте пароль для входа в админ-панель <?= $config['name'] ?>а</a>
 </div>
 <? } ?>
  
@@ -140,7 +89,7 @@ if (file_exists($filename)) include ($filename);
 <div class="navbar navbar-default navbar-fixed-bottom footer" role="navigation">
    <div class="container">
     
-     <a class="navbar-brand footer" href="<?= $config['site_conf'] ?>">&copy; 2015-<?= date("Y")?> Конфигуратор для лендингов v.<?= $config['ver']?></a>
+     <a class="navbar-brand footer" href="<?= $config['site_conf'] ?>">&copy; 2015-<?= date("Y")?> <?= $config['name'] ?> для лендингов v.<?= $config['ver']?></a>
    
 		
 		<ul class="nav navbar-nav navbar-right">
@@ -169,7 +118,7 @@ if (file_exists($filename)) include ($filename);
   <div class="form-group">
     <label for="pass_new" class="col-sm-4 control-label">Пароль:</label>
     <div class="col-sm-8">
-      <input type="password" class="form-control" id="pass_clear" name="password" placeholder="Пароль от конфигуратора">
+      <input type="password" class="form-control" id="pass_clear" name="password" placeholder="Пароль от <?= $config['name'] ?>а">
     </div>
 	
   </div>
@@ -198,7 +147,7 @@ if (file_exists($filename)) include ($filename);
     <h4 class="modal-title" id="exbody">Выход</h4>
    </div>
    <div class="modal-body">
-    Хотите закончить работу с конфигуратором?
+    Хотите закончить работу с <?= $config['name'] ?>ом?
    </div>
    <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>

@@ -59,29 +59,10 @@ class Lands{
 	public function body($body_index64)
 	{
 		if (file_exists("config/data/value.php")) include("config/data/value.php");
-		if ($script_pokup==1) { ?>
-		<script>
-		$(document).ready(function(){		
-		$('<link rel="stylesheet" href="config/css/insite.css">').appendTo('head');	});
-		var timerId = setInterval(function() {
-			$('#pokup').fadeOut(200)
-			var pokup2 = $('#pokup').text();
-			var	pokup2_new=Number(pokup2)+1;
-		
-			$('#pokup').fadeIn(200).text(pokup2_new);
-			}, <?= $pokup2n?>000);
-		var timerId = setInterval(function() {
-			$('#insite').fadeOut(200)
-			var pokup1 = $('#insite').text();
-			var	pokup1_new=Number(pokup1)+1;
-		
-			$('#insite').fadeIn(200).text(pokup1_new);
-			}, <?= $pokup1n?>000);
-		
-		</script>
-		<? echo('<div class="insite">Сейчас на сайте: <span id="insite">'.$pokup1.'</span> | Покупок сегодня: <span id="pokup">'.$pokup2.'</span></div>');
-		}
-		echo(base64_decode($body_index64));
+		if ($script_pokup==1) {
+		echo('<div class="insite hidden">Сейчас на сайте: <span id="insite"></span> | Покупок сегодня: <span id="pokup"></span></div>'); ?>
+		<script>$(document).ready(function(){$('<link rel="stylesheet" href="config/css/insite.css">').appendTo("head");$('.insite').removeClass("hidden")}),null==localStorage.pokup2&&(localStorage.pokup2="<?= $pokup2; ?>"),null==localStorage.pokup1&&(localStorage.pokup1="<?= $pokup1; ?>"),$("#pokup").fadeIn(200).text(localStorage.pokup2),$("#insite").fadeIn(200).text(localStorage.pokup1);var timerId=setInterval(function(){$("#pokup").fadeOut(200);var e=$("#pokup").text(),t=Number(e)+1;$("#pokup").fadeIn(200).text(t),localStorage.pokup2=t},<?= $pokup2n; ?>000);timerId=setInterval(function(){$("#insite").fadeOut(200);var e=$("#insite").text(),t=Number(e)+1;$("#insite").fadeIn(200).text(t),localStorage.pokup1=t},<?= $pokup1n; ?>000);</script>
+		<? } echo(base64_decode($body_index64));
 	}
 	
 	public function random_name($ipol)
@@ -127,114 +108,16 @@ class Lands{
 		return $one_city;
 	}
 	
+	public function form($formname)
+	{
+		echo('<input type="hidden" name="formname" value="'.$formname.'">');
+		
+	}
 	
 	public function modal()
 	{ 
 		if (file_exists("config/data/value.php")) include("config/data/value.php");?>
-<script>
-$(document).ready(function(){
-$('<link href="config/css/modal.css" type="text/css" rel="stylesheet"/>').appendTo('head');
-
-});
-$(function () {
-    function TemplateRefresh() {
-        ModalRefresh();
-    }
-
-    $(window).resize(function () {
-        TemplateRefresh();
-    });
-    TemplateRefresh();
-
-    /* -----------------------------------------------------------------------------------------
-     * Modal Refresh
-     */
-    function ModalRefresh() {
-        if ($('.modal').is(':visible')) {
-            var modalBlock = $('.modal:visible .modal-block'),
-                width = parseInt(modalBlock.width()),
-                height = parseInt(modalBlock.height());
-            if ($(window).height() > height + 20) {
-                modalBlock.addClass('modal-top').removeClass('margin-t-b').css('margin-top', -1 * (height / 2));
-            }
-            else {
-                modalBlock.addClass('margin-t-b').removeClass('modal-top');
-            }
-            if ($(window).width() > width) {
-                modalBlock.addClass('modal-left').removeClass('margin-l').css('margin-left', -1 * (width / 2));
-            }
-            else {
-                modalBlock.addClass('margin-l').removeClass('modal-left');
-            }
-        }
-    }
-
-
-    /* -----------------------------------------------------------------------------------------
-     * Modal Show
-     */
-    $(document).on('click', 'a[modal]', function(){
-        var modalWindow = $('div#' + $(this).attr('modal'));
-        if (modalWindow.length){
-            modalWindow.fadeIn('fast');
-            $('body').addClass('modal-show');
-            ModalRefresh();
-            return false;
-        }
-    });
-
-
-    /* -----------------------------------------------------------------------------------------
-     * Modal Hide
-     */
-    function ModalHide() {
-        $('.modal:visible').fadeOut('fast', function(){
-            $('body').removeClass('modal-show');
-        });
-    }
-
-    $(document)
-        .on('click', '.icon-close, .modal', function (event) {
-            if (event.target != this)
-                return false;
-            else
-                ModalHide();
-        })
-        .on('keydown', function (key) {
-            if (key.keyCode == 27)
-                ModalHide();
-        })
-        .on('click', '.modal > *', function (event) {
-            event.stopPropagation();
-            return true;
-        })
-        .on('submit', '#kmacb-form form', function () {
-            var name = $('#kmacb-form form input[name=name]').val(),
-                phone = $('#kmacb-form form input[name=phone]').val();
-            $('form:first input[name=name]').val(name);
-            $('form:first input[name=phone]').val(phone);
-            $('form:first').submit();
-            $('form:first input[name=name]').val('');
-            $('form:first input[name=phone]').val('');
-			return false;
-        });
-
-
-	try {
-		//var kmainputs = kmacb();
-		//$('#kmacb-form form').append(kmainputs);
-		//$('body').append('<div id="kmacb"><a title="Перезвонить мне" href="#" modal="kmacb-form"><div class="kmacb-circle"></div><div class="kmacb-circle-fill"></div><div class="kmacb-img-circle"></div></a></div>');
-
-		setTimeout(
-			function start_kmacb() {
-                $('body').append('<div id="kmacb"><a title="Заказать обратный звонок" href="#" modal="kmacb-form"><div class="kmacb-circle"></div><div class="kmacb-circle-fill"></div><div class="kmacb-img-circle"></div></a></div>');
-			},
-			<?= $modal_delay ?>000
-		);
-	}
-	catch (e) {}
-}); 
-</script> 
+<script>$(document).ready(function(){$('<link href="config/css/modal.css" type="text/css" rel="stylesheet"/>').appendTo("head")}),$(function(){function a(){o()}function o(){if($(".modal").is(":visible")){var a=$(".modal:visible .modal-block"),o=parseInt(a.width()),i=parseInt(a.height());$(window).height()>i+20?a.addClass("modal-top").removeClass("margin-t-b").css("margin-top",i/2*-1):a.addClass("margin-t-b").removeClass("modal-top"),$(window).width()>o?a.addClass("modal-left").removeClass("margin-l").css("margin-left",o/2*-1):a.addClass("margin-l").removeClass("modal-left")}}function i(){$(".modal:visible").fadeOut("fast",function(){$("body").removeClass("modal-show")})}$(window).resize(function(){a()}),a(),$(document).on("click","a[modal]",function(){var a=$("div#"+$(this).attr("modal"));if(a.length)return a.fadeIn("fast"),$("body").addClass("modal-show"),o(),!1}),$(document).on("click",".icon-close, .modal",function(a){if(a.target!=this)return!1;i()}).on("keydown",function(a){27==a.keyCode&&i()}).on("click",".modal > *",function(a){return a.stopPropagation(),!0}).on("submit","#kmacb-form form",function(){var a=$("#kmacb-form form input[name=name]").val(),o=$("#kmacb-form form input[name=phone]").val();return $("form:first input[name=name]").val(a),$("form:first input[name=phone]").val(o),$("form:first").submit(),$("form:first input[name=name]").val(""),$("form:first input[name=phone]").val(""),!1});try{setTimeout(function(){$("body").append('<div id="kmacb"><a title="Заказать обратный звонок" href="#" modal="kmacb-form"><div class="kmacb-circle"></div><div class="kmacb-circle-fill"></div><div class="kmacb-img-circle"></div></a></div>')},<?= $modal_delay ?>000)}catch(a){}});</script> 
 
 <div id="kmacb-form" class="modal">
     <div class="modal-block">
@@ -246,9 +129,8 @@ $(function () {
                <form method="POST" action="zakaz.php" onsubmit="if(this.name.value==''){alert('Введите Ваше имя');return false}if(this.phone.value==''){alert('Введите Ваш номер телефона');return false}return true;">
                     <input type="text" name="name" required placeholder="Ваше имя" />
                     <input class="phone" type="text" name="phone" required placeholder="Ваш номер телефона" /><br>
-					
-                    <input type="submit" value="<?= $button ?>" />
-                    
+					<input type="submit" value="<?= $button ?>" />
+					<? lands::form('Скрипт -Перезвоните мне-'); ?>
                 </form> 
                 <p class="bold"><?= $modal_text2 ?></p>
             </div>
@@ -276,28 +158,7 @@ else $country=$country_script;
 
 
 <script>
-$(document).ready(function(){
-$('<link rel="stylesheet" href="config/css/uved.css">').appendTo('head');
-
-var i = 0;
-function yved(){
-i=1;
-$('.yved:nth-child('+i+')').fadeIn(500).delay(5000).fadeOut(500);
-
-}
-setTimeout(function(){
-setInterval(
-function(){
-i=i+1;
-if(i><?= $vsego ?>) i=1;
-$('.yved:nth-child('+i+')').fadeIn(500).delay(5000).fadeOut(500);
-
-},<?= $delay1 ?>000);
-yved();
-
-},<?= $delay2 ?>000);
-
-});
+$(document).ready(function(){$('<link rel="stylesheet" href="config/css/uved.css">').appendTo("head");var e=0;setTimeout(function(){setInterval(function(){(e+=1)>0&&(e=<?= $vsego ?>),$(".yved:nth-child("+e+")").fadeIn(500).delay(5e3).fadeOut(500)},<?= $delay1 ?>000),e=1,$(".yved:nth-child("+e+")").fadeIn(500).delay(5e3).fadeOut(500)},<?= $delay2 ?>000)});
 
 </script> 
 	<div class="yvedw">
@@ -332,6 +193,8 @@ yved();
 			<? if ($mask_phone!="-"){ ?>
 			$('<script src="config/js/jquery.maskedinput.js">').appendTo('head');
 			$('<script src="config/js/mask<?= $mask_phone ?>.js">').appendTo('head');
+			$('input[name=phone]').addClass('phone');
+			$('input[name=tel]').addClass('phone');
 			<? }
 			if ($script_pokup==1) { ?> 
 			
@@ -362,7 +225,7 @@ yved();
 		<?
 		
 
-if ($modal) { Lands::modal(); } 
+if ($modal>0) { Lands::modal(); } 
 
 
 if ($script>0) { Lands::script(); } 
@@ -429,5 +292,7 @@ if ($script>0) { Lands::script(); }
 	
 			
 <? }
+
+	
 
  } ?>

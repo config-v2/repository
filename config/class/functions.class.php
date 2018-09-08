@@ -117,7 +117,7 @@ public function text($array){
 
 public function device_name($device)
 {
-	if ($device>0) return "Мобильное устр-во"; else return "Компьютер";
+	if ($device>0) return "Моб. устр."; else return "Компьютер";
 }
 
 public  function getOS($userAgent) {
@@ -217,57 +217,110 @@ public  function getOS($userAgent) {
 
 
 public function GetRealIp() {
- if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-   $ip=$_SERVER['HTTP_CLIENT_IP'];
- } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-  $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
- } else {
-   $ip=$_SERVER['REMOTE_ADDR'];
- }
- return $ip;
+  if($_SERVER) {
+    if($_SERVER['HTTP_X_FORWARDED_FOR'])
+      $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    elseif($_SERVER['HTTP_CLIENT_IP'])
+      $ip = $_SERVER['HTTP_CLIENT_IP'];
+    else
+      $ip = $_SERVER['REMOTE_ADDR'];
+  }
+  else {
+    if(getenv('HTTP_X_FORWARDED_FOR'))
+      $ip = getenv('HTTP_X_FORWARDED_FOR');
+    elseif(getenv('HTTP_CLIENT_IP'))
+      $ip = getenv('HTTP_CLIENT_IP');
+    else
+      $ip = getenv('REMOTE_ADDR');
+  }
+ 
+  return $ip;
 }
 
 
-public function isProxy($serv_array){ // Определяем прокси
-        $proxy_headers = array(
-            'HTTP_VIA',
-            'HTTP_X_FORWARDED_FOR',
-            'HTTP_FORWARDED_FOR',
-            'HTTP_X_FORWARDED',
-            'HTTP_FORWARDED',
-            'HTTP_CLIENT_IP',
-            'HTTP_FORWARDED_FOR_IP',
-            'VIA',
-            'X_FORWARDED_FOR',
-            'FORWARDED_FOR',
-            'X_FORWARDED',
-            'FORWARDED',
-            'CLIENT_IP',
-            'FORWARDED_FOR_IP',
-            'HTTP_PROXY_CONNECTION'
-        );
-        foreach($proxy_headers as $x){
-            if (isset($serv_array[$x])){
-                return true;
-            }
-        }
-        return false;    
-    }
-	
-public function proxy($is_proxy)
-{
-	if ($is_proxy==true) return "Обнаружено"; else return "Не обнаружено";
+public function isProxy($myIP) {
+   $scan_headers = array(
+			'HTTP_VIA',
+			'HTTP_X_FORWARDED_FOR',
+			'HTTP_FORWARDED_FOR',
+			'HTTP_X_FORWARDED',
+			'HTTP_FORWARDED',
+			'HTTP_CLIENT_IP',
+			'HTTP_FORWARDED_FOR_IP',
+			'VIA',
+			'X_FORWARDED_FOR',
+			'FORWARDED_FOR',
+			'X_FORWARDED',
+			'FORWARDED',
+			'CLIENT_IP',
+			'FORWARDED_FOR_IP',
+			'HTTP_PROXY_CONNECTION'
+		);
+ 
+   $flagProxy = false;
+   $libProxy = 'No proxy';
+ 
+   foreach($scan_headers as $i)
+			if($_SERVER[$i]) $flagProxy = true;
+ 
+   if (    in_array($_SERVER['REMOTE_PORT'], array(8080,80,6588,8000,3128,553,554))
+        || @fsockopen($_SERVER['REMOTE_ADDR'], 80, $errno, $errstr, 30))
+      $flagProxy = true;
+ 
+   // Proxy LookUp
+   if ( $flagProxy == true &&
+        isset($_SERVER['REMOTE_ADDR']) && 
+        !empty($_SERVER['REMOTE_ADDR']) )
+         // Transparent Proxy
+         // REMOTE_ADDR = proxy IP
+         // HTTP_X_FORWARDED_FOR = your IP   
+         if ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && 
+              !empty($_SERVER['HTTP_X_FORWARDED_FOR']) &&
+              $_SERVER['HTTP_X_FORWARDED_FOR'] == $myIP
+            ) 
+             $libProxy = 'Transparent Proxy';
+               // Simple Anonymous Proxy            
+              // REMOTE_ADDR = proxy IP
+              // HTTP_X_FORWARDED_FOR = proxy IP
+         else if ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && 
+                   !empty($_SERVER['HTTP_X_FORWARDED_FOR']) &&
+                   $_SERVER['HTTP_X_FORWARDED_FOR'] == $_SERVER['REMOTE_ADDR']
+                 )
+                 $libProxy = 'Simple Anonymous (Transparent) Proxy';
+              // Distorting Anonymous Proxy            
+              // REMOTE_ADDR = proxy IP
+              // HTTP_X_FORWARDED_FOR = random IP address
+              else if ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && 
+                        !empty($_SERVER['HTTP_X_FORWARDED_FOR']) &&
+                        $_SERVER['HTTP_X_FORWARDED_FOR'] != $_SERVER['REMOTE_ADDR']
+                      )
+                      $libProxy = 'Distorting Anonymous (Transparent) Proxy';
+                   // Anonymous Proxy
+                   // HTTP_X_FORWARDED_FOR = not determined
+                   // HTTP_CLIENT_IP = not determined
+                   // HTTP_VIA = determined
+                   else if ( $_SERVER['HTTP_X_FORWARDED_FOR'] == '' &&
+                             $_SERVER['HTTP_CLIENT_IP'] == '' &&
+                             !empty($_SERVER['HTTP_VIA'])
+                           )
+                           $libProxy = 'Anonymous Proxy';
+                        // High Anonymous Proxy            
+                        // REMOTE_ADDR = proxy IP
+                        // HTTP_X_FORWARDED_FOR = not determined                    
+                        else
+                           $libProxy = 'High Anonymous Proxy';
+ 
+   return $libProxy;
 }
 	
-
 public function geo_ip($ip)
 	{
 	$is_bot = preg_match(
  "~(Google|Yahoo|Rambler|Bot|Yandex|Spider|Snoopy|Crawler|Finder|Mail|curl)~i", $_SERVER['HTTP_USER_AGENT']);
-if ((!$is_bot) AND ($ip!="localhost")) $geo = json_decode(file_get_contents('http://geo.infotools.pp.ua/?ip='.$ip), true);
+if ((!$is_bot) AND ($ip!="localhost")) $geo = json_decode(file_get_contents('http://api.sypexgeo.net/json/'.$ip), true);
 else 
 {
-	$geo['country']['name_ru']="Интернетия";
+	$geo['country']['name_ru']="Локалхост";
 	$geo['country']['iso']='AA';
 	$geo['city']['name_ru']='Мухосранск';
 	$geo['region']['name_ru']="Задрыщенский уезд";
@@ -284,6 +337,18 @@ return $geo;
 		$infogeo_ip['region']=$geo['region']['name_ru'];
 		return $infogeo_ip;
 	}
+	
+	
+ 
+ public function is_ip($ip, $list_ip) // принадлежность ip списку
+ {
+	if ($list_ip!="") {
+	$all_ip = preg_split("/[\s,]+/", $list_ip); 
+	if (in_array($ip, $all_ip )) {$is_ip=1; echo ("ok");} else {$is_ip=0;}
+	} else {$is_ip=0;}
+	return $is_ip;
+ }
+ 
  public function date_rus()
 	{
 		$month=array('','Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря');
@@ -291,5 +356,33 @@ return $geo;
 		$date=$week_short[date("N")].", ".date("j")." ".$month[date("n")]." ".date("Y")." г.";
 		return $date;
 	}
+
+
+
+public function translit($s) 
+{ // Транслитерция кириллица -> латиница, для ссылок
+	$s = (string) $s; // преобразуем в строковое значение
+	$s = strip_tags($s); // убираем HTML-теги
+	$s = str_replace(array("\n", "\r"), " ", $s); // убираем перевод каретки
+	$s = preg_replace("/\s+/", ' ', $s); // удаляем повторяющие пробелы
+	$s = trim($s); // убираем пробелы в начале и конце строки
+	
+	$s = function_exists('mb_strtolower') ? mb_strtolower($s , 'UTF-8') : strtolower($s, 'UTF-8'); // переводим строку в нижний регистр (иногда надо задать локаль)
+	$s = strtr($s, array('а'=>'a','б'=>'b','в'=>'v','г'=>'g','д'=>'d','е'=>'e','ё'=>'e','ж'=>'j','з'=>'z','и'=>'i','й'=>'y','к'=>'k','л'=>'l','м'=>'m','н'=>'n','о'=>'o','п'=>'p','р'=>'r','с'=>'s','т'=>'t','у'=>'u','ф'=>'f','х'=>'h','ц'=>'c','ч'=>'ch','ш'=>'sh','щ'=>'shch','ы'=>'y','э'=>'e','ю'=>'yu','я'=>'ya','ъ'=>'','ь'=>''));
+	$s = preg_replace("/[^0-9a-z-_ ]/i", "", $s); // очищаем строку от недопустимых символов
+	$s = str_replace(" ", "-", $s); // заменяем пробелы знаком минус
+return $s; // возвращаем результат
+}
+
+public function scheme()
+{
+if (isset($_SERVER['HTTPS']))
+    $scheme = $_SERVER['HTTPS'];
+else
+    $scheme = '';
+if (($scheme) && ($scheme != 'off')) $scheme = 'https';
+else $scheme = 'http'; 
+return $scheme;
+}
 }
 ?>

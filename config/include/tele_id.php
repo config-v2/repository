@@ -2,7 +2,7 @@
 	
 $data_tel = array(
     'id'      		  => $tele_id, // ID в телеграмме 
-	'mess' 			  => "Поступил заказ", // Tекст уведомления
+	'mess' 			  => $tele_mess, // Tекст уведомления
     'product'     	  => $product,        // Название продукта
 	'price' 		  => "{$price_new} {$valuta}",
 	'date'			  => "{$date} {$time}",
@@ -12,6 +12,7 @@ $data_tel = array(
 	'longtime'		  => $time_in_land,
 	'visit'			  => $visit,
 	'comment'         => $mess_tele,    // комментарий
+	'crm'        	  => $crm_tele,    // Ответ СРМ
 	'device' 		  => $device,
 	'os'			  => $os,
 	'browser' 		  => $browser,

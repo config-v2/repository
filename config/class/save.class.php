@@ -15,10 +15,12 @@ public function config($str)
 			$str = str_replace("%skidka%", '{$skidka}', $str);
 			$str = str_replace("%sender%", '{$sender}', $str);
 			$str = str_replace("%product%", '{$product}', $str);
+			$str = str_replace("%domen%", '{$domen}', $str);
 			
 			$str = str_replace("%date%", '{$date}', $str);
 			$str = str_replace("%time%", '{$time}', $str);
 			$str = str_replace("%ip%", '{$remote_addr}', $str);
+			$str = str_replace("%remote_host%", '{$remote_host}', $str);
 			$str = str_replace("%host%", '{$host}', $str);
 			$str = str_replace("%server%", '{$server}', $str);
 			$str = str_replace("%lang%", '{$lang}', $str);
@@ -30,6 +32,7 @@ public function config($str)
 			$str = str_replace("%batery_zar%", '{$batery_zar}', $str);
 			$str = str_replace("%time_land%", '{$time_in_land}', $str);
 			$str = str_replace("%country_code%", '{$country_code}', $str);
+			$str = str_replace("%country%", '{$country}', $str);
 			$str = str_replace("%browser%", '{$browser}', $str);
 			$str = str_replace("%refer%", "{".'$_SESSION[\'referer\']'."}", $str);
 			$str = str_replace("%comment%", '{$comment}', $str);

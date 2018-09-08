@@ -1,4 +1,6 @@
-<? 
+<?
+if (file_exists('../index.php')) {
+
 if ($product=='') {
 $title_index = file_get_contents('../index.php');
 $title_index = stristr($title_index, '<title>');
@@ -7,15 +9,12 @@ $product = str_replace("<title>", "", $title_index);
 }
 
 if ($desc=='') {
-	
-	if (file_exists('../index.php')) {
-    $tags = get_meta_tags('../index.php');
+	$tags = get_meta_tags('../index.php');
 	$desc=$tags['description'];
-} else {
-    echo ('<div class="alert alert-danger alert-dismissable text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><a href="#" class="alert-link "><strong>Очевидно Вы забыли переименовать INDEX.HTML в INDEX.PHP</strong><br>Это необходимо исправить, иначе конфигуратор не будет работать</a></div>');
-}
-}
-?>
+} } else {?>
+    <div class="alert alert-danger alert-dismissable text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><a href="#" class="alert-link "></a><strong>Очевидно Вы забыли переименовать INDEX.HTML в INDEX.PHP</strong><br>Это необходимо исправить, иначе конфигуратор не будет работать<br>После исправления обновите страницу</div>
+	<script> $('document').ready(function() {$('.btn-primary').prop('disabled',true).prop('title','Переименуйте Index.html в index.php').attr('value','Сохранение не возможно');});</script><? } ?>
+
 
 	<form id="form_conf" class="form-horizontal" action="options/config_save.php" enctype="multipart/form-data"  role="form" method="POST" >
 	<div id="product_group" class="form-group">
@@ -75,7 +74,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 </div> 
 </div>
 	<div class="form-group text-center">
-		<input type="submit" name="btn" value="Сохранить" class="btn btn-primary">
+		<input type="submit"  value="Сохранить" class="btn btn-primary">
 	</div>
 		</fieldset>
    </div>
@@ -174,7 +173,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 		<option <? if (($country_script=="") OR ($country_script=="auto")) echo "selected"; ?> value="auto">Авто (по IP посетителя)</option>
 		 <? foreach($config['geo'] as $key => $value) { ?>
 		
-		<option value="<?= $key ?>"><?= $value ?></option>
+		<option <? if ($country_script==$key) echo "selected" ?> value="<?= $key ?>"><?= $value ?></option>
 		
 		 <? } ?>
 		</select>
@@ -185,17 +184,17 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 	  	<label class="col-sm-3 control-label">Маска номера: </label>
 		 <div class="col-sm-9">
      <select  group="geo" id="mask_phone" name="mask_phone" class="form-control" >
-		 <option selected value="-">Отключено</option>
+		 <option <? if ($mask_phone=='-') echo "selected" ?> value="-">Отключено</option>
 		 <? foreach($config['mask'] as $key => $value) { ?>
 		
-		<option value="<?= $key ?>"><?= $value ?></option>
+		<option <? if ($mask_phone==$key) echo "selected" ?> value="<?= $key ?>"><?= $value ?></option>
 		
 		 <? } ?>
 		</select>
 		</div>
 		</div>
 		<div class="form-group text-center">
-		<input type="submit" name="btn" value="Сохранить" class="btn btn-primary">
+		<input type="submit"  value="Сохранить" class="btn btn-primary">
 	</div>
  </fieldset>
    </div>
@@ -225,7 +224,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 		</div>
   </div>
 		<div class="form-group">
-		<label class="col-sm-3 control-label">Блок body для Index: </label><div class="col-sm-9"><textarea class="form-control" rows="5" id="body_index64" name="body_index64" cols="70"><?= base64_decode($body_index644); ?></textarea> 
+		<label class="col-sm-3 control-label">Блок body для Index: </label><div class="col-sm-9"><textarea class="form-control" rows="5" id="body_index64" name="body_index64" cols="70"><?= base64_decode($body_index64); ?></textarea> 
 		<span class="help-block">Код для размещения на ГЛАВНОЙ СТРАНИЦЕ в тегах <strong>&#8249;body&#8250; Ваш код &#8249;&#47;body&#8250;</strong> индексной страницы. Здесь можно разместить код счетчиков Яндекс-метрики, Mail.Top</span>
 		</div>
   </div>
@@ -233,7 +232,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 	 	<label class="col-sm-3 control-label">Блок body для Thanks:</label><div class="col-sm-9"><textarea class="form-control" rows="5" id="body_thanks64" name="body_thanks64" cols="70"><?= base64_decode($body_thanks64); ?></textarea> <span class="help-block">Код для для размещения на СТРАНИЦЕ "СПАСИБО" (form-ok.php) в тегах <strong>&#8249;body&#8250; Ваш код &#8249;&#47;body&#8250;</strong> страницы благодарности. Здесь можно разместить код реагирование на совершение лида (покупка), счетчиков Яндекс-метрики, Mail.Top</span></div>
   </div>
 	<div class="form-group text-center">
-		<input type="submit" name="btn" value="Сохранить" class="btn btn-primary">
+		<input type="submit"  value="Сохранить" class="btn btn-primary">
 	</div>
 	 </fieldset>
    </div>
@@ -253,11 +252,52 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
    <div class="panel-body">
 	  <fieldset>
  	 <legend><small>Настройки отправки заказа на электронную почту</small></legend>
-   <div id="email_group" class="form-group">
-	  	<label class="col-sm-3 control-label">E-mail: <em>*</em></label><div class="col-sm-9"><input group="eml" class="form-control" required id="email" type="text" name="email" value="<?= $email ?>" placeholder="E-mail, на который будут приходить уведомления о покупке."></div></div>
-	 <div id="sender_group" class="form-group">
-	  	<label class="col-sm-3 control-label">Отправитель: <em>*</em></label><div class="col-sm-9"><input group="eml" class="form-control" required id="sender" type="text" name="sender" value="<? if ($sender!="") echo $sender; else echo ($config['email']['sender']) ?>" placeholder="Имя и адрес отправителя, от которого будут приходить уведомления о покупке.">
+	 <div id="type_group" class="form-group">
+	  	<label class="col-sm-3 control-label">Способ отправки: <em>*</em></label><div class="col-sm-9">
+		
+		
+		<select group="eml" class="form-control" name="mail_type" id="mail_type">
+		 <option <? if ($mail_type!='1') echo('selected') ?> value="">Прямая отправка (по умолчанию) </option>
+		 <option <? if ($mail_type=='1') echo('selected') ?> value="1">Отправка через SMTP</option>
+		
+		</select>
+		<span class="help-block">Если вы не знаете, что это такое - возьмите способ отправки <strong>"Прямая отправка"</strong> </span>
+		</div></div>
+		
+		<div id="smtp_group" class="form-group <? if ($mail_type!='1') echo('hidden') ?>" >
+	  	<label class="col-sm-3 control-label">SMTP-сервер: <em>*</em></label>
+		<div class="col-sm-2">
+		<select class="form-control" name="smtp_prot" id="smtp_prot" <? if ($mail_type!='1') echo('disabled') ?>>
+		<option <? if ($smtp_prot=='') echo('selected') ?>  value="">Без сертификата</option>
+		<option <? if ($smtp_prot!='') echo('selected') ?> value="ssl">SSL</option>
+		</select>
+		<span class="help-block">Сертификат</span>
+		</div>
+		
+		<div class="col-sm-6"><input group="eml" <? if ($mail_type!='1') echo('disabled') ?> class="form-control" required id="smtp" type="text" name="smtp" value="<?= $smtp ?>" placeholder="Адрес SMTP сервера."><span class="help-block">Адрес SMTP сервера</span></div>
+		<div class="col-sm-1"><input group="eml" <? if ($mail_type!='1') echo('disabled') ?> class="form-control" required id="port" type="text" name="port" value="<?= $port ?>" placeholder="Порт"><span class="help-block">Порт</span></div>
+		
+		</div>
+		
+		  <div id="smtp_log_group" class="form-group <? if ($mail_type!='1') echo('hidden') ?>">
+	  	<label class="col-sm-3 control-label">Доступ: <em>*</em></label>
+		<div class="col-sm-5"><input group="eml" <? if ($mail_type!='1') echo('disabled') ?> class="form-control" required id="smtp_log" type="text" name="smtp_log" value="<?= $smtp_log ?>" placeholder="Логин к SMPT-серверу"></div>
+		<div class="col-sm-4"><input group="eml" <? if ($mail_type!='1') echo('disabled') ?> class="form-control" required id="smtp_pass" type="text" name="smtp_pass" value="<?= $smtp_pass?>" placeholder="Пароль к SMTP-серверу"></div>
+		</div>
+		
+		
+   <div id="email_group" class="form-group ">
+	  	<label class="col-sm-3 control-label">E-mail: <em>*</em></label><div class="col-sm-9"><input group="eml" class="form-control" required id="email" type="text" name="email" value="<? if ($email!="") echo $email; else echo ($config['email']['email']) ?>" placeholder="E-mail, на который будут приходить уведомления о покупке."></div></div>
+	 <div id="sender_group" class="form-group <? if ($mail_type=='1') echo('hidden') ?>">
+	  	<label class="col-sm-3 control-label">Отправитель: <em>*</em></label><div class="col-sm-9"><input group="eml" <? if ($mail_type=='1') echo('disabled') ?> class="form-control" required id="sender" type="text" name="sender" value="<? if ($sender!="") echo $sender; else echo ($config['email']['sender']); ?>" placeholder="Имя и адрес отправителя, от которого будут приходить уведомления о покупке.">
+		<span class="help-block"><i>Формат: </i> <strong>Имя_отправителя -noreply@%domen%-</strong></span>
 	 	 </div></div>
+		 
+	<div id="sender_group_smtp" class="form-group <? if ($mail_type!='1') echo('hidden') ?>">
+	  	<label class="col-sm-3 control-label">Отправитель: <em>*</em></label><div class="col-sm-9"><input group="eml" <? if ($mail_type!='1') echo('disabled') ?> class="form-control" required id="sender_smtp" type="text" name="sender_smtp" value="<? if ($sender_smtp!="") echo $sender_smtp; else echo ($config['email']['sender_smtp']); ?>" placeholder="Имя и адрес отправителя, от которого будут приходить уведомления о покупке.">
+		<span class="help-block"><i>Формат: </i>Имя_отправителя;e-mail_отправителя (через ;)<br><strong>Важно! E-mail отправителя должен быть указан тот, которому принадлежит указанный SMTP-сервер!</strong></span>
+	 	 </div></div>
+		 
 	 <div id="subject_group" class="form-group">
 	  	<label class="col-sm-3 control-label">Заголовок письма: <em>*</em></label><div class="col-sm-9"><input group="eml" class="form-control" required id="subject" type="text" name="subject" value="<? if ($subject!="") echo $subject; else echo($config['email']['subject']); ?>" placeholder="Заголовок письма, которое будет уведомлять Вас о покупке.">
 	 </div></div>
@@ -273,7 +313,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 		<span class="help-block">Комментарий к заказу, который автоматически добавится в письмо о покупке<br>А также добавлен в Вашу СРМ систему, (Если ленд подключен) </span>
 	</div></div>
 <div class="form-group text-center">
-		<input type="submit" name="btn" value="Сохранить" class="btn btn-primary">
+		<input type="submit"  value="Сохранить" class="btn btn-primary">
 	</div>
 	 </fieldset>
    </div>
@@ -294,12 +334,16 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 	  <fieldset>
 	   	 <legend><small>Настройки отправки заказа на Telegram-мессенджер</small></legend>
 	  <div class="form-group">
-    <label class="col-sm-3 control-label">ID @CollLeadBot: </label><div class="col-sm-9"><input group="tlg" class="form-control" id="tele_id" type="text" name="tele_id" value="" placeholder="Ваш ID в телеграм-боте @CoolLeadBoot">
-	 <span class="help-block">Для получения кода подключитесь к телеграм-боту <a title="@CoolLeadBot Telegram" href="https://t.me/CoolLead_bot?start=<?= base64_encode($_SERVER['SERVER_NAME']); ?>" target="_blank">@CoolLeadBoot</a> и дайте команду <b>/start</b>.<br>Полученный ID в пишите в поле</span></div>
+    <label class="col-sm-3 control-label">ID @CollLeadBot: </label><div class="col-sm-9"><input group="tlg" class="form-control" id="tele_id" type="number" name="tele_id" value="<?= $tele_id ?>" placeholder="Ваш ID в телеграм-боте @CoolLeadBot">
+	 <span class="help-block">Для получения кода подключитесь к телеграм-боту <a title="@CoolLeadBot Telegram" href="https://t.me/CoolLead_bot?start=<?= base64_encode($_SERVER['SERVER_NAME']); ?>" target="_blank">@CoolLeadBot</a> и дайте команду <b>/start</b>.<br>Полученный ID в пишите в поле</span></div>
+</div>
+<div id="tele_mess_group" class="form-group <? if ($tele_id=="") echo "hidden"; ?>">
+    <label class="col-sm-3 control-label">Сообщение:</label><div class="col-sm-9"><input required group="tlg" class="form-control" id="tele_mess" type="text" name="tele_mess" value="<? if ($tele_mess!="") echo $tele_mess; else echo $config['tele_mess']; ?>" disabled placeholder="Сообщение о заявке">
+	 </div>
 </div>
 		
 		<div class="form-group text-center">
-		<input type="submit" name="btn" value="Сохранить" class="btn btn-primary">
+		<input type="submit"  value="Сохранить" class="btn btn-primary">
 	</div>
 		 </fieldset>
    </div>
@@ -333,7 +377,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 	 <label class="col-sm-3 control-label" for="contact_email">Контактный E-mail:<br> </label><div class="col-sm-9"><input class="form-control" id="contact_email" type="text" name="contact_email" value="<?= $contact_email ?>" placeholder="Контактный E-mail продавца"></div></div>
 		
 		<div class="form-group text-center">
-		<input type="submit" name="btn" value="Сохранить" class="btn btn-primary">
+		<input type="submit"  value="Сохранить" class="btn btn-primary">
 	</div>
 		 </fieldset>
    </div>
@@ -366,7 +410,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 <div id="pokup2n_group" class="form-group"><label class="col-sm-3 control-label" for="pokup2n">Обновление, сек <em>*</em></label><div class="col-sm-9"><input class="form-control" group="inst"  <? if ($script_pokup!='1') echo ("disabled") ?> id="pokup2n" type="number"  required name="pokup2n" value="<? if ($pokup2n=='') echo ($config['pokup']['pokup2n']); else echo $pokup2n ?>" placeholder="Обновление совершенных покупок"></div></div></div>
 		
 		<div class="form-group text-center">
-		<input type="submit" name="btn" value="Сохранить" class="btn btn-primary">
+		<input type="submit"  value="Сохранить" class="btn btn-primary">
 	</div>
 		 </fieldset>
    </div>
@@ -421,7 +465,7 @@ if ($vsego=="") echo $config['sovp']['vsego']; else echo $vsego; ?>" placeholder
 </div>
 		
 		<div class="form-group text-center">
-		<input type="submit" name="btn" value="Сохранить" class="btn btn-primary">
+		<input type="submit"  value="Сохранить" class="btn btn-primary">
 	</div>
 		 </fieldset>
    </div>
@@ -430,7 +474,7 @@ if ($vsego=="") echo $config['sovp']['vsego']; else echo $vsego; ?>" placeholder
  
   <div class="panel panel-default">
   <div class="panel-heading">
-   <h4 class="panel-title"><i class="fa fa-check-square-o"></i>&#160;
+   <h4 class="panel-title"><strong style="font-size: 18px">&#9990;</strong>&#160;
        <a data-toggle="collapse" data-parent="#accordion" href="#modal-block">
        Скрипт "Перезвоните мне":&#160; </a>&#160;<i class="fa fa-caret-down" aria-hidden="true"></i>
 	   <span id="przv" class="panel-heading-info hidden"><small>Есть не заполненные поля!</small></span>
@@ -464,7 +508,40 @@ if ($button=="") echo $config['modal']['button']; else echo $button;	 ?>" placeh
 <label class="col-sm-3 control-label" for="modal_delay">Задержка перед показом (сек.): <em>*</em></label><div class="col-sm-9"><input group="przv" class="form-control" id="modal_delay" <?if ($modal!='1') echo ("disabled") ?> type="number" required name="modal_delay" value="<? if ($modal_delay=="") echo $config['modal']['modal_delay']; else echo $modal_delay;	 ?>" placeholder="задержка в секундах перед первым показом">
 	</div></div></div>
 		<div class="form-group text-center">
-		<input type="submit" name="btn" value="Сохранить" class="btn btn-primary">
+		<input type="submit"  value="Сохранить" class="btn btn-primary">
+	</div>
+		 </fieldset>
+   </div>
+  </div>
+ </div>
+ 
+ 
+  <div class="panel panel-default">
+  <div class="panel-heading">
+   <h4 class="panel-title"><i class="fa fa-check-square-o"></i>&#160;
+       <a data-toggle="collapse" data-parent="#accordion" href="#thanks-block">
+        Страница "Спасибо"
+       </a>&#160;<i class="fa fa-caret-down" aria-hidden="true"></i>
+	   <span id="thanks" class="panel-heading-info hidden"><small>Есть не заполненные поля!</small></span>
+      </h4>
+  </div>
+  <div id="thanks-block" class="panel-collapse collapse">
+   <div class="panel-body">
+	  <fieldset>
+	   	 <legend><small>Тексты на странице "Спасибо" </small></legend>
+	  <div id="thanks1_group" class="form-group">
+    <label class="col-sm-3 control-label" for="thanks1">Поздравление: </label><div class="col-sm-9"><input group="thanks" class="form-control" id="thanks1" type="text" name="thanks1" required value="<?= $config['thanks']['text1']; ?>" placeholder="Поздравление с покупкой"></div></div>
+		 <div id="thanks2_group" class="form-group">
+	<label class="col-sm-3 control-label" for="thanks2">Оповещение: </label><div class="col-sm-9"><input required value="<?= $config['thanks']['text2']; ?>"group="thanks" class="form-control" id="thanks2" type="text" name="thanks2" placeholder="Оповещение о звонке оператора"></div></div>
+	 <div id="thanks3_group" class="form-group">
+	 <label class="col-sm-3 control-label" for="thanks3">Ссылка на повтор: </label><div class="col-sm-9"><input group="thanks" class="form-control" id="thanks3" type="text" name="thanks3" required value="<?= $config['thanks']['text3']; ?>" placeholder="Ссылка на повтор ввода, в случае ошибки">
+<span class="help-block">	  Для указания ссылки используйте переменную <strong><i>%back_link%</i></strong>.</span>
+	 </div>
+	
+	 </div>
+	
+		<div class="form-group text-center">
+		<input type="submit"  value="Сохранить" class="btn btn-primary">
 	</div>
 		 </fieldset>
    </div>
@@ -507,37 +584,80 @@ if ($button=="") echo $config['modal']['button']; else echo $button;	 ?>" placeh
 <label class="col-sm-3 control-label" for="upsel_delay">Задержка в секундах переадресации: </label><div class="col-sm-9"><input class="form-control" id="upsel_delay" group="upsell" <?if ($upsel!='1') echo ("disabled") ?> type="number" name="upsel_delay" value="<? if ($upsel_delay!="") echo $upsel_delay;	 ?>" placeholder="Задержка в секундах переадресации на сайт допродажи. Пусто - отключено"></div>
 </div>
 		</div>
-		<!-- <div class="form-group text-center">
-		<input type="submit" name="btn" value="Сохранить" class="btn btn-primary">
-	</div> -->
+		<div class="form-group text-center">
+		<input type="submit"  value="Сохранить" class="btn btn-primary">
+	</div> 
 		 </fieldset>
    </div>
   </div>
  </div>
- <!--
+ 
+   <div class="panel panel-default">
+  <div class="panel-heading">
+   <h4 class="panel-title"> <i class="fa fa-bug"></i>&#160;
+       <a data-toggle="collapse" data-parent="#accordion" href="#ip-block">
+        Заблокированные IP-адреса
+       </a>&#160;<i class="fa fa-caret-down" aria-hidden="true"></i>
+	   <span id="ip" class="panel-heading-info hidden"><small>Есть не заполненные поля!</small></span>
+      </h4>
+  </div>
+  <div id="ip-block" class="panel-collapse collapse">
+   <div class="panel-body">
+	  <fieldset>
+	   	 <legend><small>IP-адреса, запрещенные для посещения</small></legend>
+	  <div class="form-group">
+    <label class="col-sm-3 control-label">Перечень ip-адресов: </label><div class="col-sm-9"><textarea class="form-control" name="ip_block" id="ip_block" cols="30" rows="10"><?= $ip_block ?></textarea>
+	 <span class="help-block">Напишите IP-адреса через запятую или каждый в отдельной строке</span></div>
+</div>
+
+		
+		<div class="form-group text-center">
+		<input type="submit"  value="Сохранить" class="btn btn-primary">
+	</div>
+		 </fieldset>
+   </div>
+  </div>
+ </div>
+ 
   <div class="panel panel-default">
   <div class="panel-heading">
    <h4 class="panel-title"> <i class="fa fa-connectdevelop"></i>&#160;
        <a data-toggle="collapse" data-parent="#accordion" href="#crm-block">
        Интеграция с СRМ:&#160;</a>&#160;<i class="fa fa-caret-down" aria-hidden="true"></i>
+	   <span id="crmt" class="panel-heading-info hidden"><small>Есть не заполненные поля!</small></span>
       </h4>
   </div>
   <div id="crm-block" class="panel-collapse collapse">
    <div class="panel-body">
 	  <fieldset>
-    Блок находится в работе
-		
+	     	 <legend><small>Интеграции с СРМ</small></legend>
+    <div class="form-group">
+    <label class="col-sm-3 control-label" for="crm">Ваша СРМ: </label><div class="col-sm-9">
+	 <select class="form-control" id="crm" name="crm" onchange="crmfunc(); return true;">
+ 
+  <option <? if ($crm=='') echo "selected"; ?> value="">Не используется</option>
+  <option <? if ($crm=='lpcrm') echo "selected"; ?> value="lpcrm">LP-CRM</option>
+  <option <? if ($crm=='eautopay') echo "selected"; ?> value="eautopay">e-autopay</option>
+   </select></div></div>
+   
+   <div <? if ($crm!='lpcrm') echo('class="hidden"'); ?> id="lpcrm"><? include('include/lpcrm.php'); ?></div>
+   <div  <? if ($crm!='eautopay') echo('class="hidden"'); ?> id="eautopay"><? include('include/eautopay.php'); ?> </div>
+   
+   
+		<!--
 		<div class="form-group text-center">
-		<input type="submit" name="btn" value="Сохранить" class="btn btn-primary">
-	</div>
+		<input type="submit"  value="Сохранить" class="btn btn-primary">
+	</div> -->
 		 </fieldset>
    </div>
   </div>
- </div> -->
+ </div> 
+ 
+
  
 </div>
 <div class="form-group text-center">
-		<input  type="submit" name="btn" value="Сохранить" class="btn btn-primary">
+		<input  type="submit"  value="Сохранить" class="btn btn-primary">
 	</div>
 </form>
 </div>
