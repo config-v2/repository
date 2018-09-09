@@ -1,6 +1,6 @@
 <?
 $config=array(
- 'ver' => "2.0",
+ 'ver' => "2.1",
  'name' => 'Конфигуратор',
  'site_conf' => "https://config-v2.github.io/",
  'site_gg' => 'https://greygler.github.io',
@@ -39,7 +39,7 @@ $config=array(
 	'sender' =>'Уведомление <noreply@%domen%>',
 	'sender_smtp' =>'Уведомление;noreply@%domen%',
 	'subject' => 'Заказ товара - %product%',
-	'message' => "<table border='0'>\n<tr><td colspan='2' height='40' ><p align='center'><i>Информация о покупателе:</i></td></tr>\n<tr><td><b>IP покупателя:</b></td><td>%ip%</td></tr><tr><td><b>Имя Internet-хоста:</b></td><td>%remote_host%</td></tr>\n<tr>\n<td><b>Использование прокси:</b></td><td>%proxy%</td></tr>\n<tr><td><b>Страна (по IP):</b></td><td>%country_code%</td></tr>\n<tr><td><b>Город (по IP):</b></td><td>%city%</td></tr>\n<tr><td><b>Установленный язык:</b> </td><td>%lang%</td></tr>\n<tr><td><b>Браузер: </b></td><td>%browser%</td></tr>\n<tr><td><b>Устройство:</b></td><td>%device%</td></tr>\n<tr><td><b>ОС:</b></td><td>%os%</td></tr>\n<tr><td><b>Время на ленде:</b></td><td>%time_land%</td></tr>\n<tr><td><b>Кол-во визитов:</b></td><td>%visit%</td></tr>\n<tr><td valign='top'><b>Последний визит:</b></td>\n<td>%visit_text%</td></tr>\n<tr><td><b>Разрешение экрана:</b></td><td>%screen%</td></tr>\n<tr><td><b>Заряд батареи:</b></td><td>%batery_proc%</td></tr>\n<tr><td><b>Зарядное устройство:</b></td><td>%batery_zar%</td></tr>\n<tr><td><b>Реферер:</b></td><td><a href='%refer%' target='_blank'>%refer%</a></td></tr>\n	<tr><td colspan='2'><p align='center'><b>UTM-метки: </b></p>%utm% </td></tr>\n<tr><td><b>Комментарий к заказу:  </b></td><td><p>%comment%</p></td></tr>\n</table>",
+	'message' => "<table border='0'>\n<tr><td colspan='2' height='40' ><p align='center'><i>Информация о покупателе:</i></td></tr>\n<tr><td><b>IP покупателя:</b></td><td>%ip%</td></tr>\n<tr><td><b>Имя Internet-хоста:</b></td><td>%remote_host%</td></tr>\n<tr>\n<td><b>Использование прокси:</b></td><td>%proxy%</td></tr>\n<tr><td><b>Страна (по IP):</b></td><td>%country_code%</td></tr>\n<tr><td><b>Город (по IP):</b></td><td>%city%</td></tr>\n<tr><td><b>Установленный язык:</b> </td><td>%lang%</td></tr>\n<tr><td><b>Браузер: </b></td><td>%browser%</td></tr>\n<tr><td><b>Устройство:</b></td><td>%device%</td></tr>\n<tr><td><b>ОС:</b></td><td>%os%</td></tr>\n<tr><td><b>Время на ленде:</b></td><td>%time_land%</td></tr>\n<tr><td><b>Кол-во визитов:</b></td><td>%visit%</td></tr>\n<tr><td valign='top'><b>Последний визит:</b></td>\n<td>%visit_text%</td></tr>\n<tr><td><b>Разрешение экрана:</b></td><td>%screen%</td></tr>\n<tr><td><b>Заряд батареи:</b></td><td>%batery_proc%</td></tr>\n<tr><td><b>Зарядное устройство:</b></td><td>%batery_zar%</td></tr>\n<tr><td><b>Реферер:</b></td><td><a href='%refer%' target='_blank'>%refer%</a></td></tr>\n	<tr><td colspan='2'><p align='center'><b>UTM-метки: </b></p>%utm% </td></tr>\n<tr><td><b>Комментарий к заказу:  </b></td><td><p>%comment%</p></td></tr>\n</table>",
 	
  ),
   'tele_mess' => 'Поступила заявка',

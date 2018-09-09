@@ -290,12 +290,12 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 	  	<label class="col-sm-3 control-label">E-mail: <em>*</em></label><div class="col-sm-9"><input group="eml" class="form-control" required id="email" type="text" name="email" value="<? if ($email!="") echo $email; else echo ($config['email']['email']) ?>" placeholder="E-mail, на который будут приходить уведомления о покупке."></div></div>
 	 <div id="sender_group" class="form-group <? if ($mail_type=='1') echo('hidden') ?>">
 	  	<label class="col-sm-3 control-label">Отправитель: <em>*</em></label><div class="col-sm-9"><input group="eml" <? if ($mail_type=='1') echo('disabled') ?> class="form-control" required id="sender" type="text" name="sender" value="<? if ($sender!="") echo $sender; else echo ($config['email']['sender']); ?>" placeholder="Имя и адрес отправителя, от которого будут приходить уведомления о покупке.">
-		<span class="help-block"><i>Формат: </i> <strong>Имя_отправителя -noreply@%domen%-</strong></span>
+		<span class="help-block"><i>Формат: </i> <strong>Имя_отправителя &lt;noreply@site.com&gt;</strong>. Имя сайта можно подставлять автоматически, используя шаблон '%domen%'. Например:  <strong>Имя_отправителя &lt;noreply@%domen%&gt;</strong></span>
 	 	 </div></div>
 		 
 	<div id="sender_group_smtp" class="form-group <? if ($mail_type!='1') echo('hidden') ?>">
 	  	<label class="col-sm-3 control-label">Отправитель: <em>*</em></label><div class="col-sm-9"><input group="eml" <? if ($mail_type!='1') echo('disabled') ?> class="form-control" required id="sender_smtp" type="text" name="sender_smtp" value="<? if ($sender_smtp!="") echo $sender_smtp; else echo ($config['email']['sender_smtp']); ?>" placeholder="Имя и адрес отправителя, от которого будут приходить уведомления о покупке.">
-		<span class="help-block"><i>Формат: </i>Имя_отправителя;e-mail_отправителя (через ;)<br><strong>Важно! E-mail отправителя должен быть указан тот, который принадлежит указаннлму SMTP-серверу!</strong></span>
+		<span class="help-block"><i>Формат: </i>Имя_отправителя;e-mail_отправителя (<u>через ;</u>)<br><strong>Важно! E-mail отправителя должен быть указан именно тот, который принадлежит указаннлму SMTP-серверу!</strong></span>
 	 	 </div></div>
 		 
 	 <div id="subject_group" class="form-group">
@@ -306,12 +306,13 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 	<div class="form-group">
 	  	<label class="col-sm-3 control-label">Текст письма:<span class="help-block">Кликните мышкой по полю чтобы увидить или редактировать письмо.</span></label> <div class="col-sm-9"><textarea rows="8" id="message" name="message" cols="70">
 		<? if ($message!="") echo $message; else echo $config['email']['message'];   ?></textarea>
-		<span class="help-block">Текст письма, который будет добавлен к оповещению о покупателе. Может содержать дополнительные переменные.<br><strong>Инструкция в документации</strong></span>
+		<span class="help-block">Текст письма, который будет добавлен к оповещению о покупателе. Может содержать дополнительные переменные.<br><strong>Инструкция в документации <a href="https://config-v2.github.io/#eml" target="_blank">https://config-v2.github.io/</a></strong></span>
 </div></div>
 <div class="form-group">
 	  	<label class="col-sm-3 control-label">Комментарий: </label><div class="col-sm-9"><textarea class="form-control" rows="3" id="comment" name="comment" cols="70"><?= $comment ?></textarea>
 		<span class="help-block">Комментарий к заказу, который автоматически добавится в письмо о покупке<br>А также добавлен в Вашу СРМ систему, (Если ленд подключен) </span>
 	</div></div>
+	
 <div class="form-group text-center">
 		<input type="submit"  value="Сохранить" class="btn btn-primary">
 	</div>
