@@ -1,22 +1,16 @@
 <?php
 $time_land='3';
 $remote_addr=Config::GetRealIp();
-$proxy=Config::isProxy($remote_addr);
 $scheme=Config::scheme();
 $remote_host=@gethostbyaddr($remote_addr);
+if ($remote_host==$remote_addr) $remote_host="Не определен";
 $cookie_days = 30; // Период cookie в днях
 $period_cookie = $cookie_days*24*60*60; // Пересчет в секунды
 $date=Config::date_rus();
 $time=date('H:i:s');
 $lang=$_SERVER['HTTP_ACCEPT_LANGUAGE'];
-$screen=$_POST['screen']['width']." х ".$_POST['screen']['height'];
-if ($_POST['battery']['proc']>0) $batery_proc=(($_POST['battery']['proc'])*100).'&#37;'; else $batery_proc="Не определено";
 
-if ($_POST['battery']['zar']=='true') $batery_zar="Подключено"; else $batery_zar="Не подключено, или не определено";
 
-if ($_POST['time_lend']<60) $time_in_land=$_POST['time_lend']." сек.";
-else if (($_POST['time_lend']>60) AND ($_POST['time_lend']<3600)) $time_in_land=date("i мин. s сек.", mktime(0, 0, $_POST['time_lend']));
-else $time_in_land=date("H час. i мин. s сек.", mktime(0, 0, $_POST['time_lend']));
 
 if ($remote_addr=="127.0.0.1") $remote_addr="localhost";
 if (stripos($_SERVER['PHP_SELF'], "index"))
@@ -28,7 +22,8 @@ if (stripos($_SERVER['PHP_SELF'], "index"))
 		SetCookie("time",time(),time()+$period_cookie);
 		SetCookie("ip",$remote_addr,time()+$period_cookie); 
 		SetCookie("remote_host",$remote_host,time()+$period_cookie); 
-				
+		$proxy=Config::isProxy();
+		$_SESSION['proxy']=$proxy;
 		$host_path=str_ireplace('index.php','', $_SERVER['PHP_SELF']);
 		$domen=str_ireplace("www.", "", $_SERVER['HTTP_HOST']);
 		$host=$domen.$host_path;
@@ -61,12 +56,22 @@ else {
 	$visit=$_COOKIE['visit'];
 	$time_cookie=$_COOKIE['time'];
 	$ip_cookie=$_COOKIE['ip'];
-	$geo_cookie=$_COOKIE['geo'];
+	$geo_cookie=unserialize($_COOKIE['lastgeo']);
+	$last_geo=$geo_cookie['city'].", ".$geo_cookie['region'].", ".$geo_cookie['country'];
 	$remote_host_cookie=$_COOKIE['remote_host'];
+	$proxy=$_SESSION['proxy'];
+	$screen=$_POST['screen']['width']." х ".$_POST['screen']['height'];
+	if ($_POST['battery']['proc']>0) $batery_proc=(($_POST['battery']['proc'])*100).'&#37;'; else $batery_proc="Не определено";
+	if ($_POST['battery']['zar']=='true') $batery_zar="Подключено"; else $batery_zar="Не подключено, или не определено";
+	if ($_POST['time_lend']<60) $time_in_land=$_POST['time_lend']." сек.";
+	else if (($_POST['time_lend']>60) AND ($_POST['time_lend']<3600)) $time_in_land=date("i мин. s сек.", mktime(0, 0, $_POST['time_lend']));
+	else $time_in_land=date("H час. i мин. s сек.", mktime(0, 0, $_POST['time_lend']));
 	if (isset($_SESSION['utms'])) foreach ($_SESSION['utms'] as $key => $value) $utm.="<tr><td><b>".str_pad($key, 14, " ", STR_PAD_RIGHT)."</b> </td><td> {$value}</td></tr>\n";
 	if ($visit>1) {
-	$visit_text.="<i>".date("d.m.Y H:i:s",$time_cookie)."</i>, ip: {$ip_cookie}</u>, имя Internet-хоста: {$remote_host_cookie} ({$geo_cookie})<br>";
-	} else $visit_text="Прошлых визитов за последние {$cookie_days} дней не обнаружено";
+	$visit_text=date("d.m.Y H:i:s",$time_cookie).", ip: {$ip_cookie}, Хост: {$remote_host_cookie} ({$last_geo})";
+	$visit_text_tele=date("d.m.Y H:i:s",$time_cookie).", ip: {$ip_cookie}";
+	} else {$visit_text="Прошлых визитов за последние {$cookie_days} дней не обнаружено"; 
+			$visit_text_tele="последние {$cookie_days} дней не обнаружено"; }
 	$country_code = $_SESSION['country_code'];
 	$city=$_SESSION['city'];
 	$geocity=$_SESSION['geocity'];

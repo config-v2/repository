@@ -238,103 +238,84 @@ public function GetRealIp() {
 }
 
 
-public function isProxy($myIP) {
-   $scan_headers = array(
-			'HTTP_VIA',
-			'HTTP_X_FORWARDED_FOR',
-			'HTTP_FORWARDED_FOR',
-			'HTTP_X_FORWARDED',
-			'HTTP_FORWARDED',
-			'HTTP_CLIENT_IP',
-			'HTTP_FORWARDED_FOR_IP',
-			'VIA',
-			'X_FORWARDED_FOR',
-			'FORWARDED_FOR',
-			'X_FORWARDED',
-			'FORWARDED',
-			'CLIENT_IP',
-			'FORWARDED_FOR_IP',
-			'HTTP_PROXY_CONNECTION'
-		);
- 
-   $flagProxy = false;
-   $libProxy = 'No proxy';
- 
-   foreach($scan_headers as $i)
-			if($_SERVER[$i]) $flagProxy = true;
- 
-   if (    in_array($_SERVER['REMOTE_PORT'], array(8080,80,6588,8000,3128,553,554))
-        || @fsockopen($_SERVER['REMOTE_ADDR'], 80, $errno, $errstr, 30))
-      $flagProxy = true;
- 
-   // Proxy LookUp
-   if ( $flagProxy == true &&
-        isset($_SERVER['REMOTE_ADDR']) && 
-        !empty($_SERVER['REMOTE_ADDR']) )
-         // Transparent Proxy
-         // REMOTE_ADDR = proxy IP
-         // HTTP_X_FORWARDED_FOR = your IP   
-         if ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && 
-              !empty($_SERVER['HTTP_X_FORWARDED_FOR']) &&
-              $_SERVER['HTTP_X_FORWARDED_FOR'] == $myIP
-            ) 
-             $libProxy = 'Transparent Proxy';
-               // Simple Anonymous Proxy            
-              // REMOTE_ADDR = proxy IP
-              // HTTP_X_FORWARDED_FOR = proxy IP
-         else if ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && 
-                   !empty($_SERVER['HTTP_X_FORWARDED_FOR']) &&
-                   $_SERVER['HTTP_X_FORWARDED_FOR'] == $_SERVER['REMOTE_ADDR']
-                 )
-                 $libProxy = 'Simple Anonymous (Transparent) Proxy';
-              // Distorting Anonymous Proxy            
-              // REMOTE_ADDR = proxy IP
-              // HTTP_X_FORWARDED_FOR = random IP address
-              else if ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && 
-                        !empty($_SERVER['HTTP_X_FORWARDED_FOR']) &&
-                        $_SERVER['HTTP_X_FORWARDED_FOR'] != $_SERVER['REMOTE_ADDR']
-                      )
-                      $libProxy = 'Distorting Anonymous (Transparent) Proxy';
-                   // Anonymous Proxy
-                   // HTTP_X_FORWARDED_FOR = not determined
-                   // HTTP_CLIENT_IP = not determined
-                   // HTTP_VIA = determined
-                   else if ( $_SERVER['HTTP_X_FORWARDED_FOR'] == '' &&
-                             $_SERVER['HTTP_CLIENT_IP'] == '' &&
-                             !empty($_SERVER['HTTP_VIA'])
-                           )
-                           $libProxy = 'Anonymous Proxy';
-                        // High Anonymous Proxy            
-                        // REMOTE_ADDR = proxy IP
-                        // HTTP_X_FORWARDED_FOR = not determined                    
-                        else
-                           $libProxy = 'High Anonymous Proxy';
- 
-   return $libProxy;
-}
+   public function proxy_func(){ // Определяем прокси
+	$proxy=0;
+        $proxy_headers = array(
+            'HTTP_VIA',
+            'HTTP_X_FORWARDED_FOR',
+            'HTTP_FORWARDED_FOR',
+            'HTTP_X_FORWARDED',
+            'HTTP_FORWARDED',
+            'HTTP_CLIENT_IP',
+            'HTTP_FORWARDED_FOR_IP',
+            'VIA',
+            'X_FORWARDED_FOR',
+            'FORWARDED_FOR',
+            'X_FORWARDED',
+            'FORWARDED',
+            'CLIENT_IP',
+            'FORWARDED_FOR_IP',
+            'HTTP_PROXY_CONNECTION'
+        );
+        foreach($proxy_headers as $x){
+            if (isset($_SERVER[$x])){
+                $proxy++;
+            }
+        }
+		
+        return $proxy;
+    }
 	
-public function geo_ip($ip)
+	 public function isProxy(){
+		
+		 if (Config::proxy_func()>0) return "Обнаружен"; else return "Не обнаружен";
+	 }
+	
+	public function is_bot()
 	{
-	$is_bot = preg_match(
- "~(Google|Yahoo|Rambler|Bot|Yandex|Spider|Snoopy|Crawler|Finder|Mail|curl)~i", $_SERVER['HTTP_USER_AGENT']);
-if ((!$is_bot) AND ($ip!="localhost")) $geo = json_decode(file_get_contents('http://api.sypexgeo.net/json/'.$ip), true);
-else 
-{
-	$geo['country']['name_ru']="Локалхост";
-	$geo['country']['iso']='AA';
-	$geo['city']['name_ru']='Мухосранск';
-	$geo['region']['name_ru']="Задрыщенский уезд";
-}
-return $geo;
+		$is_bot = preg_match(
+ "~(Google|Googlebot|nuhk|Yahoo|Yammybot|Rambler|Openbot|Bot|Slurp|msnbot|Ask Jeeves\/Teoma|ia_archiver|Yandex|Spider|Snoopy|Crawler|Finder|Mail|curl)~i", $_SERVER['HTTP_USER_AGENT']);
+ return $is_bot;
+
 	}
+	
+	public function geo_2ip($ip){
+		$geo = json_decode(file_get_contents('https://api.2ip.ua/geo.json?ip='.$ip), true);
+		return $geo;
+	}
+	
+	public function geo_ip($ip)
+	{
+	 $geo = json_decode(file_get_contents('http://api.sypexgeo.net/json/'.$ip), true);
+	
+	return $geo;
+	}
+	
+
 	
 	public function info_geo($ip)
 	{
-		$geo=Config::geo_ip($ip);
+		if ((!Config::is_bot()) AND ($ip!="localhost")) {
+			$geo=Config::geo_ip($ip);
+			if ($geo['city']['name_ru']!='') {
 		$infogeo_ip['country']=$geo['country']['name_ru'];
 		$infogeo_ip['iso']=$geo['country']['iso'];
 		$infogeo_ip['city']=$geo['city']['name_ru'];
 		$infogeo_ip['region']=$geo['region']['name_ru'];
+		} else { $geo=Config::geo_2ip($ip);
+		$infogeo_ip['country']=$geo['country_rus'];
+		$infogeo_ip['iso']=$geo['country_code'];
+		$infogeo_ip['city']=$geo['city_rus'];
+		$infogeo_ip['region']=$geo['region_rus'];
+		
+		}
+		} else 
+	{
+		$infogeo_ip['country']="Локалхост";
+		$infogeo_ip['iso']='AA';
+		$infogeo_ip['city']='Мухосранск';
+		$infogeo_ip['region']="Задрыщенский уезд";
+	}
 		return $infogeo_ip;
 	}
 	

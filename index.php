@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>Демонстрация возможностей Конфигуратора v.2.0</title>
+		<title>Демонстрация возможностей Конфигуратора v.2.1</title>
 		<meta http-equiv="content-type" content="text/html; utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,8 +13,9 @@
 		<meta name="keywords" content="Ключевые слова">
 		<meta name="description" content="Описание демонстрационного ленда">
 		<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/spacelab/bootstrap.min.css" rel="stylesheet" integrity="sha384-L/tgI3wSsbb3f/nW9V6Yqlaw3Gj7mpE56LWrhew/c8MIhAYWZ/FNirA64AVkB5pI" crossorigin="anonymous">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -40,32 +41,14 @@
 			.phone {float: right !important; }
 			.email {float: right !important; padding-left: 10px; }
 			.review {padding: 20px; margin: 20px}
-			.review dd {padding-left: 20px; margin-top: 10px; }
 		</style>
-	<!-- WP Content Copy Protection script by Rynaldo Stoltz Starts - http://yooplugins.com/ -->
-
-	<div align="center"><noscript>
-   <div style="position:fixed; top:0px; left:0px; z-index:3000; height:100%; width:100%; background-color:#FFFFFF">
-   <div style="font-family: Trebuchet MS; font-size: 14px; background-color:#FFF000; padding: 10pt;">Нам очень жаль, но похоже, что вы отключили JavaScript в этом браузере. Чтобы вы могли видеть эту страницу, мы просим вас снова включить использование JavaScript!</div></div>
-   </noscript></div>
-   <style type="text/css"> * : (input, textarea) { -webkit-touch-callout:none; -webkit-user-select:none;} img { -webkit-touch-callout:none; -webkit-user-select:none; } </style>
-   <script type="text/javascript">
-	function disableSelection(e){if(typeof e.onselectstart!="undefined")e.onselectstart=function(){return false};else if(typeof e.style.MozUserSelect!="undefined")e.style.MozUserSelect="none";else e.onmousedown=function(){return false};e.style.cursor="default"}window.onload=function(){disableSelection(document.body)};
-	document.oncontextmenu=function(e){var t=e||window.event;var n=t.target||t.srcElement;if(n.nodeName!="A")return false};
-	document.ondragstart=function(){return false};
-	window.addEventListener("keydown",function(e){if(e.ctrlKey&&(e.which==65||e.which==66||e.which==67||e.which==70||e.which==73||e.which==80||e.which==83||e.which==85||e.which==86)){e.preventDefault()}});document.keypress=function(e){if(e.ctrlKey&&(e.which==65||e.which==66||e.which==70||e.which==67||e.which==73||e.which==80||e.which==83||e.which==85||e.which==86)){}return false};
-	document.onkeydown=function(e){e=e||window.event;if(e.keyCode==123||e.keyCode==18){return false}};
-	</script>
-
-	<!-- WP Content Copy Protection script by Rynaldo Stoltz Ends - http://yooplugins.com/ -->
-
 		<? lands::head($head_index64); // Код для блока HEAD ?>
 	</head>
 	<body>
 		<? lands::body($body_index64); // Код для блока BODY ?>
 		<div class="container"> 
 			<div class="page-header">
-				<h1 class="text-center"><strong>Демонстрация возможностей</strong><small><br>Конфигуратор v.2.0</small></h1>
+				<h1 class="text-center"><strong>ДЕМОНСТРАЦИЯ ВОЗМОЖНОСТЕЙ</strong><small><br>Конфигуратор v.2.1</small></h1>
 				<div class="text-center"><a href="/config" target="_blank" >Посмотреть конфигуратор</a></div>
 			</div>
 			<span class="visible-md visible-lg">
@@ -143,35 +126,38 @@
 
 			<h2>Отзывы:</h2>	
 			
-			<dl>
+			<div class="review_slide">
+			<div>
 				<div class="thumbnail review">
-					<dt>
-						<?= lands::random_name('w'); // Случайное женское имя ?>, 
-						г. <?= $geocity; // Город пользователя ?>
-					</dt>
-					<dd>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, error, eum, sed consequuntur similique repudiandae harum molestiae reprehenderit dolores explicabo tempore sit sunt voluptatem velit rem veniam quasi alias culpa!
-					</dd>
+					
+					<blockquote class="blockquote-reverse">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, error, eum, sed consequuntur similique repudiandae harum molestiae reprehenderit dolores explicabo tempore sit sunt voluptatem velit rem veniam quasi alias culpa!</p>
+							<footer><?= lands::random_name('w'); // Случайное женское имя ?>, <cite title="Source Title">г. <?= $geocity; // Город пользователя ?></cite></footer>
+					</blockquote>
+					
 				</div>
+			</div>
+			<div>
 				<div class="thumbnail review">
-					<dt>
-						<?= lands::random_name('n'); // Случайное нейтральное имя ?>,
-						г. <?= lands::random_city($country_script); // Случайный город по ГЕО ?>
-					</dt>
-					<dd>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, in, harum temporibus esse odit ex cupiditate quo a et tempore modi quaerat officia est eos distinctio officiis hic! Veritatis, vitae.
-					</dd>
+					<blockquote class="blockquote-reverse">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, in, harum temporibus esse odit ex cupiditate quo a et tempore modi quaerat officia est eos distinctio officiis hic! Veritatis, vitae.
+					</p>
+							<footer><?= lands::random_name('n'); // Случайное нейтральное имя ?>, <cite title="Source Title">г. <?= lands::random_city($country_script); // Случайный город по ГЕО ?></cite></footer>
+					</blockquote>
+					
 				</div>
+			</div>
+			<div>
 				<div class="thumbnail review">
-					<dt>
-						<?= lands::random_name('m'); // Случайное мужское имя ?>, 
-						г. <?= lands::random_city($country_script); // Случайный город по ГЕО ?>
-					</dt>
-					<dd>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, doloremque, exercitationem dolorem modi eum consequuntur repellat sed porro officiis nesciunt quasi autem qui accusantium quos perferendis. Eveniet quisquam consectetur dolor?
-					</dd>
+								
+					<blockquote class="blockquote-reverse">
+						<p>	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, doloremque, exercitationem dolorem modi eum consequuntur repellat sed porro officiis nesciunt quasi autem qui accusantium quos perferendis. Eveniet quisquam consectetur dolor?
+					</p>
+							<footer><?= lands::random_name('m'); // Случайное мужское имя ?>, <cite title="Source Title">г. <?= lands::random_city($country_script); // Случайный город по ГЕО ?></cite></footer>
+					</blockquote>
 				</div>
-			</dl>		
+			</div>
+			</div>		
 			<div id="footer">
 				<div class="footer_text">
 					<? lands::seller('blue'); // Данные о продавце ?>
@@ -180,6 +166,22 @@
 				</div>
 			</div>
 		</div>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+		<script>
+		$(document).ready(function(){
+			$('.review_slide').slick({
+			  dots: true,
+			  infinite: true,
+			  speed: 300,
+			  slidesToShow: 1,
+			  adaptiveHeight: true,
+			   autoplay: true,
+			autoplaySpeed: 3000,
+			});
+		});
+		
+		</script>
 	<?  lands::footer(); // Дополнительная часть скриптов, ставим перед </body> ?>
 	</body>
 </html>
