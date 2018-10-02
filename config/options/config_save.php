@@ -68,7 +68,6 @@ $footer.=" {$str_up}*/\n\n";
 $text.="{$footer}?>\n";
 $sender=save_config::config($_POST['sender']);
 $text2.="$"."currency=$"."valuta; $"."discount=$"."skidka;\n";
-$text2.="$"."header=\"Content-type: text/html;charset=utf-8\\"."r\\"."nFrom: "."{"."$"."sender"."}"."\\"."r\\"."n\";\n";
 $text2.='if (config::is_ip($remote_addr,$ip_block)==true) {include("config/blockip/index.php"); exit();}';
 $text2.="\n{$footer}\n?>\n";
 file_put_contents($file_value1, $text);

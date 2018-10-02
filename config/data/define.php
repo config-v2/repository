@@ -35,7 +35,7 @@ if (stripos($_SERVER['PHP_SELF'], "index"))
 		$_SESSION['serv']=$server;
 		$server_request_uri="{$scheme}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 		$_SESSION['server_request_uri']=$server_request_uri;
-		require_once("config/session.php");
+		require_once("config/include/session.php");
 		if ($_SERVER['HTTP_REFERER']!="") $_SESSION['referer']=$_SERVER['HTTP_REFERER'];
 		else $_SESSION['referer']="Не определен.";
 		if ($remote_addr!=$lastip) {$geo = Config::info_geo($remote_addr); SetCookie("lastgeo",serialize($geo),time()+$period_cookie);  }

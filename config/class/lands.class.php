@@ -158,8 +158,13 @@ else $country=$country_script;
 
 
 <script>
-$(document).ready(function(){$('<link rel="stylesheet" href="config/css/uved.css">').appendTo("head");var e=0;setTimeout(function(){setInterval(function(){(e+=1)>0&&(e=<?= $vsego ?>),$(".yved:nth-child("+e+")").fadeIn(500).delay(5e3).fadeOut(500)},<?= $delay1 ?>000),e=1,$(".yved:nth-child("+e+")").fadeIn(500).delay(5e3).fadeOut(500)},<?= $delay2 ?>000)});
-
+$(document).ready(function(){
+$('<link rel="stylesheet" href="config/css/uved.css">').appendTo('head');
+var i = 0;
+function yved(){i=1;$('.yved:nth-child('+i+')').fadeIn(500).delay(5000).fadeOut(500);}
+setTimeout(function(){setInterval(function(){i=i+1;if(i><?= $vsego ?>) i=1;
+$('.yved:nth-child('+i+')').fadeIn(500).delay(5000).fadeOut(500);},<?= $delay1 ?>000);
+yved();},<?= $delay2 ?>000);});
 </script> 
 	<div class="yvedw">
 	<? for ($i=1; $i<=$vsego; $i++) {
@@ -170,7 +175,7 @@ $(document).ready(function(){$('<link rel="stylesheet" href="config/css/uved.css
 	$sht= "(".$kvo." шт.)";
 	
 	} else $kvo=1; ?>
-		<div class="yved yvedf<?= $yved ?>">
+		<div id="uvb<?= $i ?>" class="yved yvedf<?= $yved ?>">
 			<img src="config/images/yico<?= $yved ?>.png" alt="" class="yvedi">
 			<div class="yvedvt"><div class="yvedt"><strong><?= $name ?></strong><br><i>г. <? if ($i==1) echo($_SESSION['geocity']); else echo Lands::random_city($country); ?></i>,<br><? if ($yved==1) { ?> только что заказал(а) <br><?= $title ?><? if ($sht!=1) echo (" {$sht} "); ?><br>на <?= $price*$kvo ?> <?= $valuta ?><? } else {?> оставил(а) заявку<br>на обратный звонок<? } ?>.</div></div>
 		</div>

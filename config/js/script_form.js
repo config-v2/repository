@@ -1,12 +1,4 @@
-  var message = CodeMirror.fromTextArea(document.getElementById("message"), {
-		showCursorWhenSelecting: true,
-		autofocus: true,
-    lineNumbers: false,
-   mode: "text/html",
-   matchBrackets: true,
-	 enterMode: "keep",
-    tabMode: "shift"
-     });
+/* 
 	var head_index64 = CodeMirror.fromTextArea(document.getElementById("head_index64"), {
 		showCursorWhenSelecting: true,
 		autofocus: true,
@@ -45,7 +37,7 @@
 	 enterMode: "keep",
     tabMode: "shift"
      });
-	 
+	  */
 	
 function og(){
 	//alert($('#og_tag').val());

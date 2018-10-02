@@ -214,12 +214,12 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
     <fieldset>
 	<legend><small>Дополнительные коды, пиксели, метрики, боты и пр.</small></legend>
 	  <div class="form-group">
-	  	<label class="col-sm-3 control-label">Блок head для Index:</label><div class="col-sm-9"><textarea class="form-control" rows="15" id="head_index64" name="head_index64" cols="70"><?= base64_decode($head_index64); ?></textarea> 
+	  	<label class="col-sm-3 control-label">Блок head для Index:</label><div class="col-sm-9"><textarea class="form-control" rows="5" id="head_index64" name="head_index64" cols="70"><?= base64_decode($head_index64); ?></textarea> 
 		<span class="help-block">Код для размещения на ГЛАВНОЙ СТРАНИЦЕ в тегах <strong>&#8249;head&#8250; Ваш код &#8249;&#47;head&#8250;</strong> индексной страницы. Здесь размещают пиксели Facebook и Вконтакте, Google-аналитику, дополнительные META-теги, ссылки на JS для аналитики и пр.</span>
 		</div>
   </div>
 		<div class="form-group">
-	 	<label class="col-sm-3 control-label">Блок head для Thanks: </label><div class="col-sm-9"><textarea class="form-control" rows="15" id="head_thanks64" name="head_thanks64" cols="70"><?= base64_decode($head_thanks64); ?></textarea> 
+	 	<label class="col-sm-3 control-label">Блок head для Thanks: </label><div class="col-sm-9"><textarea class="form-control" rows="5" id="head_thanks64" name="head_thanks64" cols="70"><?= base64_decode($head_thanks64); ?></textarea> 
 		<span class="help-block">Код для размещения на СТРАНИЦЕ "СПАСИБО" (form-ok.php) в тегах <strong>&#8249;head&#8250; Ваш код &#8249;&#47;head&#8250;</strong> страницы благодарности. Здесь размещают пиксели Facebook и Вконтакте, Google-аналитику, дополнительные META-теги, ссылки на JS для аналитики и пр.</span>
 		</div>
   </div>
@@ -304,7 +304,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 	 
   
 	<div class="form-group">
-	  	<label class="col-sm-3 control-label">Текст письма:<span class="help-block">Кликните мышкой по полю чтобы увидить или редактировать письмо.</span></label> <div class="col-sm-9"><textarea rows="8" id="message" name="message" cols="70">
+	  	<label class="col-sm-3 control-label">Текст письма:</label> <div class="col-sm-9"><textarea rows="8" id="message" name="message" cols="70">
 		<? if ($message!="") echo $message; else echo $config['email']['message'];   ?></textarea>
 		<span class="help-block">Текст письма, который будет добавлен к оповещению о покупателе. Может содержать дополнительные переменные.<br><strong>Инструкция в документации <a href="https://config-v2.github.io/#eml" target="_blank">https://config-v2.github.io/</a></strong></span>
 </div></div>

@@ -10,9 +10,12 @@ public function config($str)
 			$str = str_replace("%visit%", '{$visit}', $str);
 			$str = str_replace("%visit_text%", '{$visit_text}', $str);
 			$str = str_replace("%valuta%", '{$valuta}', $str);
+			$str = str_replace("%currency%", '{$valuta}', $str);
+			
 			$str = str_replace("%price_new%", '{$price_new}', $str);
 			$str = str_replace("%price_old%", '{$price_old}', $str);
 			$str = str_replace("%skidka%", '{$skidka}', $str);
+			$str = str_replace("%discount%", '{$skidka}', $str);
 			$str = str_replace("%sender%", '{$sender}', $str);
 			$str = str_replace("%product%", '{$product}', $str);
 			$str = str_replace("%domen%", '{$domen}', $str);

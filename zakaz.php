@@ -25,7 +25,7 @@ else{
 	  if ($mail_type!=1) $verify = mail($email,$subject,$message,$header);
 	 else {
 		   if ($smtp_prot!="") $smtp="ssl://{$smtp}";
-			echo "Sender: {$sender_smtp};<br> server: {$smtp}<br>email:{$email}<br>smtp_log:{$smtp_log}<br>smtp_pass:{$smtp_pass}<br> port:{$port}<br>subject:{$subject}<br>message:{$message}";
+		//	echo "Sender: {$sender_smtp};<br> server: {$smtp}<br>email:{$email}<br>smtp_log:{$smtp_log}<br>smtp_pass:{$smtp_pass}<br> port:{$port}<br>subject:{$subject}<br>message:{$message}";
 			$m= new Mail('UTF-8');  // можно сразу указать кодировку, можно ничего не указывать ($m= new Mail;)
 			$m->From( $sender_smtp ); // от кого Можно использовать имя, отделяется точкой с запятой
 			$m->To( $email );   // кому, в этом поле так же разрешено указывать имя
@@ -40,7 +40,7 @@ else{
 	 }
 	if ($verify == 'true'){
 		include('config/include/info.php');
-		 header('Location: '.$success_url);
+	 header('Location: '.$success_url);
 		echo '<h1 style="color:green;">Поздравляем! Ваш заказ принят!</h1>';
 		exit;
 	}

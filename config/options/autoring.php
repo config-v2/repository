@@ -1,7 +1,6 @@
 <?
 session_start();
-if (isset($_SERVER['HTTPS'])) $scheme = $_SERVER['HTTPS']; else $scheme = '';
-if (($scheme) && ($scheme != 'off')) $scheme = 'https'; else $scheme = 'http';
+require_once('../class/functions.class.php');	$scheme = Config::scheme();
 $host_path=str_ireplace('options/autoring.php','', $_SERVER['PHP_SELF']);
 $host=$_SERVER['HTTP_HOST'].$host_path;
 $server="{$scheme}://{$host}";

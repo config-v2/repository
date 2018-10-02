@@ -25,10 +25,12 @@ if (file_exists($filename)) include ($filename);
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.34.0/codemirror.css" />
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <!--
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.34.0/codemirror.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.34.0/mode/xml/xml.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.34.0/mode/htmlmixed/htmlmixed.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.34.0/addon/edit/matchbrackets.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.34.0/addon/edit/matchbrackets.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.8.3/tinymce.min.js"></script>
 	<script type="text/javascript" id="widget-wfp-script" src="https://secure.wayforpay.com/server/pay-widget.js?ref=button"></script> 
 	<script type="text/javascript">function runWfpWdgt(){(new Wayforpay).invoice("https://secure.wayforpay.com/button/b44c537ac9673")}function pass(){var s=$("#pass_form").serialize();$.ajax({type:"POST",url:"options/password_save.php",data:s,success:function(s){$("#pass_block").addClass("hidden"),$("#no").addClass("hidden"),$("#ok").removeClass("hidden"),$("#results").html(s),$("#success").addClass("hidden")},error:function(s,a){alert("Возникла ошибка: "+s.responseCode)}})}function clearfunc(){var s=$("#clear_form").serialize();$.ajax({type:"POST",url:"options/clear.php",data:s,success:function(s){$("#clear_block").addClass("hidden"),$("#no-clear").addClass("hidden"),$("#ok-clear").removeClass("hidden"),$("#results-clear").html(s),$("#suc-clear").addClass("hidden")},error:function(s,a){alert("Возникла ошибка: "+s.responseCode)}})}</script>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -207,7 +209,22 @@ if (file_exists($filename)) include ($filename);
   </div>
 </div>
 
+	<script> 
+	tinymce.init({
+  selector: '#message',
+  height: 300,
+  menubar: false,
+  
+  plugins: [
+    'advlist autolink lists link charmap  preview textcolor',
+    'visualblocks code fullscreen',
+    'table contextmenu paste help wordcount'
+  ],
+  toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist | table | removeformat | code | help',
+ 
+});
 	
+	</script>
 	 
  </body>
 </html>

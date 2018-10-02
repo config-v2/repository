@@ -2,7 +2,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * 
  *   Configuration v.2.2 for LandingPage:    *
  *           Created for config_v2           *
- *   Last edition by 02.10.2018, 15:53:43    *
+ *   Last edition by 02.10.2018, 15:56:27    *
  * * * * * * * * * * * * * * * * * * * * * * */
 
 $product = "Демонстрация возможностей Конфигуратора v.2.1";

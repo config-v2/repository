@@ -281,12 +281,14 @@ public function GetRealIp() {
 	
 	public function geo_2ip($ip){
 		$geo = json_decode(file_get_contents('https://api.2ip.ua/geo.json?ip='.$ip), true);
+		if ($geo['country_rus']=='') $geo = json_decode(file_get_contents('http://api.2ip.ua/geo.json?ip='.$ip), true);
 		return $geo;
 	}
 	
 	public function geo_ip($ip)
 	{
-	 $geo = json_decode(file_get_contents('http://api.sypexgeo.net/json/'.$ip), true);
+		$geo = json_decode(file_get_contents('https://api.sypexgeo.net/json/'.$ip), true);
+		if ($geo['country']['name_ru']=='') $geo = json_decode(file_get_contents('http://api.sypexgeo.net/json/'.$ip), true);
 	
 	return $geo;
 	}
