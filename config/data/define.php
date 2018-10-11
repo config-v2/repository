@@ -76,7 +76,7 @@ else {
 	$remote_addr=$_SESSION['remote_addr'];
 	$scheme=$_SESSION['scheme'];
 	$remote_host=$_SESSION['remote_host'];
-	$lang$_SESSION['lang'];
+	$lang=$_SESSION['lang'];
 	$screen=$_POST['screen']['width']." х ".$_POST['screen']['height']." х ".$_POST['screen']['color'];
 	if ($_POST['battery']['proc']>0) $batery_proc=(($_POST['battery']['proc'])*100).'&#37;'; else $batery_proc="Не определено";
 	if ($_POST['battery']['zar']=='true') $batery_zar="Подключено"; else $batery_zar="Не подключено, или не определено";
