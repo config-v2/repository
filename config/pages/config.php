@@ -177,6 +177,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 		
 		 <? } ?>
 		</select>
+		<span class="help-block">Страна гео-локализации посетителя</span>
 		</div>
 		</div>
 	 
@@ -191,8 +192,21 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 		
 		 <? } ?>
 		</select>
+		<span class="help-block">Маска для ввода номера пользователем</span>
 		</div>
 		</div>
+		
+		
+		<div  id="send_group" class="form-group">
+		<label class="col-sm-3 control-label">Доставка: </label>
+	   <div class="col-sm-9">
+	   <textarea group="geo" id="sending" class="form-control" name="sending_html"  cols="30" rows="3"><? if ($sending_html!="") echo htmlspecialchars_decode($sending_html); else echo('Доставка наложенным платежом') ?></textarea>
+		<span class="help-block">Информации о способе доставки</span>
+</div>
+</div>
+		
+		
+		
 		<div class="form-group text-center">
 		<input type="submit"  value="Сохранить" class="btn btn-primary">
 	</div>
@@ -200,6 +214,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
    </div>
   </div>
  </div>
+ 
  <div class="panel panel-default">
   <div class="panel-heading">
    <h4 class="panel-title"><i class="fa fa-code"></i>&#160;
@@ -231,6 +246,46 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 		<div class="form-group">
 	 	<label class="col-sm-3 control-label">Блок body для Thanks:</label><div class="col-sm-9"><textarea class="form-control" rows="5" id="body_thanks64" name="body_thanks64" cols="70"><?= base64_decode($body_thanks64); ?></textarea> <span class="help-block">Код для для размещения на СТРАНИЦЕ "СПАСИБО" (form-ok.php) в тегах <strong>&#8249;body&#8250; Ваш код &#8249;&#47;body&#8250;</strong> страницы благодарности. Здесь можно разместить код реагирование на совершение лида (покупка), счетчиков Яндекс-метрики, Mail.Top</span></div>
   </div>
+	<div class="form-group text-center">
+		<input type="submit"  value="Сохранить" class="btn btn-primary">
+	</div>
+	 </fieldset>
+   </div>
+  </div>
+ </div>
+ 
+ 
+ <div class="panel panel-default">
+  <div class="panel-heading">
+   <h4 class="panel-title"><i class="fa fa-tags"></i>&#160;
+       <a data-toggle="collapse" data-parent="#accordion" href="#dop_value">
+        Дополнительные поля:
+       </a>&#160;<i class="fa fa-caret-down" aria-hidden="true"></i>
+	   <span id="dv" class="panel-heading-info hidden"><small>Есть не заполненные поля!</small></span>
+      </h4>
+  </div>
+  <div id="dop_value" class="panel-collapse collapse">
+   <div class="panel-body">
+    <fieldset>
+	<legend><small>Дополнительные поля, для использования в лендинге</small></legend>
+	  <div class="form-group">
+	  	<label class="col-sm-3 control-label">Дополнительное поле 1:</label><div class="col-sm-9"><textarea class="form-control" rows="3" id="value1" name="value1_html" cols="70"><? if($value1_html!="") echo htmlspecialchars_decode($value1_html); else echo("Дополнительное поле 1"); ?></textarea> 
+		<span class="help-block">Дополнительное поле 1 для размещения информации на лендинге</span>
+		</div>
+  </div>
+  
+  <div class="form-group">
+	  	<label class="col-sm-3 control-label">Дополнительное поле 2:</label><div class="col-sm-9"><textarea class="form-control" rows="3" id="value2" name="value2_html" cols="70"><? if($value2_html!="") echo htmlspecialchars_decode($value2_html); else echo("Дополнительное поле 2"); ?></textarea> 
+		<span class="help-block">Дополнительное поле 2 для размещения информации на лендинге</span>
+		</div>
+  </div>
+  
+  <div class="form-group">
+	  	<label class="col-sm-3 control-label">Дополнительное поле 3:</label><div class="col-sm-9"><textarea class="form-control" rows="3" id="value1" name="value3_html" cols="70"><? if($value3_html!="") echo htmlspecialchars_decode($value3_html); else echo("Дополнительное поле 3"); ?></textarea> 
+		<span class="help-block">Дополнительное поле 3 для размещения информации на лендинге</span>
+		</div>
+  </div>
+		
 	<div class="form-group text-center">
 		<input type="submit"  value="Сохранить" class="btn btn-primary">
 	</div>

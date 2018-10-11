@@ -24,7 +24,7 @@ $text.=" * ".str_pad($file_conf, 41, " ", STR_PAD_BOTH)." *\n";
 $text.=" * ".str_pad($create, 41, " ", STR_PAD_BOTH)." *\n";
 $text.=" * ".str_pad($last_edit, 41, " ", STR_PAD_BOTH)." *\n";
 $text.=" {$str_up}*/\n\n";
-$text2=$text."session_start();\nrequire_once(\"config/class/functions.class.php\");\nrequire_once(\"config/class/lands.class.php\");\nrequire_once(\"config/data/define.php\");\n";
+$text2=$text."session_start();\nrequire_once(\"config/class/browser.class.php\");\nrequire_once(\"config/class/functions.class.php\");\nrequire_once(\"config/class/lands.class.php\");\nrequire_once(\"config/data/define.php\");\n";
 
 if ($_FILES["upsel_pic"]["name"]!="") {if (!file_exists($ups_pic_dir)) mkdir($ups_pic_dir); move_uploaded_file($_FILES["upsel_pic"]["tmp_name"], $ups_pic_dir.$_FILES["upsel_pic"]["name"]);
 }
@@ -36,7 +36,9 @@ if ($_FILES["og_pic"]["name"]!="") move_uploaded_file($_FILES["og_pic"]["tmp_nam
 	
 	//echo("{$key} = {$value}<br>");
 	
-	if (stripos($key, "64")) {$value_save=base64_encode($value); $value=base64_encode(trim($value));} else {$value_save=save_config::config(trim($value));
+	if (stripos($key, "64")) {$value_save=base64_encode($value); $value=base64_encode(trim($value));} 
+	else if (stripos($key, "html")) {$value_save=htmlspecialchars($value); $value=htmlspecialchars(trim($value));} 
+	else {$value_save=save_config::config(trim($value)); 
 	$value = str_replace('"', '\"', $value);}
 	//if (($key=="contact_email") AND ($value=="")) $value=$_POST['email'];
   
@@ -68,6 +70,7 @@ $footer.=" {$str_up}*/\n\n";
 $text.="{$footer}?>\n";
 $sender=save_config::config($_POST['sender']);
 $text2.="$"."currency=$"."valuta; $"."discount=$"."skidka;\n";
+$text2.="$"."header=\"Content-type: text/html;charset=utf-8\\"."r\\"."nFrom: "."{"."$"."sender"."}"."\\"."r\\"."n\";\n";
 $text2.='if (config::is_ip($remote_addr,$ip_block)==true) {include("config/blockip/index.php"); exit();}';
 $text2.="\n{$footer}\n?>\n";
 file_put_contents($file_value1, $text);

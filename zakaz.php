@@ -19,9 +19,10 @@ else{
 	$success_url = 'form-ok.php';
 	if ($_POST['formname']!="") $formname="<tr><td><b>Форма заказа:</b></td><td>{$_POST['formname']}</td></tr>";
 	$message1 = "<table border=\"0\">
-	<tr><td colspan=\"2\" ><b>Товар:</b><font size=\"5\" color=\"#FF0000\"> {$product}</font></td></tr><tr><td><b>Цена:&nbsp; </b></td><td >{$price_new} {$valuta}</td></tr><tr><td><b>Старая цена:&nbsp; </b></td><td >{$price_old} {$valuta}</td></tr>
-	<tr><td><b>Скидка:&nbsp; </b></td><td >{$skidka} %</td></tr><tr><td ><b>Покупатель:</b></td><td>{$name}</td></tr><tr><td ><b>Телефон: </b></td><td>{$phone}</td></tr><tr><td ><b>Сайт продажи:</b></td><td><a href='{$server}' target='_blank'>{$server}</a></td></tr><tr><td ><b>Дата заказа: </b></td><td>{$date}</td></tr><tr><td ><b>Время заказа: </b></td><td>{$time}</td></tr>{$formname}</table>";
-	$message = $message1.$message."{$mess}"."<br><hr width='70%'><br>\n<small>Настоящее письмо сконструировано и отправленно через админпанель для лендингов <strong>{$config['name']} v.{$config['ver']}</strong>.<br>Подробнее: <a target='_blank' href='{$config['site_conf']}'>{$config['site_conf']}</a>, &copy; 2015-".date("Y").", <a target='_blank' href='{$config['site_gg']}'>{$config['powered']}</a></small>";
+	<tr><td colspan=\"2\" ><b>{$config['email']['prod']}:</b><font size=\"5\" color=\"#FF0000\"> {$product}</font></td></tr><tr><td><b>{$config['email']['price']}:&nbsp; </b></td><td ><font size=\"5\" color=\"#FF0000\">{$price_new} {$valuta}</font></td></tr><tr><td><b>{$config['email']['oldprice']}:&nbsp; </b></td><td ><strike>{$price_old} {$valuta}</strike></td></tr>
+	<tr><td><b>{$config['email']['skidka']}:&nbsp; </b></td><td >{$skidka} %</td></tr><tr><td ><b>{$config['email']['pokup']}:</b></td><td><font size=\"4\" >{$name}</font></td></tr><tr><td ><b>{$config['email']['phone']}: </b></td><td><font size=\"4\" >{$phone}</font></td></tr><tr><td ><b>Сайт продажи:</b></td><td><a href='{$server}' target='_blank'>{$server}</a></td></tr><tr><td ><b>Дата заказа: </b></td><td>{$date}</td></tr><tr><td ><b>Время заказа: </b></td><td>{$time}</td></tr>{$formname}</table>";
+	$message = $message1.$message."{$mess}"."<br><hr><br>\n<small> {$config['email']['footer']} <strong>{$config['name']} v.{$config['ver']}</strong>.<br>Подробнее: <a target='_blank' href='{$config['site_conf']}'>{$config['site_conf']}</a>, &copy; 2015-".date("Y").", <a target='_blank' href='{$config['site_gg']}'>{$config['powered']}</a></small>";
+	//echo $message;
 	  if ($mail_type!=1) $verify = mail($email,$subject,$message,$header);
 	 else {
 		   if ($smtp_prot!="") $smtp="ssl://{$smtp}";

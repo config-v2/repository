@@ -1,22 +1,14 @@
 <?php
 $time_land='3';
-$remote_addr=Config::GetRealIp();
-$scheme=Config::scheme();
-$remote_host=@gethostbyaddr($remote_addr);
-if ($remote_host==$remote_addr) $remote_host="Не определен";
 $cookie_days = 30; // Период cookie в днях
 $period_cookie = $cookie_days*24*60*60; // Пересчет в секунды
 $date=Config::date_rus();
 $time=date('H:i:s');
-$lang=$_SERVER['HTTP_ACCEPT_LANGUAGE'];
 
-
-
-if ($remote_addr=="127.0.0.1") $remote_addr="localhost";
 if (stripos($_SERVER['PHP_SELF'], "index"))
 	{
-		 $visit=$_COOKIE['visit'];
-		 $lastip=$_COOKIE['ip'];
+		$visit=$_COOKIE['visit'];
+		$lastip=$_COOKIE['ip'];
 		$visit++;
 		SetCookie("visit",$visit,time()+$period_cookie);
 		SetCookie("time",time(),time()+$period_cookie);
@@ -26,6 +18,17 @@ if (stripos($_SERVER['PHP_SELF'], "index"))
 		$_SESSION['proxy']=$proxy;
 		$host_path=str_ireplace('index.php','', $_SERVER['PHP_SELF']);
 		$domen=str_ireplace("www.", "", $_SERVER['HTTP_HOST']);
+		$remote_addr=Config::GetRealIp();
+		if ($remote_addr=="127.0.0.1") $remote_addr="localhost";
+		$scheme=Config::scheme();
+		$remote_host=@gethostbyaddr($remote_addr);
+		if ($remote_host==$remote_addr) $remote_host="Не определен";
+		$lang_array=explode(";", $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+		$lang=$lang_array[0];
+		$_SESSION['remote_addr']=$remote_addr;
+		$_SESSION['scheme']=$scheme;
+		$_SESSION['remote_host']=$remote_host;
+		$_SESSION['lang']=$lang;
 		$host=$domen.$host_path;
 		$url="{$scheme}://{$domen}";
 		$_SESSION['url']=$url;
@@ -50,8 +53,18 @@ if (stripos($_SERVER['PHP_SELF'], "index"))
 		$region=$_SESSION['region'];
 		$city=$_SESSION['city'];
 		$geocity=$_SESSION['geocity'];
-		
+		$user_agent=$_SERVER['HTTP_USER_AGENT'];
+		$_SESSION['user_agent']=$user_agent;
+		$browser_class = new Browser();
+		$browser=$browser_class->getBrowser()." v.".$browser_class->getVersion();
+		$_SESSION['browser']=$browser;
+		$os=$browser_class->getPlatform();
+		$_SESSION['os']=$os;
+		if ($browser_class->isMobile()) $device="Mobile"; else
+		if ($browser_class->isTablet()) $device="Tablet"; else $device="Desktop";
+		$_SESSION['device']=$device;
 		}
+		
 else {
 	$visit=$_COOKIE['visit'];
 	$time_cookie=$_COOKIE['time'];
@@ -60,7 +73,11 @@ else {
 	$last_geo=$geo_cookie['city'].", ".$geo_cookie['region'].", ".$geo_cookie['country'];
 	$remote_host_cookie=$_COOKIE['remote_host'];
 	$proxy=$_SESSION['proxy'];
-	$screen=$_POST['screen']['width']." х ".$_POST['screen']['height'];
+	$remote_addr=$_SESSION['remote_addr'];
+	$scheme=$_SESSION['scheme'];
+	$remote_host=$_SESSION['remote_host'];
+	$lang$_SESSION['lang'];
+	$screen=$_POST['screen']['width']." х ".$_POST['screen']['height']." х ".$_POST['screen']['color'];
 	if ($_POST['battery']['proc']>0) $batery_proc=(($_POST['battery']['proc'])*100).'&#37;'; else $batery_proc="Не определено";
 	if ($_POST['battery']['zar']=='true') $batery_zar="Подключено"; else $batery_zar="Не подключено, или не определено";
 	if ($_POST['time_lend']<60) $time_in_land=$_POST['time_lend']." сек.";
@@ -82,11 +99,12 @@ else {
 	$domen=$_SESSION['domen'];
 	$url=$_SESSION['url'];
 	$server_request_uri=$_SESSION['server_request_uri'];
+	$user_agent=$_SESSION['user_agent'];
+	$browser=$_SESSION['browser'];
+	$os=$_SESSION['os'];
+	$device=$_SESSION['device'];
 }
-$device=Config::device_name(Config::is_mobile());
-$user_agent=$_SERVER['HTTP_USER_AGENT'];
-$browser=Config::user_browser($user_agent);
-$os=Config::getOS($user_agent);
+
 $insrtion="https://youtu.be/I56D87MHQnI";
 $ins_crm=array(
 'LP-CRM' => 'https://youtu.be/I56D87MHQnI',

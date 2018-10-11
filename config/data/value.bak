@@ -1,22 +1,25 @@
 <?php
 /* * * * * * * * * * * * * * * * * * * * * * * 
- *   Configuration v.2.2 for LandingPage:    *
+ *   Configuration v.2.3 for LandingPage:    *
  *           Created for config_v2           *
- *   Last edition by 02.10.2018, 15:53:43    *
+ *   Last edition by 10.10.2018, 15:20:24    *
  * * * * * * * * * * * * * * * * * * * * * * */
 
-$product = "Демонстрация возможностей Конфигуратора v.2.1";
+$product = "Демонстрация возможностей Конфигуратора v.2.3";
 $og_tag = "0";
-$valuta = "грн";
+$valuta = "тенге";
 $price_new = "256";
 $price_old_select = "0";
-$price_old = "625";
+$price_old = "652";
 $country_script = "auto";
 $mask_phone = "-";
+$sending_html = "Доставка наложенным платежом";
 $head_index64 = "";
 $head_thanks64 = "";
 $body_index64 = "";
 $body_thanks64 = "";
+$value1_html = "";
+$value3_html = "";
 $mail_type = "";
 $email = "admin@%domen%";
 $sender = "Уведомление <noreply@%domen%>";
@@ -29,15 +32,15 @@ $message = "<table border=\"0\">
 </td>
 </tr>
 <tr>
-<td><strong>IP покупателя:</strong></td>
+<td><strong>IP:</strong></td>
 <td>%ip%</td>
 </tr>
 <tr>
-<td><strong>Имя Internet-хоста:</strong></td>
+<td><strong>Internet-хост:</strong></td>
 <td>%remote_host%</td>
 </tr>
 <tr>
-<td><strong>Использование прокси:</strong></td>
+<td><strong>Прокси | VPN:</strong></td>
 <td>%proxy%</td>
 </tr>
 <tr>
@@ -49,8 +52,8 @@ $message = "<table border=\"0\">
 <td>%city%</td>
 </tr>
 <tr>
-<td><strong>Установленный язык:</strong></td>
-<td>%lang%</td>
+<td><strong>Реферер:</strong></td>
+<td><a href=\"%refer%\" target=\"_blank\" rel=\"noopener\">%refer%</a></td>
 </tr>
 <tr>
 <td><strong>Браузер: </strong></td>
@@ -65,20 +68,12 @@ $message = "<table border=\"0\">
 <td>%os%</td>
 </tr>
 <tr>
-<td><strong>Время на ленде:</strong></td>
-<td>%time_land%</td>
-</tr>
-<tr>
-<td><strong>Кол-во визитов:</strong></td>
-<td>%visit%</td>
-</tr>
-<tr>
-<td valign=\"top\"><strong>Последний визит:</strong></td>
-<td>%visit_text%</td>
-</tr>
-<tr>
 <td><strong>Разрешение экрана:</strong></td>
 <td>%screen%</td>
+</tr>
+<tr>
+<td><strong>Установленный язык:</strong></td>
+<td>%lang%</td>
 </tr>
 <tr>
 <td><strong>Заряд батареи:</strong></td>
@@ -89,8 +84,16 @@ $message = "<table border=\"0\">
 <td>%batery_zar%</td>
 </tr>
 <tr>
-<td><strong>Реферер:</strong></td>
-<td><a href=\"%refer%\" target=\"_blank\" rel=\"noopener\">%refer%</a></td>
+<td><strong>Время на ленде:</strong></td>
+<td>%time_land%</td>
+</tr>
+<tr>
+<td><strong>Кол-во визитов:</strong></td>
+<td>%visit%</td>
+</tr>
+<tr>
+<td valign=\"top\"><strong>Последний визит:</strong></td>
+<td>%visit_text%</td>
 </tr>
 <tr>
 <td colspan=\"2\">
@@ -123,7 +126,7 @@ $upsel = "0";
 $ip_block = "";
 $crm = "";
 $skidka = 100-floor(($price_new/$price_old)*100);
-$ver='2.2';
+$ver='2.3';
 $power1='Powered by GreyGler';
 $power2='https://greygler.github.io';
 $time_land=3;
