@@ -200,7 +200,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 		<div  id="send_group" class="form-group">
 		<label class="col-sm-3 control-label">Доставка: </label>
 	   <div class="col-sm-9">
-	   <textarea group="geo" id="sending" class="form-control" name="sending_html"  cols="30" rows="3"><? if ($sending_html!="") echo htmlspecialchars_decode($sending_html); else echo('Доставка наложенным платежом') ?></textarea>
+	   <textarea group="geo" id="sending" class="form-control" name="sending_html"  cols="30" rows="3"><? if ($sending_html!="") echo htmlspecialchars_decode($sending_html); else echo($config['dop']['sending']) ?></textarea>
 		<span class="help-block">Информации о способе доставки</span>
 </div>
 </div>
@@ -269,19 +269,19 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
     <fieldset>
 	<legend><small>Дополнительные поля, для использования в лендинге</small></legend>
 	  <div class="form-group">
-	  	<label class="col-sm-3 control-label">Дополнительное поле 1:</label><div class="col-sm-9"><textarea class="form-control" rows="3" id="value1" name="value1_html" cols="70"><? if($value1_html!="") echo htmlspecialchars_decode($value1_html); else echo("Дополнительное поле 1"); ?></textarea> 
+	  	<label class="col-sm-3 control-label">Дополнительное поле 1:</label><div class="col-sm-9"><textarea class="form-control" rows="3" id="value1" name="value1_html" cols="70"><? if($value1_html!="") echo htmlspecialchars_decode($value1_html); else echo($config['dop']['val1']); ?></textarea> 
 		<span class="help-block">Дополнительное поле 1 для размещения информации на лендинге</span>
 		</div>
   </div>
   
   <div class="form-group">
-	  	<label class="col-sm-3 control-label">Дополнительное поле 2:</label><div class="col-sm-9"><textarea class="form-control" rows="3" id="value2" name="value2_html" cols="70"><? if($value2_html!="") echo htmlspecialchars_decode($value2_html); else echo("Дополнительное поле 2"); ?></textarea> 
+	  	<label class="col-sm-3 control-label">Дополнительное поле 2:</label><div class="col-sm-9"><textarea class="form-control" rows="3" id="value2" name="value2_html" cols="70"><? if($value2_html!="") echo htmlspecialchars_decode($value2_html); else echo($config['dop']['val2']); ?></textarea> 
 		<span class="help-block">Дополнительное поле 2 для размещения информации на лендинге</span>
 		</div>
   </div>
   
   <div class="form-group">
-	  	<label class="col-sm-3 control-label">Дополнительное поле 3:</label><div class="col-sm-9"><textarea class="form-control" rows="3" id="value1" name="value3_html" cols="70"><? if($value3_html!="") echo htmlspecialchars_decode($value3_html); else echo("Дополнительное поле 3"); ?></textarea> 
+	  	<label class="col-sm-3 control-label">Дополнительное поле 3:</label><div class="col-sm-9"><textarea class="form-control" rows="3" id="value1" name="value3_html" cols="70"><? if($value3_html!="") echo htmlspecialchars_decode($value3_html); else echo($config['dop']['val3']); ?></textarea> 
 		<span class="help-block">Дополнительное поле 3 для размещения информации на лендинге</span>
 		</div>
   </div>
