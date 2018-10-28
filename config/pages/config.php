@@ -2,10 +2,8 @@
 if (file_exists('../index.php')) {
 
 if ($product=='') {
-$title_index = file_get_contents('../index.php');
-$title_index = stristr($title_index, '<title>');
-$title_index = stristr($title_index, '</title>', true);
-$product = str_replace("<title>", "", $title_index);
+	$site=file_get_contents('../index.php');
+ if (preg_match("~<title>(.*?)</title>~iu", $site, $out)) {$product = $out[1];}
 }
 
 if ($desc=='') {
