@@ -38,7 +38,6 @@ public function config($str)
 			$str = str_replace("%country%", '{$country}', $str);
 			$str = str_replace("%browser%", '{$browser}', $str);
 			$str = str_replace("%refer%", "{".'$_SESSION[\'referer\']'."}", $str);
-			$str = str_replace("%comment%", '{$comment}', $str);
 			$str = str_replace("%utm%", '{$utm}', $str);
 			$str = str_replace("%city%", '{$city}', $str);
 			$str = str_replace("%proxy%", '{$proxy}', $str);

@@ -76,10 +76,10 @@
 				<div class="row">
 					<div class="col-md-7 col-lg-7 thumbnail"> 
 						<h3>
-							Видеообзор устаревшей версии 1.9:
+							Видеообзор версии 2.3 
 						</h3>
 						<div class="thumb-wrap">
-							<iframe width="854" height="480" src="https://www.youtube.com/embed/I56D87MHQnI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+							<iframe width="854" height="480" src="https://www.youtube.com/embed/bHGkCu3VhEk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 						</div>
 						<h3>
 							Как Вы раньше обходились без конфигуратора?
@@ -131,6 +131,7 @@
 									<input class="btn btn-primary" type="submit" value="Отправить">
 								</div>	
 								<? lands::form('Главная форма'); // Имя формы с заказом ?>
+								<input type="hidden" name="comment" value="sfdgsdfsdfsdfsdf">
 						</form>
 						<span class="help-block text-center">Мы не рассылаем спам и не передаем данные третьим лицам.</span>
 					</div>
@@ -205,10 +206,10 @@
 				
 							<blockquote class="blockquote-reverse">
 								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, error, eum, sed consequuntur similique repudiandae harum molestiae reprehenderit dolores explicabo tempore sit sunt voluptatem velit rem veniam quasi alias culpa!
+									<i class="fa fa-quote-left fa-3x fa-pull-left fa-border" aria-hidden="true"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, error, eum, sed consequuntur similique repudiandae harum molestiae reprehenderit dolores explicabo tempore sit sunt voluptatem velit rem veniam quasi alias culpa!
 								</p>
 									<footer>
-										<?= lands::random_name('w'); // Случайное нейтральное имя ?>,
+										<?= lands::random_name('w'); // Случайное женское имя ?>,
 										<cite title="Source Title">
 											г. <?= $geocity; // Город пользователя ?>
 										</cite>
@@ -222,7 +223,7 @@
 						<div class="thumbnail review">
 							<blockquote class="blockquote-reverse">
 								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, in, harum temporibus esse odit ex cupiditate quo a et tempore modi quaerat officia est eos distinctio officiis hic! Veritatis, vitae.
+									<i class="fa fa-quote-left fa-3x fa-pull-left fa-border" aria-hidden="true"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, in, harum temporibus esse odit ex cupiditate quo a et tempore modi quaerat officia est eos distinctio officiis hic! Veritatis, vitae.
 								</p>
 									<footer>
 										<?= lands::random_name('m'); // Случайное мужское имя ?>,
@@ -239,7 +240,7 @@
 						<div class="thumbnail review">
 							<blockquote class="blockquote-reverse">
 								<p>	
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, doloremque, exercitationem dolorem modi eum consequuntur repellat sed porro officiis nesciunt quasi autem qui accusantium quos perferendis. Eveniet quisquam consectetur dolor?
+									<i class="fa fa-quote-left fa-3x fa-pull-left fa-border" aria-hidden="true"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, doloremque, exercitationem dolorem modi eum consequuntur repellat sed porro officiis nesciunt quasi autem qui accusantium quos perferendis. Eveniet quisquam consectetur dolor?
 								</p>
 									<footer>
 										<?= lands::random_name('n'); // Случайное нейтральное имя ?>,

@@ -5,5 +5,5 @@ $_SESSION['login']="";
 $_SESSION['password']="";
 
 
-header("Location: /config");
+header("Location: ../");
 ?>

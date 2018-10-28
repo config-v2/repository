@@ -17,12 +17,7 @@ class Lands{
 	public function og($price, $title, $desc, $img, $country )
 	{
 		
-		if (isset($_SERVER['HTTPS']))
-		$scheme = $_SERVER['HTTPS'];
-			else
-		$scheme = '';
-		if (($scheme) && ($scheme != 'off')) $scheme = 'https';
-			else $scheme = 'http';
+		$server=$_SESSION['serv'];
 		?>
 		
 	<meta property="og:title" content="<?= $title ?>" />
@@ -34,7 +29,7 @@ class Lands{
 	
 	<!-- Для товара  -->
 	<meta property="og:price:amount" content="<?= $price ?>">
-	<meta property="og:price:currency" content="<?= Lands::currency($country_code) ?>">
+	<meta property="og:price:currency" content="<?= Lands::currency($country) ?>">
 	
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="<?= $title ?>">

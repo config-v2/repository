@@ -10,6 +10,8 @@ if (stripos($_SERVER['PHP_SELF'], "index"))
 		$visit=$_COOKIE['visit'];
 		$lastip=$_COOKIE['ip'];
 		$visit++;
+		$remote_addr=Config::GetRealIp();
+		if ($remote_addr=="127.0.0.1") $remote_addr="localhost";
 		SetCookie("visit",$visit,time()+$period_cookie);
 		SetCookie("time",time(),time()+$period_cookie);
 		SetCookie("ip",$remote_addr,time()+$period_cookie); 
@@ -18,9 +20,7 @@ if (stripos($_SERVER['PHP_SELF'], "index"))
 		$_SESSION['proxy']=$proxy;
 		$host_path=str_ireplace('index.php','', $_SERVER['PHP_SELF']);
 		$domen=str_ireplace("www.", "", $_SERVER['HTTP_HOST']);
-		$remote_addr=Config::GetRealIp();
-		if ($remote_addr=="127.0.0.1") $remote_addr="localhost";
-		$scheme=Config::scheme();
+				$scheme=Config::scheme();
 		$remote_host=@gethostbyaddr($remote_addr);
 		if ($remote_host==$remote_addr) $remote_host="Не определен";
 		$lang_array=explode(";", $_SERVER['HTTP_ACCEPT_LANGUAGE']);
@@ -105,8 +105,8 @@ else {
 	$device=$_SESSION['device'];
 }
 
-$insrtion="https://youtu.be/I56D87MHQnI";
+$insrtion="https://youtu.be/bHGkCu3VhEk";
 $ins_crm=array(
-'LP-CRM' => 'https://youtu.be/I56D87MHQnI',
-'e-autopay' => 'https://youtu.be/I56D87MHQnI',
+'LP-CRM' => 'https://youtu.be/bHGkCu3VhEk',
+'e-autopay' => 'https://youtu.be/bHGkCu3VhEk',
 );
