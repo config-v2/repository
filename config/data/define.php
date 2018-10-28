@@ -11,6 +11,8 @@ if (stripos($_SERVER['PHP_SELF'], "index"))
 		$lastip=$_COOKIE['ip'];
 		$visit++;
 		$remote_addr=Config::GetRealIp();
+		$remote_host=@gethostbyaddr($remote_addr);
+		if ($remote_host==$remote_addr) $remote_host="Не определен";
 		if ($remote_addr=="127.0.0.1") $remote_addr="localhost";
 		SetCookie("visit",$visit,time()+$period_cookie);
 		SetCookie("time",time(),time()+$period_cookie);
@@ -21,8 +23,7 @@ if (stripos($_SERVER['PHP_SELF'], "index"))
 		$host_path=str_ireplace('index.php','', $_SERVER['PHP_SELF']);
 		$domen=str_ireplace("www.", "", $_SERVER['HTTP_HOST']);
 				$scheme=Config::scheme();
-		$remote_host=@gethostbyaddr($remote_addr);
-		if ($remote_host==$remote_addr) $remote_host="Не определен";
+		
 		$lang_array=explode(";", $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 		$lang=$lang_array[0];
 		$_SESSION['remote_addr']=$remote_addr;
