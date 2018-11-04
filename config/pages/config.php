@@ -1,6 +1,6 @@
 <?
 if (file_exists('../index.php')) {
-
+require_once('data/data.php');
 if ($product=='') {
 	$site=file_get_contents('../index.php');
  if (preg_match("~<title>(.*?)</title>~iu", $site, $out)) {$product = $out[1];}
@@ -19,6 +19,19 @@ if ($desc=='') {
 		<label class="col-sm-3 control-label">Название продукта <em>*</em></label>
 	   <div class="col-sm-9">
 		<input class="form-control" required id="product" type="text" name="product" value="<?= $product; ?>" placeholder="Название продукта">
+		<span class="help-block">Название продукта, которое будет отображаться в заявках</span>
+</div>
+</div>
+<div id="logs_group" class="form-group">
+		<label class="col-sm-3 control-label">Журнал заказов <em>*</em></label>
+	   <div class="col-sm-9">
+	   <select required class="form-control" name="logs" id="logs" onchange="log_func(this.value)">
+	   <? if (!$logs!='') { ?>
+	   <option selected disabled value="">Укажите, хотите ли Вы сохранять информацию о заказах в <?= $config['name'] ?>е.</option> <? } ?>
+	   <option <? if ($logs=='1') echo ('selected') ?> value="1">Включено</option>
+	   <option <? if ($logs=='0') echo ('selected') ?> value="0">Выключено</option>
+	   </select>
+	<span class="help-block">Обратите внимание, что сохранение заявок влечет за собой увеличение занимаемого лендингом объема.<br>Поэтому не забывайте удалять старые журналы заказов.</span>
 </div>
 </div>
 	<div class="panel-group" id="accordion">
@@ -178,6 +191,23 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 		<span class="help-block">Страна гео-локализации посетителя</span>
 		</div>
 		</div>
+		
+		
+		 <div class="form-group">
+    <label for="timezone" class="col-sm-3 control-label">Часовой пояс<br><small>На этом компьютере определятся таймзона «<span id="tzs"></span>»</small></label>
+    <div class="col-sm-9">
+     
+	  <select group="geo" class="form-control" name="timezone" id="timezone">
+<? if ($timezone=='') $timezone=$config['timezone'];
+ foreach($timezone_array as $key => $value)  if ($value['timezone']!='') { ?>	
+  	  <option <? if ($value['timezone']==$timezone) echo ('selected') ?> value="<?= $value['timezone'] ?>"><?= $value['options'] ?></option>
+<? } ?>
+	  </select>
+	  <span class="help-block">Необходимо для правильного отображение времени заказов, сделанных на лендинге</span>
+    </div>
+  </div>
+		
+		
 	 
 	  <div class="form-group">
 	  	<label class="col-sm-3 control-label">Маска номера: </label>
@@ -279,7 +309,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
   </div>
   
   <div class="form-group">
-	  	<label class="col-sm-3 control-label">Дополнительное поле 3:</label><div class="col-sm-9"><textarea class="form-control" rows="3" id="value1" name="value3_html" cols="70"><? if($value3_html!="") echo htmlspecialchars_decode($value3_html); else echo($config['dop']['val3']); ?></textarea> 
+	  	<label class="col-sm-3 control-label">Дополнительное поле 3:</label><div class="col-sm-9"><textarea class="form-control" rows="3" id="value3" name="value3_html" cols="70"><? if($value3_html!="") echo htmlspecialchars_decode($value3_html); else echo($config['dop']['val3']); ?></textarea> 
 		<span class="help-block">Дополнительное поле 3 для размещения информации на лендинге</span>
 		</div>
   </div>
@@ -429,6 +459,12 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 	 <label class="col-sm-3 control-label" for="contact_phone3">Контактный телефон 3: </label><div class="col-sm-9"><input class="form-control" id="contact_phone3" type="text" name="contact_phone3" value="<?= $contact_phone3 ?>" placeholder="Контактный телефон продавца 3"></div></div>
 	 <div class="form-group">
 	 <label class="col-sm-3 control-label" for="contact_email">Контактный E-mail:<br> </label><div class="col-sm-9"><input class="form-control" id="contact_email" type="text" name="contact_email" value="<?= $contact_email ?>" placeholder="Контактный E-mail продавца"></div></div>
+	 
+	 	<div class="form-group">
+	  	<label class="col-sm-3 control-label">Политика конфиденциальности:</label> <div class="col-sm-9"><textarea rows="8" id="polit" name="polit" cols="70">
+		<? if ($polit!="") echo $polit; else echo $config['polit']; ?></textarea>
+		<span class="help-block">Текст "Политики Конфиденциальности"</span>
+</div></div>
 		
 		<div class="form-group text-center">
 		<input type="submit"  value="Сохранить" class="btn btn-primary">
@@ -730,8 +766,21 @@ if ($button=="") echo $config['modal']['button']; else echo $button;	 ?>" placeh
     </div>
   </div>
 </div>
+
+<script>function log_func(l){if (l==1) $('#lilog').removeClass('hidden');else $('#lilog').addClass('hidden');};</script> 
+<script src="js/jstz.min.js"></script>
+<script src="js/tz.js"></script>
 <script src="js/script_form.js"></script>
-<?
+
+<script> 
+	 $('document').ready(function() {
+		
+	<? if ($timezone=='') { ?>	 $('#timezone option[value="'+timezone.name()+'"]').prop('selected', true); <? } ?>
+		 $('#tzs').html(timezone.name());
+
+});
+	</script>
+<? 
 	if ($_GET['save']=='1') { ?>
 	<div class="modal fade" id="save" tabindex="-1" role="dialog" aria-labelledby="savebody" aria-hidden="true">
  <div class="modal-dialog modal-sm">

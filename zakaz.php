@@ -16,17 +16,17 @@ echo('<h1 style="color:red;">Пожалуйста заполните все по
 else{
 	
 	$mess_tele=""; // Комментарий в telegram
-	if ($key_crm!="")		include('config/include/key_crm.php');
-	if ($user_api_key!="")	include('config/include/api_key.php');
+	if ($key_crm!="")		require_once('config/include/key_crm.php');
+	if ($user_api_key!="")	require_once('config/include/api_key.php');
 	if ($mess_tele!="") $mess_tele.='%0A'.$commentform; else $mess_tele=$commentform;
-	if ($tele_id!="") 		include('config/include/tele_id.php');
-	
+	if ($tele_id!="") 		require_once('config/include/tele_id.php');
+	if ($logs=="1") require_once('config/include/add_log.php');
 		
 	$success_url = 'form-ok.php';
 	if ($_POST['formname']!="") $formname="<tr><td><b>Форма заказа:</b></td><td>{$_POST['formname']}</td></tr>";
 	$message1 = "<table border=\"0\">
 	<tr><td colspan=\"2\" ><b>{$config['email']['prod']}:</b><font size=\"5\" color=\"#FF0000\"> {$product}</font></td></tr><tr><td><b>{$config['email']['price']}:&nbsp; </b></td><td ><font size=\"5\" color=\"#FF0000\">{$price_new} {$valuta}</font></td></tr><tr><td><b>{$config['email']['oldprice']}:&nbsp; </b></td><td ><strike>{$price_old} {$valuta}</strike></td></tr>
-	<tr><td><b>{$config['email']['skidka']}:&nbsp; </b></td><td >{$skidka} %</td></tr><tr><td ><b>{$config['email']['pokup']}:</b></td><td><font size=\"4\" >{$name}</font></td></tr><tr><td ><b>{$config['email']['phone']}: </b></td><td><font size=\"4\" >{$phone}</font></td></tr><tr><td ><b>Сайт продажи:</b></td><td><a href='{$server}' target='_blank'>{$server}</a></td></tr><tr><td ><b>Дата заказа: </b></td><td>{$date}</td></tr><tr><td ><b>Время заказа: </b></td><td>{$time}</td></tr><tr><td><b>Комментарий к заказу:</b></td><td>{$comment}</td></tr><tr>{$formname}</tr></table>";
+	<tr><td><b>{$config['email']['skidka']}:&nbsp; </b></td><td >{$skidka} %</td></tr><tr><td ><b>{$config['email']['pokup']}:</b></td><td><font size=\"4\" >{$name}</font></td></tr><tr><td ><b>{$config['email']['phone']}: </b></td><td><font size=\"4\" >{$phone}</font></td></tr><tr><td ><b>Сайт продажи:</b></td><td><a href='{$server}' target='_blank'>{$server}</a></td></tr><tr><td ><b>Дата заказа: </b></td><td>{$date}</td></tr><tr><td ><b>Время заказа: </b></td><td>{$time} ({$timezone})</td></tr><tr><td><b>Комментарий к заказу:</b></td><td>{$comment}</td></tr><tr>{$formname}</tr></table>";
 
 	$message = $message1.$message.$mess."<br><hr><br>\n<small> {$config['email']['footer']} <strong>{$config['name']} v.{$config['ver']}</strong>.<br>Подробнее: <a target='_blank' href='{$config['site_conf']}'>{$config['site_conf']}</a>, &copy; 2015-".date("Y").", <a target='_blank' href='{$config['site_gg']}'>{$config['powered']}</a></small>";
 	//echo $message;

@@ -126,12 +126,12 @@
 										<input type="text" name="phone" class="form-control" required placeholder="Телефон">
 									</div>
 								</div>
-							
+								<input type="hidden" name="comment" value="Демонстрационный комментарий">
 								<div class="form-group text-center">		
 									<input class="btn btn-primary" type="submit" value="Отправить">
 								</div>	
 								<? lands::form('Главная форма'); // Имя формы с заказом ?>
-								<input type="hidden" name="comment" value="sfdgsdfsdfsdfsdf">
+								
 						</form>
 						<span class="help-block text-center">Мы не рассылаем спам и не передаем данные третьим лицам.</span>
 					</div>

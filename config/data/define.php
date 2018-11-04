@@ -8,7 +8,10 @@ $time=date('H:i:s');
 if (stripos($_SERVER['PHP_SELF'], "index"))
 	{
 		$visit=$_COOKIE['visit'];
-		$lastip=$_COOKIE['ip'];
+		$_SESSION['lastip']=$_COOKIE['ip'];
+		$_SESSION['lasttime']=$_COOKIE['time'];
+		$_SESSION['lastremotehost']=$_COOKIE['remote_host'];
+		
 		$visit++;
 		$remote_addr=Config::GetRealIp();
 		$remote_host=@gethostbyaddr($remote_addr);
@@ -40,9 +43,14 @@ if (stripos($_SERVER['PHP_SELF'], "index"))
 		$server_request_uri="{$scheme}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 		$_SESSION['server_request_uri']=$server_request_uri;
 		require_once("config/include/session.php");
-		if ($_SERVER['HTTP_REFERER']!="") $_SESSION['referer']=$_SERVER['HTTP_REFERER'];
-		else $_SESSION['referer']="Не определен.";
-		if ($remote_addr!=$lastip) {$geo = Config::info_geo($remote_addr); SetCookie("lastgeo",serialize($geo),time()+$period_cookie);  }
+		$_SESSION['referer']=$_SERVER['HTTP_REFERER']; 
+		$user_agent=$_SERVER['HTTP_USER_AGENT'];
+		if ($_COOKIE['lastgeo']!='') $_SESSION['lastgeo']=$_COOKIE['lastgeo'];
+		$_SESSION['user_agent']=$user_agent;
+		if ($remote_addr!=$_SESSION['lastip']) {
+			include('config/data/countries_ru.php');
+			include('config/data/geo.php');
+			SetCookie("lastgeo",serialize($geo),time()+$period_cookie);  }
 		else {$geo=unserialize($_COOKIE['lastgeo']);}
 		$_SESSION['country_code'] = $geo['iso'];
 		$_SESSION['country'] = $geo['country'];
@@ -54,8 +62,6 @@ if (stripos($_SERVER['PHP_SELF'], "index"))
 		$region=$_SESSION['region'];
 		$city=$_SESSION['city'];
 		$geocity=$_SESSION['geocity'];
-		$user_agent=$_SERVER['HTTP_USER_AGENT'];
-		$_SESSION['user_agent']=$user_agent;
 		$browser_class = new Browser();
 		$browser=$browser_class->getBrowser()." v.".$browser_class->getVersion();
 		$_SESSION['browser']=$browser;
@@ -64,30 +70,36 @@ if (stripos($_SERVER['PHP_SELF'], "index"))
 		if ($browser_class->isMobile()) $device="Mobile"; else
 		if ($browser_class->isTablet()) $device="Tablet"; else $device="Desktop";
 		$_SESSION['device']=$device;
-		}
+		
+				}
 		
 else {
 	$visit=$_COOKIE['visit'];
-	$time_cookie=$_COOKIE['time'];
-	$ip_cookie=$_COOKIE['ip'];
-	$geo_cookie=unserialize($_COOKIE['lastgeo']);
-	$last_geo=$geo_cookie['city'].", ".$geo_cookie['region'].", ".$geo_cookie['country'];
-	$remote_host_cookie=$_COOKIE['remote_host'];
 	$proxy=$_SESSION['proxy'];
 	$remote_addr=$_SESSION['remote_addr'];
 	$scheme=$_SESSION['scheme'];
 	$remote_host=$_SESSION['remote_host'];
 	$lang=$_SESSION['lang'];
+	$timezone_user=$_POST['tz'];
+	if ($_SESSION['referer']!="") $referer=$_SESSION['referer']; else
+		if ($_POST['referer']!="") $referer=$_POST['referer']; else $referer="Не определен.";
+	
 	$screen=$_POST['screen']['width']." х ".$_POST['screen']['height']." х ".$_POST['screen']['color'];
 	if ($_POST['battery']['proc']>0) $batery_proc=(($_POST['battery']['proc'])*100).'&#37;'; else $batery_proc="Не определено";
 	if ($_POST['battery']['zar']=='true') $batery_zar="Подключено"; else $batery_zar="Не подключено, или не определено";
 	if ($_POST['time_lend']<60) $time_in_land=$_POST['time_lend']." сек.";
 	else if (($_POST['time_lend']>60) AND ($_POST['time_lend']<3600)) $time_in_land=date("i мин. s сек.", mktime(0, 0, $_POST['time_lend']));
 	else $time_in_land=date("H час. i мин. s сек.", mktime(0, 0, $_POST['time_lend']));
-	if (isset($_SESSION['utms'])) foreach ($_SESSION['utms'] as $key => $value) $utm.="<tr><td><b>".str_pad($key, 14, " ", STR_PAD_RIGHT)."</b> </td><td> {$value}</td></tr>\n";
+	if (isset($_SESSION['utms'])) foreach ($_SESSION['utms'] as $key => $value) $utm.="<tr><td><b>".str_pad($key, 14, " ", STR_PAD_RIGHT)."&nbsp;</b> </td><td> {$value}</td></tr>\n";
 	if ($visit>1) {
-	$visit_text=date("d.m.Y H:i:s",$time_cookie).", ip: {$ip_cookie}, Хост: {$remote_host_cookie} ({$last_geo})";
-	$visit_text_tele=date("d.m.Y H:i:s",$time_cookie).", ip: {$ip_cookie}";
+		$time_cookie=$_SESSION['lasttime'];
+		$ip_cookie=$_SESSION['lastip'];
+		$remote_host_cookie=$_SESSION['lastremotehost'];
+		if ($_SESSION['lastgeo']!="") {$last_geo_cookie=unserialize($_SESSION['lastgeo']);
+		$last_geo=$last_geo_cookie['city'].", ".$last_geo_cookie['region'].", ".$last_geo_cookie['country'];}
+			
+	$visit_text=date("d.m.Y H:i:s",$time_cookie).",%0A ip: {$ip_cookie}, Хост: {$remote_host_cookie} ({$last_geo})";
+	$visit_text_tele=date("d.m.Y H:i:s",$time_cookie).", ip: {$ip_cookie}, ({$last_geo})";
 	} else {$visit_text="Прошлых визитов за последние {$cookie_days} дней не обнаружено"; 
 			$visit_text_tele="последние {$cookie_days} дней не обнаружено"; }
 	$country_code = $_SESSION['country_code'];

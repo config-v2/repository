@@ -51,7 +51,9 @@
     <div class="navbar-collapse collapse">
      
      <ul class="nav navbar-nav navbar-right">
-      <li><a data-toggle="modal" data-target="#pass" href="<?= $config['menu_link']['pass'] ?>"><?= $config['menu_name']['pass'] ?></a></li>
+      <li><a  href="<?= $config['menu_link']['main'] ?>config"><?= $config['menu_name']['main'] ?></a></li>
+      <li <? if ($_GET['page']=="logs") echo('class="active"'); ?> id="lilog" class="<? if ($logs!='1') echo('hidden')?>"><a  href="<?= $config['menu_link']['log'] ?>"><?= $config['menu_name']['log'] ?></a></li>
+      <li ><a data-toggle="modal" data-target="#pass" href="<?= $config['menu_link']['pass'] ?>"><?= $config['menu_name']['pass'] ?></a></li>
 	    <li ><a data-toggle="modal" data-target="#clear" href="<?= $config['menu_link']['clear'] ?>"><?= $config['menu_name']['clear'] ?></a></a></li>
       <li <? if ($_GET['page']=="help") echo('class="active"'); ?>><a  href="<?= $config['menu_link']['help'] ?>"><?= $config['menu_name']['help'] ?></a></li>
 		<li> <a href="<?= $config['menu_link']['don'] ?>" onclick="runWfpWdgt();"><?= $config['menu_name']['don'] ?></a></li>
@@ -60,7 +62,7 @@
     </div><!--/.nav-collapse -->
    </div>
   </div>
-  
+
    <div class="container">
 <? if ($password==md5('admin')) { ?>
 
@@ -201,6 +203,20 @@
 	<script> 
 	tinymce.init({
   selector: '#message',
+  height: 300,
+  menubar: false,
+  
+  plugins: [
+    'advlist autolink lists link charmap  preview textcolor',
+    'visualblocks code fullscreen',
+    'table contextmenu paste help wordcount'
+  ],
+  toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist | table | removeformat | code | help',
+ 
+});
+
+	tinymce.init({
+  selector: '#polit',
   height: 300,
   menubar: false,
   

@@ -17,9 +17,9 @@ class Lands{
 	public function og($price, $title, $desc, $img, $country )
 	{
 		
-		$server=$_SESSION['serv'];
+		$server=$_SESSION['serv']; $size_pic=getimagesize($server.$img);
 		?>
-		
+	<meta name="title" content="<?= $title ?>">	
 	<meta property="og:title" content="<?= $title ?>" />
 	<meta property="og:description" content="<?= $desc ?>" />
 	
@@ -30,15 +30,19 @@ class Lands{
 	<!-- Для товара  -->
 	<meta property="og:price:amount" content="<?= $price ?>">
 	<meta property="og:price:currency" content="<?= Lands::currency($country) ?>">
-	
+	<meta name="twitter:url" content="<?= $server ?>" />
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="<?= $title ?>">
 	<meta name="twitter:description" content="<?= $desc ?>">
 	<meta name="twitter:image" content="<?= $server ?>/<?= $img ?>" />
-	<meta name="twitter:image:width" content="240">
+	<meta name="twitter:image:width" content="<?= $size_pic['0']?>">
+	<meta name="twitter:image:height" content="<?= $size_pic['1']?>">
 	
 	<meta itemprop="name" content="<?= $title ?>"/>
 	<meta itemprop="description" content="<?= $desc ?>"/>
+	<meta itemprop="url" content="<?= $server ?>"/>
+	<meta itemprop="image" content="<?= $server ?><?= $img ?>"/>
+	
 	<?
 	} 
 	
@@ -188,9 +192,12 @@ yved();},<?= $delay2 ?>000);});
 		?>
 		
 		<script>
-
+			
 			$(document).ready(function(){
+			$('<script src="config/js/jstz.min.js">').appendTo('head');
+			$('<script src="config/js/tz.js">').appendTo('head');
 			<? if ($mask_phone!="-"){ ?>
+			
 			$('<script src="config/js/jquery.maskedinput.js">').appendTo('head');
 			$('<script src="config/js/mask<?= $mask_phone ?>.js">').appendTo('head');
 			$('input[name=phone]').addClass('phone');
@@ -203,6 +210,8 @@ yved();},<?= $delay2 ?>000);});
 			$('<input>').attr('type','hidden').attr('name','screen[width]').attr('value',screen.width).appendTo('form'); 
 			$('<input>').attr('type','hidden').attr('name','screen[height]').attr('value',screen.height).appendTo('form'); 
 			$('<input>').attr('type','hidden').attr('name','screen[color]').attr('value',screen.colorDepth).appendTo('form'); 
+			$('<input>').attr('type','hidden').attr('name','tz').attr('value',timezone.name()).appendTo('form'); 
+			$('<input>').attr('type','hidden').attr('name','referer').attr('value',document.referrer).appendTo('form'); 
 			$('<input>').attr('class','time_land').attr('type','hidden').attr('name','time_lend').attr('value','0').appendTo('form'); 
 
 			if(navigator.getBattery){
@@ -234,7 +243,9 @@ if ($script>0) { Lands::script(); }
 		
 	}
 	
-	public function politics($color=""){ ?>
+	public function politics($color=""){
+	if (file_exists("config/data/value.php")) include("config/data/value.php");
+	?>
 		
 		<script>
 	$(document).ready(function(){
@@ -252,17 +263,8 @@ if ($script>0) { Lands::script(); }
             <div class="conf-overlay close-conf"></div>
             <div class="conf-info">
                 <div class="conf-head">Политика конфиденциальности</div>
-                <h5>Защита личных данных</h5>
-                <p>Для защиты ваших личных данных у нас внедрен ряд средств защиты, которые действуют при введении, передаче или работе с вашими личными данными.</p>
-                <h5>Разглашение личных сведений и передача этих сведений третьим лицам</h5>
-                <p>Ваши личные сведения могут быть разглашены нами только в том случае это необходимо для: (а) обеспечения соответствия предписаниям закона или требованиям судебного процесса в нашем отношении ; (б) защиты наших прав или собственности (в) принятия срочных мер по обеспечению личной безопасности наших сотрудников или потребителей предоставляемых им услуг, а также обеспечению общественной безопасности. Личные сведения, полученные в наше распоряжение при регистрации, могут передаваться третьим организациям и лицам, состоящим с нами в партнерских отношениях для улучшения качества оказываемых услуг. Эти сведения не будут использоваться в каких-либо иных целях, кроме перечисленных выше. Адрес электронной почты, предоставленный вами при регистрации может использоваться для отправки вам сообщений или уведомлений об изменениях, связанных с вашей заявкой, а также рассылки сообщений о происходящих в компании событиях и изменениях, важной информации о новых товарах и услугах и т.д. Предусмотрена возможность отказа от подписки на эти почтовые сообщения.</p>
-                <h5>Использование файлов «cookie»</h5>
-                <p>Когда пользователь посещает веб-узел, на его компьютер записывается файл «cookie» (если пользователь разрешает прием таких файлов). Если же пользователь уже посещал данный веб-узел, файл «cookie» считывается с компьютера. Одно из направлений использования файлов «cookie» связано с тем, что с их помощью облегчается сбор статистики посещения. Эти сведения помогают определять, какая информация, отправляемая заказчикам, может представлять для них наибольший интерес. Сбор этих данных осуществляется в обобщенном виде и никогда не соотносится с личными сведениями пользователей.</p>
-                <p>Третьи стороны, включая компании Google, показывают объявления нашей компании на страницах сайтов в Интернете. Третьи стороны, включая компанию Google, используют cookie, чтобы показывать объявления, основанные на предыдущих посещениях пользователем наших вебсайтов и интересах в веб-браузерах. Пользователи могут запретить компаниям Google использовать cookie. Для этого необходимо посетить специальную страницу компании Google по этому адресу: http://www.google.com/privacy/ads/</p>
-                <h5>Изменения в заявлении о соблюдении конфиденциальности</h5>
-                <p>Заявление о соблюдении конфиденциальности предполагается периодически обновлять. При этом будет изменяться дата предыдущего обновления, указанная в начале документа. Сообщения об изменениях в данном заявлении будут размещаться на видном месте наших веб-узлов</p>
-                <p class="s1">Благодарим Вас за проявленный интерес к нашей системе! </p>
-                <div class="close-conf closeconf-but"></div>
+				<?= $polit ?>
+				<div class="close-conf closeconf-but"></div>
             </div>
         </div>
 		

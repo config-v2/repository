@@ -19,6 +19,7 @@ public function config($str)
 			$str = str_replace("%sender%", '{$sender}', $str);
 			$str = str_replace("%product%", '{$product}', $str);
 			$str = str_replace("%domen%", '{$domen}', $str);
+			$str = str_replace("%timezone%", '{$timezone_user}', $str);
 			
 			$str = str_replace("%date%", '{$date}', $str);
 			$str = str_replace("%time%", '{$time}', $str);
@@ -37,7 +38,7 @@ public function config($str)
 			$str = str_replace("%country_code%", '{$country_code}', $str);
 			$str = str_replace("%country%", '{$country}', $str);
 			$str = str_replace("%browser%", '{$browser}', $str);
-			$str = str_replace("%refer%", "{".'$_SESSION[\'referer\']'."}", $str);
+			$str = str_replace("%refer%", '{$referer}', $str);
 			$str = str_replace("%utm%", '{$utm}', $str);
 			$str = str_replace("%city%", '{$city}', $str);
 			$str = str_replace("%proxy%", '{$proxy}', $str);
