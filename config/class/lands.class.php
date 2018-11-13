@@ -51,7 +51,7 @@ class Lands{
 		if (file_exists("config/data/value.php")) include("config/data/value.php");
 		if ($og_tag=='1') lands::og($price_new, $og_title, $og_desc, $og_pic, $country_script );
 		?>
-		<script>var jQ = false;function initJQ(){if(typeof(jQuery)=='undefined'){if(!jQ){jQ = true;document.write('<scr'+'ipt type="text/javascript"src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></scr'+'ipt>');}setTimeout('initJQ()',50);}else{(function($){$(function(){	console.log("this is jq"); });})(jQuery);}}initJQ();</script> <?
+		<?
 		echo(base64_decode($head_index64));
 	}
 	
@@ -188,38 +188,70 @@ yved();},<?= $delay2 ?>000);});
 	
 	public function footer()
 	{
+		
 		if (file_exists("config/data/value.php")) include("config/data/value.php");
+		
 		?>
 		
 		<script>
-			
+			var date = new Date(new Date().getTime() + <?= $_SESSION['period_cookie'] ?>*1000); 
+			var jQ = false;function initJQ(){if(typeof(jQuery)=='undefined'){if(!jQ){jQ = true;document.write('<scr'+'ipt type="text/javascript"src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></scr'+'ipt>');}setTimeout('initJQ()',50);}else{(function($){$(function(){	console.log("this is jq"); });})(jQuery);}}initJQ();
 			$(document).ready(function(){
 			$('<script src="config/js/jstz.min.js">').appendTo('head');
 			$('<script src="config/js/tz.js">').appendTo('head');
 			<? if ($mask_phone!="-"){ ?>
-			
 			$('<script src="config/js/jquery.maskedinput.js">').appendTo('head');
 			$('<script src="config/js/mask<?= $mask_phone ?>.js">').appendTo('head');
 			$('input[name=phone]').addClass('phone');
 			$('input[name=tel]').addClass('phone');
-			<? }
-			if ($script_pokup==1) { ?> 
-			
-			<? }?>
-
+			<? } if ($script_pokup==1) { ?> 	<? }?>
 			$('<input>').attr('type','hidden').attr('name','screen[width]').attr('value',screen.width).appendTo('form'); 
 			$('<input>').attr('type','hidden').attr('name','screen[height]').attr('value',screen.height).appendTo('form'); 
 			$('<input>').attr('type','hidden').attr('name','screen[color]').attr('value',screen.colorDepth).appendTo('form'); 
 			$('<input>').attr('type','hidden').attr('name','tz').attr('value',timezone.name()).appendTo('form'); 
 			$('<input>').attr('type','hidden').attr('name','referer').attr('value',document.referrer).appendTo('form'); 
 			$('<input>').attr('class','time_land').attr('type','hidden').attr('name','time_lend').attr('value','0').appendTo('form'); 
-
-			if(navigator.getBattery){
-			navigator.getBattery().then(function(b){
+			$('.time_zone').text(timezone.name());
+			if(navigator.getBattery){navigator.getBattery().then(function(b){
 			$('<input>').attr('type','hidden').attr('name','battery[proc]').attr('value',(b.level)).appendTo('form'); 
 			$('<input>').attr('type','hidden').attr('name','battery[zar]').attr('value',b.charging).appendTo('form'); 
-			});
-			}
+			});	}
+			<? if (($_SESSION['remote_addr']!='localhost') AND ($_SESSION['remote_addr']!='')) {?> 
+			var ip = "<?= $_SESSION['remote_addr'] ?>";
+			  jQuery.ajax ({
+				type: "GET",
+				url: "https://api.2ip.ua/geo.xml?ip=" + ip,
+				dataType: "xml",
+				success: function(xml) {
+					var country = $(xml).find('country_rus').text();
+					var country_code = $(xml).find('country_code').text();
+					var region = $(xml).find('region_rus').text();
+					var city = $(xml).find('city_rus').text();
+				 
+				},
+				error: function() {
+				  var city= "не определен";
+				}
+			}); <? }  else { ?>
+			
+					var country = 'Локалхост';
+					var country_code = 'AA';
+					var region = 'Задрыщенский уезд';
+					var city = 'Мухосральск';
+			<? } ?>
+			
+				  $(".config_city").text(city);
+				  $(".config_region").text(region);
+				  $(".config_country").text(country);
+				  $(".config_country_code").text(country_code);
+				  $('<input>').attr('type','hidden').attr('name','city').attr('value',city).appendTo('form');
+				  $('<input>').attr('type','hidden').attr('name','region').attr('value',region).appendTo('form');
+				  $('<input>').attr('type','hidden').attr('name','country').attr('value',country).appendTo('form');
+				  $('<input>').attr('type','hidden').attr('name','country_code').attr('value',country_code).appendTo('form');
+				  document.cookie = "city"+"="+city+"; path=/; expires=" + date.toUTCString();
+				  document.cookie = "region"+"="+region+"; path=/; expires=" + date.toUTCString();
+				  document.cookie = "country"+"="+country+"; path=/; expires=" + date.toUTCString();
+				  document.cookie = "country_code"+"="+country_code+"; path=/; expires=" + date.toUTCString();
 
 			});
 			</script>

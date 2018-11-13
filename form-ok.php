@@ -64,21 +64,13 @@
 	echo $upsel_url_title;
 	if ($upsel_url!="") echo ("</a>");
 	echo ("</h3>"); ?>
-	<script>
-	
-	$(document).ready(function(){
-		
-		
-		setTimeout(function() { $('html, body').animate({ scrollTop: $('#upsel').offset().top }, 500); }, 2000);
-		
-        
-     });
-</script>
+	<script>$(document).ready(function(){setTimeout(function() { $('html, body').animate({ scrollTop: $('#upsel').offset().top }, 500); }, 2000);});</script>
     <?        
 }
 ?>
 
 </div>
+<?= base64_decode($body2_thanks64) ?>
 	
 </body>
 </html>

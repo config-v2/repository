@@ -3,7 +3,7 @@
 	<html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Демонстрация возможностей Конфигуратора v.2.3</title>
+		<title>Демонстрация возможностей Конфигуратора v.2.4</title>
 		<meta http-equiv="content-type" content="text/html; utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +16,7 @@
 		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -55,7 +55,7 @@
 		<header id="head">
 			<div class="container"> 
 				<div class="page-header">
-					<h1 class="text-center"><strong>ДЕМОНСТРАЦИЯ ВОЗМОЖНОСТЕЙ</strong><small><br>Конфигуратор v.2.3</small></h1>
+					<h1 class="text-center"><strong>ДЕМОНСТРАЦИЯ ВОЗМОЖНОСТЕЙ</strong><small><br>Конфигуратор v.2.4</small></h1>
 					<div class="text-center"><a href="/config" target="_blank" >Посмотреть конфигуратор</a></div>
 				</div>
 				<span class="visible-md visible-lg">
@@ -211,7 +211,7 @@
 									<footer>
 										<?= lands::random_name('w'); // Случайное женское имя ?>,
 										<cite title="Source Title">
-											г. <?= $geocity; // Город пользователя ?>
+											г. <span class="config_city"></span><!-- // Город пользователя -->
 										</cite>
 									</footer>
 							</blockquote>
@@ -284,6 +284,6 @@
 			});
 		</script>
 		
-	<?  lands::footer(); // Дополнительная часть скриптов, ставим перед закрывающимся /body ?>
+	<?  lands::footer($body2_index64); // Дополнительная часть скриптов, ставим перед закрывающимся /body ?>
 	</body>
 </html>

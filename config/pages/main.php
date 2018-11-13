@@ -46,12 +46,12 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
      </button>
-     <a class="navbar-brand" href="/config"><strong><?= $config['name'] ?></strong> v.<?= $config['ver']?> </a>
+     <a class="navbar-brand" href="?p=main"><strong><?= $config['name'] ?></strong> v.<?= $config['ver']?> </a>
     </div>
     <div class="navbar-collapse collapse">
      
      <ul class="nav navbar-nav navbar-right">
-      <li><a  href="<?= $config['menu_link']['main'] ?>config"><?= $config['menu_name']['main'] ?></a></li>
+      <li><a  href="?p=main"><?= $config['menu_name']['main'] ?></a></li>
       <li <? if ($_GET['page']=="logs") echo('class="active"'); ?> id="lilog" class="<? if ($logs!='1') echo('hidden')?>"><a  href="<?= $config['menu_link']['log'] ?>"><?= $config['menu_name']['log'] ?></a></li>
       <li ><a data-toggle="modal" data-target="#pass" href="<?= $config['menu_link']['pass'] ?>"><?= $config['menu_name']['pass'] ?></a></li>
 	    <li ><a data-toggle="modal" data-target="#clear" href="<?= $config['menu_link']['clear'] ?>"><?= $config['menu_name']['clear'] ?></a></a></li>

@@ -2,6 +2,7 @@
 $time_land='3';
 $cookie_days = 30; // Период cookie в днях
 $period_cookie = $cookie_days*24*60*60; // Пересчет в секунды
+$_SESSION['period_cookie']=$period_cookie;
 $date=Config::date_rus();
 $time=date('H:i:s');
 
@@ -45,23 +46,33 @@ if (stripos($_SERVER['PHP_SELF'], "index"))
 		require_once("config/include/session.php");
 		$_SESSION['referer']=$_SERVER['HTTP_REFERER']; 
 		$user_agent=$_SERVER['HTTP_USER_AGENT'];
-		if ($_COOKIE['lastgeo']!='') $_SESSION['lastgeo']=$_COOKIE['lastgeo'];
+		if ($_COOKIE['city']!='') {
+			$_SESSION['last_city']=$_COOKIE['city'];
+			$_SESSION['last_region']=$_COOKIE['region'];
+			$_SESSION['last_country']=$_COOKIE['country'];
+			$_SESSION['last_country_code']=$_COOKIE['country_code'];
+			
+		}
 		$_SESSION['user_agent']=$user_agent;
-		if ($remote_addr!=$_SESSION['lastip']) {
-			include('config/data/countries_ru.php');
-			include('config/data/geo.php');
-			SetCookie("lastgeo",serialize($geo),time()+$period_cookie);  }
-		else {$geo=unserialize($_COOKIE['lastgeo']);}
-		$_SESSION['country_code'] = $geo['iso'];
-		$_SESSION['country'] = $geo['country'];
-		$_SESSION['city']=$geo['city'].", ".$geo['region'].", ".$geo['country'];
-		$_SESSION['region']=$geo['region'];
-		$_SESSION['geocity']=$geo['city'];
-		$country_code = $_SESSION['country_code'];
-		$country = $_SESSION['country'];
-		$region=$_SESSION['region'];
-		$city=$_SESSION['city'];
-		$geocity=$_SESSION['geocity'];
+		
+		
+		//if ($remote_addr!=$_SESSION['lastip']) {
+		//	include('config/data/countries_ru.php');
+		//	include('config/data/geo.php');
+		//	SetCookie("lastgeo",serialize($geo),time()+$period_cookie);  }
+	//	else {$geo=unserialize($_COOKIE['lastgeo']);}
+		
+		
+	//	$_SESSION['country_code'] = $geo['iso'];
+	//	$_SESSION['country'] = $geo['country'];
+	//	$_SESSION['city']=$geo['city'].", ".$geo['region'].", ".$geo['country'];
+	//	$_SESSION['region']=$geo['region'];
+	//	$_SESSION['geocity']=$geo['city'];
+	//	$country_code = $_SESSION['country_code'];
+	//	$country = $_SESSION['country'];
+	//	$region=$_SESSION['region'];
+	//	$city=$_SESSION['city'];
+	//	$geocity=$_SESSION['geocity'];
 		$browser_class = new Browser();
 		$browser=$browser_class->getBrowser()." v.".$browser_class->getVersion();
 		$_SESSION['browser']=$browser;
@@ -95,18 +106,24 @@ else {
 		$time_cookie=$_SESSION['lasttime'];
 		$ip_cookie=$_SESSION['lastip'];
 		$remote_host_cookie=$_SESSION['lastremotehost'];
-		if ($_SESSION['lastgeo']!="") {$last_geo_cookie=unserialize($_SESSION['lastgeo']);
-		$last_geo=$last_geo_cookie['city'].", ".$last_geo_cookie['region'].", ".$last_geo_cookie['country'];}
+		
+		
+		$_SESSION['last_city']=$_COOKIE['city'];
+			$_SESSION['last_region']=$_COOKIE['region'];
+			$_SESSION['last_country']=$_COOKIE['country'];
+			$_SESSION['last_country_code']=$_COOKIE['country_code'];
+		
+		if ($_SESSION['last_city']!="") { $last_geo=$_SESSION['last_city'].", ".$_SESSION['last_region'].", ".$_SESSION['last_country']; }
 			
 	$visit_text=date("d.m.Y H:i:s",$time_cookie).",%0A ip: {$ip_cookie}, Хост: {$remote_host_cookie} ({$last_geo})";
 	$visit_text_tele=date("d.m.Y H:i:s",$time_cookie).", ip: {$ip_cookie}, ({$last_geo})";
 	} else {$visit_text="Прошлых визитов за последние {$cookie_days} дней не обнаружено"; 
 			$visit_text_tele="последние {$cookie_days} дней не обнаружено"; }
-	$country_code = $_SESSION['country_code'];
-	$city=$_SESSION['city'];
-	$geocity=$_SESSION['geocity'];
-	$country = $_SESSION['country'];
-	$region=$_SESSION['region'];
+	$country_code = $_COOKIE['country_code'];
+	$geocity= $_COOKIE['city'];
+	$country = $_COOKIE['country'];
+	$region = $_COOKIE['region'];
+	$city=$geocity.",".$region.",".$country;
 	$server=$_SESSION['serv'];
 	$host=$_SESSION['host'];
 	$domen=$_SESSION['domen'];

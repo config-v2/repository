@@ -256,24 +256,44 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
    <div class="panel-body">
     <fieldset>
 	<legend><small>Дополнительные коды, пиксели, метрики, боты и пр.</small></legend>
+	<div class="panel panel-default">
+	 <div class="panel-heading">Дополнительные коды, устанавливаемые на <strong>ГЛАВНОЙ СТРАНИЦЕ (index.php)</strong></div>
+  <div class="panel-body">
 	  <div class="form-group">
-	  	<label class="col-sm-3 control-label">Блок head для Index:</label><div class="col-sm-9"><textarea class="form-control" rows="5" id="head_index64" name="head_index64" cols="70"><?= base64_decode($head_index64); ?></textarea> 
-		<span class="help-block">Код для размещения на ГЛАВНОЙ СТРАНИЦЕ в тегах <strong>&#8249;head&#8250; Ваш код &#8249;&#47;head&#8250;</strong> индексной страницы. Здесь размещают пиксели Facebook и Вконтакте, Google-аналитику, дополнительные META-теги, ссылки на JS для аналитики и пр.</span>
+	  	<label class="col-sm-3 control-label">Блок <strong>head</strong> для Index:</label><div class="col-sm-9"><textarea class="form-control" rows="5" id="head_index64" name="head_index64" cols="70"><?= base64_decode($head_index64); ?></textarea> 
+		<span class="help-block">Код для размещения на ГЛАВНОЙ СТРАНИЦЕ в тегах <code><strong>&#8249;head&#8250; Ваш код &#8249;&#47;head&#8250;</strong></code> индексной страницы. Здесь размещают пиксели Facebook и Вконтакте, Google-аналитику, дополнительные META-теги, ссылки на JS для аналитики и пр.</span>
+		</div>
+  </div>
+  <div class="form-group">
+		<label class="col-sm-3 control-label">Верхний блок <strong>body</strong> для Index:<br><small>Сразу после тега &#8249;body&#8250;</small>  </label><div class="col-sm-9"><textarea class="form-control" rows="5" id="body_index64" name="body_index64" cols="70"><?= base64_decode($body_index64); ?></textarea> 
+		<span class="help-block">Код для размещения на ГЛАВНОЙ СТРАНИЦЕ в тегах <code><strong>&#8249;body&#8250; Ваш код ....</strong></code> индексной страницы. Здесь можно разместить код счетчиков (Яндекс-метрики, Mail.Top)</span>
+		</div>
+  </div>
+  
+  <div class="form-group">
+		<label class="col-sm-3 control-label">Нижний блок <strong>body</strong> для Index:<br><small>Перед тегом &#8249;&#47;body&#8250;</small>  </label><div class="col-sm-9"><textarea class="form-control" rows="5" id="body2_index64" name="body2_index64" cols="70"><?= base64_decode($body2_index64); ?></textarea> 
+		<span class="help-block">Код для размещения на ГЛАВНОЙ СТРАНИЦЕ в тегах <code><strong>..... Ваш код &#8249;&#47;body&#8250;</strong></code> индексной страницы. Здесь можно разместить код счетчиков (Яндекс-метрики, Mail.Top), мессенджеры, боты и пр.</span>
+		</div>
+  </div>
+		
+  </div>
+  </div>
+  <br>
+  <div class="panel panel-default"><div class="panel-heading">Дополнительные коды, устанавливаемые на <strong>Страницe БЛАГОДАРНОСТИ (form-ok.php)</strong></div>
+  <div class="panel-body">
+		<div class="form-group">
+	 	<label class="col-sm-3 control-label">Блок <strong>head</strong> для Thanks: </label><div class="col-sm-9"><textarea class="form-control" rows="5" id="head_thanks64" name="head_thanks64" cols="70"><?= base64_decode($head_thanks64); ?></textarea> 
+		<span class="help-block">Код для размещения на СТРАНИЦЕ "СПАСИБО" (form-ok.php) в тегах <code><strong>&#8249;head&#8250; Ваш код &#8249;&#47;head&#8250;</strong></code> страницы благодарности. Здесь размещают пиксели Facebook и Вконтакте, Google-аналитику, дополнительные META-теги, ссылки на JS для аналитики и пр.</span>
 		</div>
   </div>
 		<div class="form-group">
-	 	<label class="col-sm-3 control-label">Блок head для Thanks: </label><div class="col-sm-9"><textarea class="form-control" rows="5" id="head_thanks64" name="head_thanks64" cols="70"><?= base64_decode($head_thanks64); ?></textarea> 
-		<span class="help-block">Код для размещения на СТРАНИЦЕ "СПАСИБО" (form-ok.php) в тегах <strong>&#8249;head&#8250; Ваш код &#8249;&#47;head&#8250;</strong> страницы благодарности. Здесь размещают пиксели Facebook и Вконтакте, Google-аналитику, дополнительные META-теги, ссылки на JS для аналитики и пр.</span>
-		</div>
+	 	<label class="col-sm-3 control-label">Верхний блок <strong>body</strong> для Thanks:<br><small>Сразу после тега &#8249;body&#8250;</small> </label><div class="col-sm-9"><textarea class="form-control" rows="5" id="body_thanks64" name="body_thanks64" cols="70"><?= base64_decode($body_thanks64); ?></textarea> <span class="help-block">Код для для размещения на СТРАНИЦЕ "СПАСИБО" (form-ok.php) в тегах <code><strong>&#8249;body&#8250; Ваш код ....</strong></code> страницы благодарности. Здесь можно разместить код реагирование на совершение лида (покупка), счетчиков (Яндекс-метрики, Mail.Top)</span></div>
   </div>
-		<div class="form-group">
-		<label class="col-sm-3 control-label">Блок body для Index: </label><div class="col-sm-9"><textarea class="form-control" rows="5" id="body_index64" name="body_index64" cols="70"><?= base64_decode($body_index64); ?></textarea> 
-		<span class="help-block">Код для размещения на ГЛАВНОЙ СТРАНИЦЕ в тегах <strong>&#8249;body&#8250; Ваш код &#8249;&#47;body&#8250;</strong> индексной страницы. Здесь можно разместить код счетчиков Яндекс-метрики, Mail.Top</span>
-		</div>
+  <div class="form-group">
+	 	<label class="col-sm-3 control-label">Нижний блок <strong>body</strong> для Thanks:<br><small>Перед тегом &#8249;&#47;body&#8250;</small></label><div class="col-sm-9"><textarea class="form-control" rows="5" id="body2_thanks64" name="body2_thanks64" cols="70"><?= base64_decode($body2_thanks64); ?></textarea> <span class="help-block">Код для для размещения на СТРАНИЦЕ "СПАСИБО" (form-ok.php) в тегах <code><strong>..... Ваш код &#8249;&#47;body&#8250;</strong></code> страницы благодарности. Здесь можно разместить код реагирование на совершение лида (покупка), счетчиков (Яндекс-метрики, Mail.Top), мессенджеры, боты и пр.</span></div>
   </div>
-		<div class="form-group">
-	 	<label class="col-sm-3 control-label">Блок body для Thanks:</label><div class="col-sm-9"><textarea class="form-control" rows="5" id="body_thanks64" name="body_thanks64" cols="70"><?= base64_decode($body_thanks64); ?></textarea> <span class="help-block">Код для для размещения на СТРАНИЦЕ "СПАСИБО" (form-ok.php) в тегах <strong>&#8249;body&#8250; Ваш код &#8249;&#47;body&#8250;</strong> страницы благодарности. Здесь можно разместить код реагирование на совершение лида (покупка), счетчиков Яндекс-метрики, Mail.Top</span></div>
   </div>
+  </div><br>
 	<div class="form-group text-center">
 		<input type="submit"  value="Сохранить" class="btn btn-primary">
 	</div>
@@ -295,7 +315,7 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
   <div id="dop_value" class="panel-collapse collapse">
    <div class="panel-body">
     <fieldset>
-	<legend><small>Дополнительные поля, для использования в лендинге</small></legend>
+	<legend><small>Дополнительные поля, для использования в лендинге <i>(опционально!)</i></small></legend>
 	  <div class="form-group">
 	  	<label class="col-sm-3 control-label">Дополнительное поле 1:</label><div class="col-sm-9"><textarea class="form-control" rows="3" id="value1" name="value1_html" cols="70"><? if($value1_html!="") echo htmlspecialchars_decode($value1_html); else echo($config['dop']['val1']); ?></textarea> 
 		<span class="help-block">Дополнительное поле 1 для размещения информации на лендинге</span>
