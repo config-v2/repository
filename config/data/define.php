@@ -135,8 +135,5 @@ else {
 	$device=$_SESSION['device'];
 }
 
-$insrtion="https://youtu.be/bHGkCu3VhEk";
-$ins_crm=array(
-'LP-CRM' => 'https://youtu.be/bHGkCu3VhEk',
-'e-autopay' => 'https://youtu.be/bHGkCu3VhEk',
+
 );

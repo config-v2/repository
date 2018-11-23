@@ -1,11 +1,14 @@
 <div class="page-header">
-<h2><?= $config['name'] ?></strong> v. <?= $config['ver'] ?>. <small>Видеоинструкция</small></h2>
+<h2><?= $config['name'] ?></strong> v. <?= $config['ver'] ?>. <small>Видеоинструкции</small></h2>
 </div>
 <div class="row">
 <div class="col-md-offset-3 col-lg-offset-3 col-md-6 col-lg-6">
-<div class="thumb-wrap text-center">
-  <iframe width="600" height="320" src="https://www.youtube.com/embed/<?= $config['video']; ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-  </div>
+<h2 id="video">Видеоинструкция по использованию</h2>
+  <div class="video-container"><div class="youtube" id="<?= $config['video']; ?>"></div></div><div style="height: 50px;" id="lpcrm"></div><hr>
+	<h2>Подключение к LP-CRM</h2>
+  <div class="video-container"><div class="youtube" id="<?= $config['lpcrm']; ?>"></div></div><div style="height: 50px;" id="eautopay"></div><hr>
+	<h2>Подключение к е-autopay</h2>
+  <div class="video-container"><div class="youtube" id="<?= $config['eautopay']; ?>"></div></div>
   <hr width="60%">
   <div class="text-center">
   <ul class="list-inline">

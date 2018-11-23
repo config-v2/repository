@@ -28,19 +28,17 @@
 		<style>
 		
 			body {margin-bottom: 40px;} 
-			.thumb-wrap {
-				position: relative;
-				padding-bottom: 56.25%; 
-				padding-top: 30px;
-				height: 0;
+			.video-container {
+				margin: -1px auto 0;
+				width: 480px;
+				height: 270px;
+				background-color: #000;
 				overflow: hidden;
+				position: relative;
 			}
-			.thumb-wrap iframe {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
+			.timer-box {
+				width: 370px;
+				margin: 0 auto 15px;
 			}
 			.phone {float: right !important; }
 			.email {float: right !important; padding-left: 10px; }
@@ -74,20 +72,22 @@
 		<section id="main_block">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-7 col-lg-7 thumbnail"> 
-						<h3>
-							Видеообзор версии 2.3 
-						</h3>
-						<div class="thumb-wrap">
-							<iframe width="854" height="480" src="https://www.youtube.com/embed/bHGkCu3VhEk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-						</div>
-						<h3>
-							Как Вы раньше обходились без конфигуратора?
-						</h3>
+					<div class="col-md-7 col-lg-7 "> 
+						<h2 class="text-center">
+							<strong>Видеообзор версии 2.3 </strong>
+						</h2>
+						<div class="video-container">
+							<div class="youtube" id="QbgxHQWLJgw"></div>
+						</div><br>
+					<div class="timer-box thumbnail">
+						<h3 class="text-center">Это просто счетчик,<br><small>для демонстрации возможностей</small></h3>   
+						<div id="DateCountdown" data-date="<?= date("Y-m-d");?>  23:59:59" style="width: 100%; color: red"></div>
 					</div>
+					</div>
+					
 					<div class="col-md-5 col-lg-5">
 						<div class="jumbotron">
-							<h2 class="text-center">
+						  	<h2 class="text-center">
 								Суперцена:
 								<strong>
 									 <?= $price_new; // Новая цена ?> <?= $currency; // Валюта?>
@@ -133,7 +133,8 @@
 								<? lands::form('Главная форма'); // Имя формы с заказом ?>
 								
 						</form>
-						<span class="help-block text-center">Мы не рассылаем спам и не передаем данные третьим лицам.</span>
+						<div class="alert alert-success text-center">Мы не рассылаем спам и не передаем данные третьим лицам.</div>
+						
 					</div>
 					
 				</div>
@@ -270,8 +271,14 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 		
-		<script> <!-- Инициализация слайдера -->
+		<link href="config/css/youtube_wrapper.css" rel="stylesheet">
+		<script src="config/js/youtube_wrapper.js"></script>
+		<link href="config/css/TimeCircles.css" rel="stylesheet">
+		<script src="config/js/TimeCircles.js"></script>
+		
+		<script>
 			$(document).ready(function(){
+				 // Инициализация слайдера
 				$('.review_slide').slick({
 				  dots: true,
 				  infinite: true,
@@ -281,7 +288,37 @@
 				   autoplay: true,
 				autoplaySpeed: 3000,
 				});
-			});
+				
+				
+				$("#DateCountdown").TimeCircles({ // Инициализация таймера
+						   "animation": "smooth",
+							"bg_width": 0.1,
+							"fg_width": 0.03666666666666667,
+							"circle_bg_color": "#60686F",
+							"time": {
+								"Days": {
+									"text": "Days",
+									"color": "#FFCC66",
+									"show": false
+								},
+								"Hours": {
+									"text": "Hours",
+									"color": "#99CCFF",
+									"show": true
+								},
+								"Minutes": {
+									"text": "Minutes",
+									"color": "#BBFFBB",
+									"show": true
+								},
+								"Seconds": {
+									"text": "Seconds",
+									"color": "#FF9999",
+									"show": true
+								}
+							}
+						});		
+				});
 		</script>
 		
 	<?  lands::footer($body2_index64); // Дополнительная часть скриптов, ставим перед закрывающимся /body ?>

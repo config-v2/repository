@@ -1,8 +1,12 @@
 <!-- e-AutoPay -->
+ <div id="idcrm_group" class="form-group">
+	 <label class="col-sm-3 control-label"  for="idcrm">Видеоинструкция: </label><div class="col-sm-9">
+	 <p class="form-control-static"><a target="_blank" href="?page=help#eautopay">Видеоинструкция по подключению (откроется в новой вкладке)</a></p></div></div>
+	  <div id="idcrm_group" class="form-group">
     <label class="col-sm-3 control-label"><strong>Примечание.</strong></label><div class="col-sm-9">
 <small>Чтобы получить ключи в аккаунте администратора перейдите в раздел <strong>"Настройки"-"Настройки API".</strong><br>
 Для получения <strong>user_api_key</strong> отметьте чек-бокс "Разрешить использование API-интерфейсов"<br>
-Для получения <strong>customer_api_key</strong> отметьте чек-бокс "Разрешить получение всех заказов через API-интерфейс"</small> </div>
+Для получения <strong>customer_api_key</strong> отметьте чек-бокс "Разрешить получение всех заказов через API-интерфейс"</small> </div></div>
  
 
 	 <br><br>

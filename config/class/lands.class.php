@@ -176,7 +176,7 @@ yved();},<?= $delay2 ?>000);});
 	} else $kvo=1; ?>
 		<div id="uvb<?= $i ?>" class="yved yvedf<?= $yved ?>">
 			<img src="config/images/yico<?= $yved ?>.png" alt="" class="yvedi">
-			<div class="yvedvt"><div class="yvedt"><strong><?= $name ?></strong><br><i>г. <? if ($i==1) echo($_SESSION['geocity']); else echo Lands::random_city($country); ?></i>,<br><? if ($yved==1) { ?> только что заказал(а) <br><?= $title ?><? if ($sht!=1) echo (" {$sht} "); ?><br>на <?= $price*$kvo ?> <?= $valuta ?><? } else {?> оставил(а) заявку<br>на обратный звонок<? } ?>.</div></div>
+			<div class="yvedvt"><div class="yvedt"><strong><?= $name ?></strong><br><i>г. <? if ($i==1) echo("<span class=\"config_city\"></span>"); else echo Lands::random_city($country); ?></i>,<br><? if ($yved==1) { ?> только что заказал(а) <br><?= $title ?><? if ($sht!=1) echo (" {$sht} "); ?><br>на <?= $price*$kvo ?> <?= $valuta ?><? } else {?> оставил(а) заявку<br>на обратный звонок<? } ?>.</div></div>
 		</div>
 	<? } ?>
 		
@@ -186,7 +186,7 @@ yved();},<?= $delay2 ?>000);});
 <? }  
 	
 	
-	public function footer()
+	public function footer($body2_index64)
 	{
 		
 		if (file_exists("config/data/value.php")) include("config/data/value.php");
@@ -227,20 +227,7 @@ yved();},<?= $delay2 ?>000);});
 					var country_code = $(xml).find('country_code').text();
 					var region = $(xml).find('region_rus').text();
 					var city = $(xml).find('city_rus').text();
-				 
-				},
-				error: function() {
-				  var city= "не определен";
-				}
-			}); <? }  else { ?>
-			
-					var country = 'Локалхост';
-					var country_code = 'AA';
-					var region = 'Задрыщенский уезд';
-					var city = 'Мухосральск';
-			<? } ?>
-			
-				  $(".config_city").text(city);
+					 $(".config_city").text(city);
 				  $(".config_region").text(region);
 				  $(".config_country").text(country);
 				  $(".config_country_code").text(country_code);
@@ -252,6 +239,32 @@ yved();},<?= $delay2 ?>000);});
 				  document.cookie = "region"+"="+region+"; path=/; expires=" + date.toUTCString();
 				  document.cookie = "country"+"="+country+"; path=/; expires=" + date.toUTCString();
 				  document.cookie = "country_code"+"="+country_code+"; path=/; expires=" + date.toUTCString();
+				 
+				},
+				error: function() {
+				  var city= "не определен";
+				}
+			}); <? }  else { ?>
+			
+					var country = 'Локалхост';
+					var country_code = 'AA';
+					var region = 'Задрыщенский уезд';
+					var city = 'Мухосральск';
+					 $(".config_city").text(city);
+				  $(".config_region").text(region);
+				  $(".config_country").text(country);
+				  $(".config_country_code").text(country_code);
+				  $('<input>').attr('type','hidden').attr('name','city').attr('value',city).appendTo('form');
+				  $('<input>').attr('type','hidden').attr('name','region').attr('value',region).appendTo('form');
+				  $('<input>').attr('type','hidden').attr('name','country').attr('value',country).appendTo('form');
+				  $('<input>').attr('type','hidden').attr('name','country_code').attr('value',country_code).appendTo('form');
+				  document.cookie = "city"+"="+city+"; path=/; expires=" + date.toUTCString();
+				  document.cookie = "region"+"="+region+"; path=/; expires=" + date.toUTCString();
+				  document.cookie = "country"+"="+country+"; path=/; expires=" + date.toUTCString();
+				  document.cookie = "country_code"+"="+country_code+"; path=/; expires=" + date.toUTCString();
+			<? } ?>
+			
+				 
 
 			});
 			</script>
@@ -272,7 +285,7 @@ if ($modal>0) { Lands::modal(); }
 
 if ($script>0) { Lands::script(); } 
 		
-		
+		echo(base64_decode($body_index64));
 	}
 	
 	public function politics($color=""){

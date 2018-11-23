@@ -32,6 +32,14 @@
  .CodeMirror { height: auto; border: 1px solid #ddd; }
  .CodeMirror-scroll { max-height: 200px; }
  .CodeMirror pre { padding-left: 7px; line-height: 1.25; }
+ .video-container {
+				margin: -1px auto 0;
+				width: 480px;
+				height: 270px;
+				background-color: #000;
+				overflow: hidden;
+				position: relative;
+			}
 </style>
  </head>
  <body>
@@ -199,6 +207,8 @@
     </div>
   </div>
 </div>
+<link href="css/youtube_wrapper.css" rel="stylesheet">
+		<script src="js/youtube_wrapper.js"></script>
 
 	<script> 
 	tinymce.init({
