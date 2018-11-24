@@ -1,6 +1,6 @@
 <!-- e-AutoPay -->
  <div id="idcrm_group" class="form-group">
-	 <label class="col-sm-3 control-label"  for="idcrm">Видеоинструкция: </label><div class="col-sm-9">
+	 <label class="col-sm-3 control-label" >Видеоинструкция: </label><div class="col-sm-9">
 	 <p class="form-control-static"><a target="_blank" href="?page=help#eautopay">Видеоинструкция по подключению (откроется в новой вкладке)</a></p></div></div>
 	  <div id="idcrm_group" class="form-group">
     <label class="col-sm-3 control-label"><strong>Примечание.</strong></label><div class="col-sm-9">

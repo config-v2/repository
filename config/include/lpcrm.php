@@ -1,6 +1,6 @@
  <!-- lp-crm -->
   <div id="idcrm_group" class="form-group">
-	 <label class="col-sm-3 control-label"  for="idcrm">Видеоинструкция: </label><div class="col-sm-9">
+	 <label class="col-sm-3 control-label" >Видеоинструкция: </label><div class="col-sm-9">
 	 <p class="form-control-static"><a target="_blank" href="?page=help#lpcrm">Видеоинструкция по подключению (откроется в новой вкладке)</a></p></div></div>
 	 
 	
@@ -32,7 +32,7 @@
 		 if ((uz.indexOf('.biz') + 1)||(uz.indexOf('.top') + 1)) {
 		 var uz1=uz.replace("http://","");
 		 var uz2=uz1.replace("https://","");
-		 var uz3=uz3.replace("/","");
+		 var uz3=uz2.replace("/","");
 		 $('#idcrm').prop('value',uz3);
 		 }
 		 
