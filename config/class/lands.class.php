@@ -58,7 +58,9 @@ class Lands{
 	public function body($body_index64)
 	{
 		if (file_exists("config/data/value.php")) include("config/data/value.php");
-		if ($script_pokup==1) {
+		if ($script_pokup==1) { ?>
+		<script>
+			var jQ = false;function initJQ(){if(typeof(jQuery)=='undefined'){if(!jQ){jQ = true;document.write('<scr'+'ipt type="text/javascript"src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></scr'+'ipt>');}setTimeout('initJQ()',50);}else{(function($){$(function(){	console.log("this is jq"); });})(jQuery);}}initJQ(); </script><?
 		echo('<div class="insite hidden">Сейчас на сайте: <span id="insite"></span> | Покупок сегодня: <span id="pokup"></span></div>'); ?>
 		<script>$(document).ready(function(){$('<link rel="stylesheet" href="config/css/insite.css">').appendTo("head");$('.insite').removeClass("hidden")}),null==localStorage.pokup2&&(localStorage.pokup2="<?= $pokup2; ?>"),null==localStorage.pokup1&&(localStorage.pokup1="<?= $pokup1; ?>"),$("#pokup").fadeIn(200).text(localStorage.pokup2),$("#insite").fadeIn(200).text(localStorage.pokup1);var timerId=setInterval(function(){$("#pokup").fadeOut(200);var e=$("#pokup").text(),t=Number(e)+1;$("#pokup").fadeIn(200).text(t),localStorage.pokup2=t},<?= $pokup2n; ?>000);timerId=setInterval(function(){$("#insite").fadeOut(200);var e=$("#insite").text(),t=Number(e)+1;$("#insite").fadeIn(200).text(t),localStorage.pokup1=t},<?= $pokup1n; ?>000);</script>
 		<? } echo(base64_decode($body_index64));
@@ -202,8 +204,6 @@ yved();},<?= $delay2 ?>000);});
 			<? if ($mask_phone!="-"){ ?>
 			$('<script src="config/js/jquery.maskedinput.js">').appendTo('head');
 			$('<script src="config/js/mask<?= $mask_phone ?>.js">').appendTo('head');
-			$('input[name=phone]').addClass('phone');
-			$('input[name=tel]').addClass('phone');
 			<? } if ($script_pokup==1) { ?> 	<? }?>
 			$('<input>').attr('type','hidden').attr('name','screen[width]').attr('value',screen.width).appendTo('form'); 
 			$('<input>').attr('type','hidden').attr('name','screen[height]').attr('value',screen.height).appendTo('form'); 
@@ -285,7 +285,7 @@ if ($modal>0) { Lands::modal(); }
 
 if ($script>0) { Lands::script(); } 
 		
-		echo(base64_decode($body_index64));
+		echo(base64_decode($body2_index64));
 	}
 	
 	public function politics($color=""){
@@ -293,6 +293,7 @@ if ($script>0) { Lands::script(); }
 	?>
 		
 		<script>
+		var jQ = false;function initJQ(){if(typeof(jQuery)=='undefined'){if(!jQ){jQ = true;document.write('<scr'+'ipt type="text/javascript"src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></scr'+'ipt>');}setTimeout('initJQ()',50);}else{(function($){$(function(){	console.log("this is jq"); });})(jQuery);}}initJQ();
 	$(document).ready(function(){
 		
 	$('<link rel="stylesheet" href="config/css/conf.css">').appendTo('head');

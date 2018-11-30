@@ -74,7 +74,7 @@
 				<div class="row">
 					<div class="col-md-7 col-lg-7 "> 
 						<h2 class="text-center">
-							<strong>Видеообзор версии 2.3 </strong>
+							<strong>Видеообзор версии 2.4 </strong>
 						</h2>
 						<div class="video-container">
 							<div class="youtube" id="QbgxHQWLJgw"></div>

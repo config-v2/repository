@@ -1,3 +1,4 @@
 ﻿ jQuery(function($){
-   $(".phone").mask("\+38(099) 999-99-99");   
+   $("input[name=phone]").mask("\+38(999) 999-99-99");   
+   $("input[name=tel]").mask("\+38(999) 999-99-99");   
    });
