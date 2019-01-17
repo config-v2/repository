@@ -28,14 +28,6 @@
 		<style>
 		
 			body {margin-bottom: 40px;} 
-			.video-container {
-				margin: -1px auto 0;
-				width: 480px;
-				height: 270px;
-				background-color: #000;
-				overflow: hidden;
-				position: relative;
-			}
 			.timer-box {
 				width: 370px;
 				margin: 0 auto 15px;
@@ -54,7 +46,7 @@
 			<div class="container"> 
 				<div class="page-header">
 					<h1 class="text-center"><strong>ДЕМОНСТРАЦИЯ ВОЗМОЖНОСТЕЙ</strong><small><br>Конфигуратор v.2.4</small></h1>
-					<div class="text-center"><a href="/config" target="_blank" >Посмотреть конфигуратор</a></div>
+					<div class="text-center"><a href="/config" target="_blank" >Посмотреть конфигуратор </a></div>
 				</div>
 				<span class="visible-md visible-lg">
 					<span class="phone"><strong>Звоните:</strong> <? lands::link_phone($contact_phone1); // Активная ссылка на телефон ?></span>

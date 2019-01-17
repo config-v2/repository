@@ -1,4 +1,4 @@
-<?
+<?php 
 require_once('config/class/lpcrm.class.php');
 
 $products_list = array(

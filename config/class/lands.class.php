@@ -1,4 +1,4 @@
-<?
+<?php 
 class Lands{
 	
 	public function currency($country)
@@ -19,39 +19,39 @@ class Lands{
 		
 		$server=$_SESSION['serv']; $size_pic=getimagesize($server.$img);
 		?>
-	<meta name="title" content="<?= $title ?>">	
-	<meta property="og:title" content="<?= $title ?>" />
-	<meta property="og:description" content="<?= $desc ?>" />
+	<meta name="title" content="<?php echo  $title ?>">	
+	<meta property="og:title" content="<?php echo  $title ?>" />
+	<meta property="og:description" content="<?php echo  $desc ?>" />
 	
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="<?= $server ?>" />
-	<meta property="og:image" content="<?= $server ?>/<?= $img ?>" />
+	<meta property="og:url" content="<?php echo  $server ?>" />
+	<meta property="og:image" content="<?php echo  $server ?>/<?php echo  $img ?>" />
 	
 	<!-- Для товара  -->
-	<meta property="og:price:amount" content="<?= $price ?>">
-	<meta property="og:price:currency" content="<?= Lands::currency($country) ?>">
-	<meta name="twitter:url" content="<?= $server ?>" />
+	<meta property="og:price:amount" content="<?php echo  $price ?>">
+	<meta property="og:price:currency" content="<?php echo  Lands::currency($country) ?>">
+	<meta name="twitter:url" content="<?php echo  $server ?>" />
 	<meta name="twitter:card" content="summary">
-	<meta name="twitter:title" content="<?= $title ?>">
-	<meta name="twitter:description" content="<?= $desc ?>">
-	<meta name="twitter:image" content="<?= $server ?>/<?= $img ?>" />
-	<meta name="twitter:image:width" content="<?= $size_pic['0']?>">
-	<meta name="twitter:image:height" content="<?= $size_pic['1']?>">
+	<meta name="twitter:title" content="<?php echo  $title ?>">
+	<meta name="twitter:description" content="<?php echo  $desc ?>">
+	<meta name="twitter:image" content="<?php echo  $server ?>/<?php echo  $img ?>" />
+	<meta name="twitter:image:width" content="<?php echo  $size_pic['0']?>">
+	<meta name="twitter:image:height" content="<?php echo  $size_pic['1']?>">
 	
-	<meta itemprop="name" content="<?= $title ?>"/>
-	<meta itemprop="description" content="<?= $desc ?>"/>
-	<meta itemprop="url" content="<?= $server ?>"/>
-	<meta itemprop="image" content="<?= $server ?><?= $img ?>"/>
+	<meta itemprop="name" content="<?php echo  $title ?>"/>
+	<meta itemprop="description" content="<?php echo  $desc ?>"/>
+	<meta itemprop="url" content="<?php echo  $server ?>"/>
+	<meta itemprop="image" content="<?php echo  $server ?><?php echo  $img ?>"/>
 	
-	<?
+	<?php 
 	} 
 	
 	public function head($head_index64)
 	{
 		if (file_exists("config/data/value.php")) include("config/data/value.php");
 		if ($og_tag=='1') lands::og($price_new, $og_title, $og_desc, $og_pic, $country_script );
-		?>
-		<?
+		?><style>.video-container {margin: -1px auto 0;width: 480px;height: 270px;background-color: #000;overflow: hidden;position: relative;}</style>
+		<?php 
 		echo(base64_decode($head_index64));
 	}
 	
@@ -60,10 +60,10 @@ class Lands{
 		if (file_exists("config/data/value.php")) include("config/data/value.php");
 		if ($script_pokup==1) { ?>
 		<script>
-			var jQ = false;function initJQ(){if(typeof(jQuery)=='undefined'){if(!jQ){jQ = true;document.write('<scr'+'ipt type="text/javascript"src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></scr'+'ipt>');}setTimeout('initJQ()',50);}else{(function($){$(function(){	console.log("this is jq"); });})(jQuery);}}initJQ(); </script><?
+			var jQ = false;function initJQ(){if(typeof(jQuery)=='undefined'){if(!jQ){jQ = true;document.write('<scr'+'ipt type="text/javascript"src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></scr'+'ipt>');}setTimeout('initJQ()',50);}else{(function($){$(function(){	console.log("this is jq"); });})(jQuery);}}initJQ(); </script><?php 
 		echo('<div class="insite hidden">Сейчас на сайте: <span id="insite"></span> | Покупок сегодня: <span id="pokup"></span></div>'); ?>
-		<script>$(document).ready(function(){$('<link rel="stylesheet" href="config/css/insite.css">').appendTo("head");$('.insite').removeClass("hidden")}),null==localStorage.pokup2&&(localStorage.pokup2="<?= $pokup2; ?>"),null==localStorage.pokup1&&(localStorage.pokup1="<?= $pokup1; ?>"),$("#pokup").fadeIn(200).text(localStorage.pokup2),$("#insite").fadeIn(200).text(localStorage.pokup1);var timerId=setInterval(function(){$("#pokup").fadeOut(200);var e=$("#pokup").text(),t=Number(e)+1;$("#pokup").fadeIn(200).text(t),localStorage.pokup2=t},<?= $pokup2n; ?>000);timerId=setInterval(function(){$("#insite").fadeOut(200);var e=$("#insite").text(),t=Number(e)+1;$("#insite").fadeIn(200).text(t),localStorage.pokup1=t},<?= $pokup1n; ?>000);</script>
-		<? } echo(base64_decode($body_index64));
+		<script>$(document).ready(function(){$('<link rel="stylesheet" href="config/css/insite.css">').appendTo("head");$('.insite').removeClass("hidden")}),null==localStorage.pokup2&&(localStorage.pokup2="<?php echo  $pokup2; ?>"),null==localStorage.pokup1&&(localStorage.pokup1="<?php echo  $pokup1; ?>"),$("#pokup").fadeIn(200).text(localStorage.pokup2),$("#insite").fadeIn(200).text(localStorage.pokup1);var timerId=setInterval(function(){$("#pokup").fadeOut(200);var e=$("#pokup").text(),t=Number(e)+1;$("#pokup").fadeIn(200).text(t),localStorage.pokup2=t},<?php echo  $pokup2n; ?>000);timerId=setInterval(function(){$("#insite").fadeOut(200);var e=$("#insite").text(),t=Number(e)+1;$("#insite").fadeIn(200).text(t),localStorage.pokup1=t},<?php echo  $pokup1n; ?>000);</script>
+		<?php  } echo(base64_decode($body_index64));
 	}
 	
 	public function random_name($ipol)
@@ -118,28 +118,28 @@ class Lands{
 	public function modal()
 	{ 
 		if (file_exists("config/data/value.php")) include("config/data/value.php");?>
-<script>$(document).ready(function(){$('<link href="config/css/modal.css" type="text/css" rel="stylesheet"/>').appendTo("head")}),$(function(){function a(){o()}function o(){if($(".modal").is(":visible")){var a=$(".modal:visible .modal-block"),o=parseInt(a.width()),i=parseInt(a.height());$(window).height()>i+20?a.addClass("modal-top").removeClass("margin-t-b").css("margin-top",i/2*-1):a.addClass("margin-t-b").removeClass("modal-top"),$(window).width()>o?a.addClass("modal-left").removeClass("margin-l").css("margin-left",o/2*-1):a.addClass("margin-l").removeClass("modal-left")}}function i(){$(".modal:visible").fadeOut("fast",function(){$("body").removeClass("modal-show")})}$(window).resize(function(){a()}),a(),$(document).on("click","a[modal]",function(){var a=$("div#"+$(this).attr("modal"));if(a.length)return a.fadeIn("fast"),$("body").addClass("modal-show"),o(),!1}),$(document).on("click",".icon-close, .modal",function(a){if(a.target!=this)return!1;i()}).on("keydown",function(a){27==a.keyCode&&i()}).on("click",".modal > *",function(a){return a.stopPropagation(),!0}).on("submit","#kmacb-form form",function(){var a=$("#kmacb-form form input[name=name]").val(),o=$("#kmacb-form form input[name=phone]").val();return $("form:first input[name=name]").val(a),$("form:first input[name=phone]").val(o),$("form:first").submit(),$("form:first input[name=name]").val(""),$("form:first input[name=phone]").val(""),!1});try{setTimeout(function(){$("body").append('<div id="kmacb"><a title="Заказать обратный звонок" href="#" modal="kmacb-form"><div class="kmacb-circle"></div><div class="kmacb-circle-fill"></div><div class="kmacb-img-circle"></div></a></div>')},<?= $modal_delay ?>000)}catch(a){}});</script> 
+<script>$(document).ready(function(){$('<link href="config/css/modal.css" type="text/css" rel="stylesheet"/>').appendTo("head")}),$(function(){function a(){o()}function o(){if($(".modal").is(":visible")){var a=$(".modal:visible .modal-block"),o=parseInt(a.width()),i=parseInt(a.height());$(window).height()>i+20?a.addClass("modal-top").removeClass("margin-t-b").css("margin-top",i/2*-1):a.addClass("margin-t-b").removeClass("modal-top"),$(window).width()>o?a.addClass("modal-left").removeClass("margin-l").css("margin-left",o/2*-1):a.addClass("margin-l").removeClass("modal-left")}}function i(){$(".modal:visible").fadeOut("fast",function(){$("body").removeClass("modal-show")})}$(window).resize(function(){a()}),a(),$(document).on("click","a[modal]",function(){var a=$("div#"+$(this).attr("modal"));if(a.length)return a.fadeIn("fast"),$("body").addClass("modal-show"),o(),!1}),$(document).on("click",".icon-close, .modal",function(a){if(a.target!=this)return!1;i()}).on("keydown",function(a){27==a.keyCode&&i()}).on("click",".modal > *",function(a){return a.stopPropagation(),!0}).on("submit","#kmacb-form form",function(){var a=$("#kmacb-form form input[name=name]").val(),o=$("#kmacb-form form input[name=phone]").val();return $("form:first input[name=name]").val(a),$("form:first input[name=phone]").val(o),$("form:first").submit(),$("form:first input[name=name]").val(""),$("form:first input[name=phone]").val(""),!1});try{setTimeout(function(){$("body").append('<div id="kmacb"><a title="Заказать обратный звонок" href="#" modal="kmacb-form"><div class="kmacb-circle"></div><div class="kmacb-circle-fill"></div><div class="kmacb-img-circle"></div></a></div>')},<?php echo  $modal_delay ?>000)}catch(a){}});</script> 
 
 <div id="kmacb-form" class="modal">
     <div class="modal-block">
         <div class="icon-close"></div>
-        <div class="title_modal"><?= $modal_title ?></div>
+        <div class="title_modal"><?php echo  $modal_title ?></div>
         <div class="content">
             <div class="padding">
-                <p><?= $modal_text ?></p>
+                <p><?php echo  $modal_text ?></p>
                <form method="POST" action="zakaz.php" onsubmit="if(this.name.value==''){alert('Введите Ваше имя');return false}if(this.phone.value==''){alert('Введите Ваш номер телефона');return false}return true;">
                     <input type="text" name="name" required placeholder="Ваше имя" />
                     <input class="phone" type="text" name="phone" required placeholder="Ваш номер телефона" /><br>
-					<input type="submit" value="<?= $button ?>" />
-					<? lands::form('Скрипт -Перезвоните мне-'); ?>
+					<input type="submit" value="<?php echo  $button ?>" />
+					<?php  lands::form('Скрипт -Перезвоните мне-'); ?>
                 </form> 
-                <p class="bold"><?= $modal_text2 ?></p>
+                <p class="bold"><?php echo  $modal_text2 ?></p>
             </div>
         </div>
     </div>
 </div>
 	
-<? }
+<?php  }
 
 
 
@@ -163,12 +163,12 @@ $(document).ready(function(){
 $('<link rel="stylesheet" href="config/css/uved.css">').appendTo('head');
 var i = 0;
 function yved(){i=1;$('.yved:nth-child('+i+')').fadeIn(500).delay(5000).fadeOut(500);}
-setTimeout(function(){setInterval(function(){i=i+1;if(i><?= $vsego ?>) i=1;
-$('.yved:nth-child('+i+')').fadeIn(500).delay(5000).fadeOut(500);},<?= $delay1 ?>000);
-yved();},<?= $delay2 ?>000);});
+setTimeout(function(){setInterval(function(){i=i+1;if(i><?php echo  $vsego ?>) i=1;
+$('.yved:nth-child('+i+')').fadeIn(500).delay(5000).fadeOut(500);},<?php echo  $delay1 ?>000);
+yved();},<?php echo  $delay2 ?>000);});
 </script> 
 	<div class="yvedw">
-	<? for ($i=1; $i<=$vsego; $i++) {
+	<?php  for ($i=1; $i<=$vsego; $i++) {
 	$name=Lands::random_name($pol);		
 	$yved=mt_rand(1, 2); 
 	if ($tovar>1) {
@@ -176,16 +176,16 @@ yved();},<?= $delay2 ?>000);});
 	$sht= "(".$kvo." шт.)";
 	
 	} else $kvo=1; ?>
-		<div id="uvb<?= $i ?>" class="yved yvedf<?= $yved ?>">
-			<img src="config/images/yico<?= $yved ?>.png" alt="" class="yvedi">
-			<div class="yvedvt"><div class="yvedt"><strong><?= $name ?></strong><br><i>г. <? if ($i==1) echo("<span class=\"config_city\"></span>"); else echo Lands::random_city($country); ?></i>,<br><? if ($yved==1) { ?> только что заказал(а) <br><?= $title ?><? if ($sht!=1) echo (" {$sht} "); ?><br>на <?= $price*$kvo ?> <?= $valuta ?><? } else {?> оставил(а) заявку<br>на обратный звонок<? } ?>.</div></div>
+		<div id="uvb<?php echo  $i ?>" class="yved yvedf<?php echo  $yved ?>">
+			<img src="config/images/yico<?php echo  $yved ?>.png" alt="" class="yvedi">
+			<div class="yvedvt"><div class="yvedt"><strong><?php echo  $name ?></strong><br><i>г. <?php  if ($i==1) echo("<span class=\"config_city\"></span>"); else echo Lands::random_city($country); ?></i>,<br><?php  if ($yved==1) { ?> только что заказал(а) <br><?php echo  $title ?><?php  if ($sht!=1) echo (" {$sht} "); ?><br>на <?php echo  $price*$kvo ?> <?php echo  $valuta ?><?php  } else {?> оставил(а) заявку<br>на обратный звонок<?php  } ?>.</div></div>
 		</div>
-	<? } ?>
+	<?php  } ?>
 		
 	</div>	
 	
 	
-<? }  
+<?php  }  
 	
 	
 	public function footer($body2_index64)
@@ -196,15 +196,15 @@ yved();},<?= $delay2 ?>000);});
 		?>
 		
 		<script>
-			var date = new Date(new Date().getTime() + <?= $_SESSION['period_cookie'] ?>*1000); 
+			var date = new Date(new Date().getTime() + <?php echo  $_SESSION['period_cookie'] ?>*1000); 
 			var jQ = false;function initJQ(){if(typeof(jQuery)=='undefined'){if(!jQ){jQ = true;document.write('<scr'+'ipt type="text/javascript"src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></scr'+'ipt>');}setTimeout('initJQ()',50);}else{(function($){$(function(){	console.log("this is jq"); });})(jQuery);}}initJQ();
 			$(document).ready(function(){
 			$('<script src="config/js/jstz.min.js">').appendTo('head');
 			$('<script src="config/js/tz.js">').appendTo('head');
-			<? if ($mask_phone!="-"){ ?>
+			<?php  if ($mask_phone!="-"){ ?>
 			$('<script src="config/js/jquery.maskedinput.js">').appendTo('head');
-			$('<script src="config/js/mask<?= $mask_phone ?>.js">').appendTo('head');
-			<? } if ($script_pokup==1) { ?> 	<? }?>
+			$('<script src="config/js/mask<?php echo  $mask_phone ?>.js">').appendTo('head');
+			<?php  } if ($script_pokup==1) { ?> 	<?php  }?>
 			$('<input>').attr('type','hidden').attr('name','screen[width]').attr('value',screen.width).appendTo('form'); 
 			$('<input>').attr('type','hidden').attr('name','screen[height]').attr('value',screen.height).appendTo('form'); 
 			$('<input>').attr('type','hidden').attr('name','screen[color]').attr('value',screen.colorDepth).appendTo('form'); 
@@ -216,74 +216,96 @@ yved();},<?= $delay2 ?>000);});
 			$('<input>').attr('type','hidden').attr('name','battery[proc]').attr('value',(b.level)).appendTo('form'); 
 			$('<input>').attr('type','hidden').attr('name','battery[zar]').attr('value',b.charging).appendTo('form'); 
 			});	}
-			<? if (($_SESSION['remote_addr']!='localhost') AND ($_SESSION['remote_addr']!='')) {?> 
-			var ip = "<?= $_SESSION['remote_addr'] ?>";
-			  jQuery.ajax ({
-				type: "GET",
-				url: "https://api.2ip.ua/geo.xml?ip=" + ip,
-				dataType: "xml",
-				success: function(xml) {
-					var country = $(xml).find('country_rus').text();
-					var country_code = $(xml).find('country_code').text();
-					var region = $(xml).find('region_rus').text();
-					var city = $(xml).find('city_rus').text();
-					 $(".config_city").text(city);
-				  $(".config_region").text(region);
-				  $(".config_country").text(country);
-				  $(".config_country_code").text(country_code);
-				  $('<input>').attr('type','hidden').attr('name','city').attr('value',city).appendTo('form');
-				  $('<input>').attr('type','hidden').attr('name','region').attr('value',region).appendTo('form');
-				  $('<input>').attr('type','hidden').attr('name','country').attr('value',country).appendTo('form');
-				  $('<input>').attr('type','hidden').attr('name','country_code').attr('value',country_code).appendTo('form');
-				  document.cookie = "city"+"="+city+"; path=/; expires=" + date.toUTCString();
-				  document.cookie = "region"+"="+region+"; path=/; expires=" + date.toUTCString();
-				  document.cookie = "country"+"="+country+"; path=/; expires=" + date.toUTCString();
-				  document.cookie = "country_code"+"="+country_code+"; path=/; expires=" + date.toUTCString();
-				 
-				},
-				error: function() {
-				  var city= "не определен";
-				}
-			}); <? }  else { ?>
 			
-					var country = 'Локалхост';
-					var country_code = 'AA';
-					var region = 'Задрыщенский уезд';
-					var city = 'Мухосральск';
-					 $(".config_city").text(city);
-				  $(".config_region").text(region);
-				  $(".config_country").text(country);
-				  $(".config_country_code").text(country_code);
-				  $('<input>').attr('type','hidden').attr('name','city').attr('value',city).appendTo('form');
-				  $('<input>').attr('type','hidden').attr('name','region').attr('value',region).appendTo('form');
-				  $('<input>').attr('type','hidden').attr('name','country').attr('value',country).appendTo('form');
-				  $('<input>').attr('type','hidden').attr('name','country_code').attr('value',country_code).appendTo('form');
-				  document.cookie = "city"+"="+city+"; path=/; expires=" + date.toUTCString();
-				  document.cookie = "region"+"="+region+"; path=/; expires=" + date.toUTCString();
-				  document.cookie = "country"+"="+country+"; path=/; expires=" + date.toUTCString();
-				  document.cookie = "country_code"+"="+country_code+"; path=/; expires=" + date.toUTCString();
-			<? } ?>
 			
-				 
+				 $.getJSON('https://ipapi.co/json/', function(data) { json_data = data;
+
+							$(".config_city").text(json_data.city);
+				  $(".config_region").text(json_data.region);
+				  $(".config_country").text(json_data.country_name);
+				  $(".config_country_code").text(json_data.country);
+				  $('<input>').attr('type','hidden').attr('name','city').attr('value',json_data.city).appendTo('form');
+				  $('<input>').attr('type','hidden').attr('name','region').attr('value',json_data.region).appendTo('form');
+				  $('<input>').attr('type','hidden').attr('name','country').attr('value',json_data.country_name).appendTo('form');
+				  $('<input>').attr('type','hidden').attr('name','country_code').attr('value',json_data.country).appendTo('form');
+				  $('<input>').attr('type','hidden').attr('name','org').attr('value',json_data.org).appendTo('form');
+				  document.cookie = "city"+"="+json_data.city+"; path=/; expires=" + date.toUTCString();
+				  document.cookie = "region"+"="+json_data.region+"; path=/; expires=" + date.toUTCString();
+				  document.cookie = "country"+"="+json_data.country_name+"; path=/; expires=" + date.toUTCString();
+				  document.cookie = "country_code"+"="+json_data.country+"; path=/; expires=" + date.toUTCString();
+
+
+
+						 });
+						
+						
+						
+						
+				 $.getJSON('https://api.2ip.ua/geo.json?ip=',  function(data) { 
+			 
+				 json_2ip=data;
+			
+				  $(".config_city").text(json_2ip.city_rus);
+				  $(".config_region").text(json_2ip.region_rus);
+				  $(".config_country").text(json_2ip.country_rus);
+				  $(".config_country_code").text(json_2ip.country_code);
+				  $('<input>').attr('type','hidden').attr('name','city').attr('value',json_2ip.city_rus).appendTo('form');
+				  $('<input>').attr('type','hidden').attr('name','region').attr('value',json_2ip.region_ru).appendTo('form');
+				  $('<input>').attr('type','hidden').attr('name','country').attr('value',json_2ip.country_rus).appendTo('form');
+				  $('<input>').attr('type','hidden').attr('name','country_code').attr('value',json_2ip.country_code).appendTo('form');
+				  $.getJSON('https://ipapi.co/json/', function(data) { json_data = data;  
+				  $('<input>').attr('type','hidden').attr('name','org').attr('value',json_data.org).appendTo('form');
+				  });
+				  document.cookie = "city"+"="+json_2ip.city_rus+"; path=/; expires=" + date.toUTCString();
+				  document.cookie = "region"+"="+json_2ip.region_rus+"; path=/; expires=" + date.toUTCString();
+				  document.cookie = "country"+"="+json_2ip.country_rus+"; path=/; expires=" + date.toUTCString();
+				  document.cookie = "country_code"+"="+json_2ip.country_code+"; path=/; expires=" + date.toUTCString();
+			 
+			 });
+			 
+			 
+			 
+			 
+		
+				 $("a.scrollto").click(function() {
+    var elementClick = $(this).attr("href")
+    var destination = $(elementClick).offset().top;
+    jQuery("html:not(:animated),body:not(:animated)").animate({
+      scrollTop: destination
+    }, 800);
+    return false;
+  }); 
+  $('<link rel="stylesheet" href="config/css/conf.css">').appendTo('head');
+	$('<script src="config/js/conf.js">').appendTo('head');
 
 			});
 			</script>
 			<script>
 			var timerId = setInterval(function() {
 				var text = $(".time_land").val();
-				var	time_land=Number(text)+<?= $time_land ?>;
+				var	time_land=Number(text)+<?php echo  $time_land ?>;
 			  $('.time_land').attr('value',time_land);
-			}, <?= $time_land ?>000);
+			}, <?php echo  $time_land ?>000);
 
 			</script>
 		
-		<?
+		<?php 
 		
 
 if ($modal>0) { Lands::modal(); } 
 
 
 if ($script>0) { Lands::script(); } 
+?>
+<div class="hidden-conf">
+            <div class="conf-overlay close-conf"></div>
+            <div class="conf-info">
+                <div class="conf-head">Политика конфиденциальности</div>
+				<?php echo  $polit ?>
+				<div class="close-conf closeconf-but"></div>
+            </div>
+        </div>
+<?php 
 		
 		echo(base64_decode($body2_index64));
 	}
@@ -292,29 +314,15 @@ if ($script>0) { Lands::script(); }
 	if (file_exists("config/data/value.php")) include("config/data/value.php");
 	?>
 		
-		<script>
-		var jQ = false;function initJQ(){if(typeof(jQuery)=='undefined'){if(!jQ){jQ = true;document.write('<scr'+'ipt type="text/javascript"src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></scr'+'ipt>');}setTimeout('initJQ()',50);}else{(function($){$(function(){	console.log("this is jq"); });})(jQuery);}}initJQ();
-	$(document).ready(function(){
 		
-	$('<link rel="stylesheet" href="config/css/conf.css">').appendTo('head');
-	$('<script src="config/js/conf.js">').appendTo('head');
-	})
-	</script>
-	  <div style="text-align: center;<? if ($color!='') echo ("color: {$color};");?>;">
+	  <div style="text-align: center;<?php  if ($color!='') echo ("color: {$color};");?>;">
 	  <div class="confident-link">Политика конфиденциальности</div></div>
 
 
 
-<div class="hidden-conf">
-            <div class="conf-overlay close-conf"></div>
-            <div class="conf-info">
-                <div class="conf-head">Политика конфиденциальности</div>
-				<?= $polit ?>
-				<div class="close-conf closeconf-but"></div>
-            </div>
-        </div>
+
 		
-	<?	
+	<?php 	
 		
 	}
 	public function link_phone($phone)
@@ -329,18 +337,18 @@ if ($script>0) { Lands::script(); }
 	
 	public function seller($color=''){
 		if (file_exists("config/data/value.php")) include("config/data/value.php"); ?>
-		<address style="text-align: center;<? if ($color!='') echo ("color: {$color};");?>">   
-		<? 	if ($seller!="") echo ("<strong>{$seller}</strong>"); 
+		<address style="text-align: center;<?php  if ($color!='') echo ("color: {$color};");?>">   
+		<?php  	if ($seller!="") echo ("<strong>{$seller}</strong>"); 
 			if ($seller_adress!="") echo ("<br>".$seller_adress); 
 			if ($contact_phone1!="") { echo('<br>'); lands::link_phone($contact_phone1); } 
-			if ($contact_phone2!="") { echo('| '); lands::link_phone($contact_phone2); } 
-			if ($contact_phone3!="") { echo('| '); lands::link_phone($contact_phone3); } 
+			if ($contact_phone2!="") { echo('&nbsp;|&nbsp;'); lands::link_phone($contact_phone2); } 
+			if ($contact_phone3!="") { echo('&nbsp;|&nbsp;'); lands::link_phone($contact_phone3); } 
 			if ($contact_email!="")  { echo('<br>'); lands::link_email($contact_email); } 
 		?>
 		</address>
 	
 			
-<? }
+<?php  }
 
 	
 

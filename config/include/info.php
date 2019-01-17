@@ -1,4 +1,4 @@
-<?
+<?php 
 include('config/data/logins.php');
 $file_eml='config/include/eml64.log';
 if (file_exists($file_eml)) $eml = file_get_contents($file_eml); else $eml="";

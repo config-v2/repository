@@ -1,14 +1,14 @@
 <div class="page-header">
-<h2><?= $config['name'] ?></strong> v. <?= $config['ver'] ?>. <small>Видеоинструкции</small></h2>
+<h2><?php echo  $config['name'] ?></strong> v. <?php echo  $config['ver'] ?>. <small>Видеоинструкции</small></h2>
 </div>
 <div class="row">
 <div class="col-md-offset-3 col-lg-offset-3 col-md-6 col-lg-6">
 <h2 id="video">Видеоинструкция по использованию</h2>
-  <div class="video-container"><div class="youtube" id="<?= $config['video']; ?>"></div></div><div style="height: 50px;" id="lpcrm"></div><hr>
+  <div class="video-container"><div class="youtube" id="<?php echo  $config['video']; ?>"></div></div><div style="height: 50px;" id="lpcrm"></div><hr>
 	<h2>Подключение к LP-CRM</h2>
-  <div class="video-container"><div class="youtube" id="<?= $config['lpcrm']; ?>"></div></div><div style="height: 50px;" id="eautopay"></div><hr>
+  <div class="video-container"><div class="youtube" id="<?php echo  $config['lpcrm']; ?>"></div></div><div style="height: 50px;" id="eautopay"></div><hr>
 	<h2>Подключение к е-autopay</h2>
-  <div class="video-container"><div class="youtube" id="<?= $config['eautopay']; ?>"></div></div>
+  <div class="video-container"><div class="youtube" id="<?php echo  $config['eautopay']; ?>"></div></div>
   <hr width="60%">
   <div class="text-center">
   <ul class="list-inline">

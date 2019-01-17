@@ -1,4 +1,4 @@
-<?php
+<?php  
 /**
  * File: Browser.php
  * Author: Chris Schuld (http://chrisschuld.com/)

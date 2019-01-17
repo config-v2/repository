@@ -1,4 +1,4 @@
-<?
+<?php 
 if($_GET){
     setcookie("utm_source",$_GET['utm_source'],time()+$period_cookie);
     setcookie("utm_medium",$_GET['utm_medium'],time()+$period_cookie);

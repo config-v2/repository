@@ -1,4 +1,4 @@
-<? 
+<?php  
 class save_config {
 public function config($str)
 	{

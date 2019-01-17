@@ -1,4 +1,4 @@
-<?
+<?php 
 //print_r($_POST);
 $logpath='../logs/'.$_POST['f'];
 if (file_exists($logpath))  {require_once($logpath); echo htmlspecialchars_decode($log);}

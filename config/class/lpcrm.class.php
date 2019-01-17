@@ -1,4 +1,4 @@
-<?
+<?php 
 class Lpcrm {
 
 public function send($data, $crm_id, $api) // Отправка данных в СРМ

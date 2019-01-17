@@ -1,4 +1,4 @@
-<?php
+<?php  
 $time_land='3';
 $cookie_days = 30; // Период cookie в днях
 $period_cookie = $cookie_days*24*60*60; // Пересчет в секунды
@@ -82,6 +82,10 @@ if (stripos($_SERVER['PHP_SELF'], "index"))
 		if ($browser_class->isTablet()) $device="Tablet"; else $device="Desktop";
 		$_SESSION['device']=$device;
 		
+		// Рабочие константы
+		define('YEAR',date("Y"));
+		define('TODAY', date("d.m.Y"));
+		
 				}
 		
 else {
@@ -123,7 +127,9 @@ else {
 	$geocity= $_COOKIE['city'];
 	$country = $_COOKIE['country'];
 	$region = $_COOKIE['region'];
-	$city=$geocity.",".$region.",".$country;
+	$city=$geocity;
+	if ($region!="") $city.=",".$region;
+	if ($country!="") $city.=",".$country;
 	$server=$_SESSION['serv'];
 	$host=$_SESSION['host'];
 	$domen=$_SESSION['domen'];

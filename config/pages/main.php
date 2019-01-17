@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?= $config['name'] ?> v.<?= $config['ver']?> для <?= $_SERVER['SERVER_NAME']; ?></title>
+  <title><?php echo  $config['name'] ?> v.<?php echo  $config['ver']?> для <?php echo  $_SERVER['SERVER_NAME']; ?></title>
   <meta name="author" content="GreyGler" />
     <meta name="copyright" content="https://greygler.github.io" />
 	 <link rel="shortcut icon" href="favicon.png" type="image/png">
@@ -54,33 +54,33 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
      </button>
-     <a class="navbar-brand" href="?p=main"><strong><?= $config['name'] ?></strong> v.<?= $config['ver']?> </a>
+     <a class="navbar-brand" href="?p=main"><strong><?php echo  $config['name'] ?></strong> v.<?php echo  $config['ver']?> </a>
     </div>
     <div class="navbar-collapse collapse">
      
      <ul class="nav navbar-nav navbar-right">
-      <li><a  href="?p=main"><?= $config['menu_name']['main'] ?></a></li>
-      <li <? if ($_GET['page']=="logs") echo('class="active"'); ?> id="lilog" class="<? if ($logs!='1') echo('hidden')?>"><a  href="<?= $config['menu_link']['log'] ?>"><?= $config['menu_name']['log'] ?></a></li>
-      <li ><a data-toggle="modal" data-target="#pass" href="<?= $config['menu_link']['pass'] ?>"><?= $config['menu_name']['pass'] ?></a></li>
-	    <li ><a data-toggle="modal" data-target="#clear" href="<?= $config['menu_link']['clear'] ?>"><?= $config['menu_name']['clear'] ?></a></a></li>
-      <li <? if ($_GET['page']=="help") echo('class="active"'); ?>><a  href="<?= $config['menu_link']['help'] ?>"><?= $config['menu_name']['help'] ?></a></li>
-		<li> <a href="<?= $config['menu_link']['don'] ?>" onclick="runWfpWdgt();"><?= $config['menu_name']['don'] ?></a></li>
-      <li class="active"><a data-toggle="modal" data-target="#exit" href="<?= $config['menu_link']['exit'] ?>"><i class="fa fa-power-off" aria-hidden="true"></i> <?= $config['menu_name']['exit'] ?></a></li>
+      <li><a  href="?p=main"><?php echo  $config['menu_name']['main'] ?></a></li>
+      <li <?php  if ($_GET['page']=="logs") echo('class="active"'); ?> id="lilog" class="<?php  if ($logs!='1') echo('hidden')?>"><a  href="<?php echo  $config['menu_link']['log'] ?>"><?php echo  $config['menu_name']['log'] ?></a></li>
+      <li ><a data-toggle="modal" data-target="#pass" href="<?php echo  $config['menu_link']['pass'] ?>"><?php echo  $config['menu_name']['pass'] ?></a></li>
+	    <li ><a data-toggle="modal" data-target="#clear" href="<?php echo  $config['menu_link']['clear'] ?>"><?php echo  $config['menu_name']['clear'] ?></a></a></li>
+      <li <?php  if ($_GET['page']=="help") echo('class="active"'); ?>><a  href="<?php echo  $config['menu_link']['help'] ?>"><?php echo  $config['menu_name']['help'] ?></a></li>
+		<li> <a href="<?php echo  $config['menu_link']['don'] ?>" onclick="runWfpWdgt();"><?php echo  $config['menu_name']['don'] ?></a></li>
+      <li class="active"><a data-toggle="modal" data-target="#exit" href="<?php echo  $config['menu_link']['exit'] ?>"><i class="fa fa-power-off" aria-hidden="true"></i> <?php echo  $config['menu_name']['exit'] ?></a></li>
      </ul>
     </div><!--/.nav-collapse -->
    </div>
   </div>
 
    <div class="container">
-<? if ($password==md5('admin')) { ?>
+<?php  if ($password==md5('admin')) { ?>
 
   	<div class="alert alert-danger alert-dismissable text-center">
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
- <a href="#" class="alert-link "><strong>Внимание!</strong> В целях безопасности поменяйте пароль для входа в админ-панель <?= $config['name'] ?>а</a>
+ <a href="#" class="alert-link "><strong>Внимание!</strong> В целях безопасности поменяйте пароль для входа в админ-панель <?php echo  $config['name'] ?>а</a>
 </div>
-<? } ?>
+<?php  } ?>
  
- <? if ($_GET['page']!="") $page='pages/'.$_GET['page'].".php"; else $page='pages/config.php';
+ <?php  if ($_GET['page']!="") $page='pages/'.$_GET['page'].".php"; else $page='pages/config.php';
  
  
  include($page); ?>
@@ -90,11 +90,11 @@
 <div class="navbar navbar-default navbar-fixed-bottom footer" role="navigation">
    <div class="container">
     
-     <a class="navbar-brand footer" href="<?= $config['site_conf'] ?>">&copy; 2015-<?= date("Y")?> <?= $config['name'] ?> для лендингов v.<?= $config['ver']?></a>
+     <a class="navbar-brand footer" href="<?php echo  $config['site_conf'] ?>">&copy; 2015-<?php echo  date("Y")?> <?php echo  $config['name'] ?> для лендингов v.<?php echo  $config['ver']?></a>
    
 		
 		<ul class="nav navbar-nav navbar-right">
-      <li><a href="<?= $config['site_gg'] ?>"><?= $config['powered'] ?></a></li>
+      <li><a href="<?php echo  $config['site_gg'] ?>"><?php echo  $config['powered'] ?></a></li>
       
      </ul>
     
@@ -119,7 +119,7 @@
   <div class="form-group">
     <label for="pass_new" class="col-sm-4 control-label">Пароль:</label>
     <div class="col-sm-8">
-      <input type="password" class="form-control" id="pass_clear" name="password" placeholder="Пароль от <?= $config['name'] ?>а">
+      <input type="password" class="form-control" id="pass_clear" name="password" placeholder="Пароль от <?php echo  $config['name'] ?>а">
     </div>
 	
   </div>
@@ -133,7 +133,7 @@
    <div class="modal-footer">
         <button id="no-clear" type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
         <button id="suc-clear" type="submit" class="btn btn-danger">Очистить данные</button>
-        <a id="ok-clear" href="<?= $server ?>" class="btn btn-primary hidden">Ok</a>
+        <a id="ok-clear" href="<?php echo  $server ?>" class="btn btn-primary hidden">Ok</a>
       </div>
 	  </form>
   </div>
@@ -148,7 +148,7 @@
     <h4 class="modal-title" id="exbody">Выход</h4>
    </div>
    <div class="modal-body">
-    Хотите закончить работу с <?= $config['name'] ?>ом?
+    Хотите закончить работу с <?php echo  $config['name'] ?>ом?
    </div>
    <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
@@ -174,7 +174,7 @@
   <div class="form-group">
     <label for="login" class="col-sm-4 control-label">Логин:</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" id="login" value="<?= $login ?>" name="login" placeholder="Логин">
+      <input type="text" class="form-control" id="login" value="<?php echo  $login ?>" name="login" placeholder="Логин">
     </div>
   </div>
   <div class="form-group">
@@ -201,7 +201,7 @@
       <div class="modal-footer">
         <button id="no" type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
         <button id="success" type="submit" class="btn btn-primary">Сменить пароль</button>
-        <a id="ok" href="<?= $server ?>" class="btn btn-primary hidden">Ok</a>
+        <a id="ok" href="<?php echo  $server ?>" class="btn btn-primary hidden">Ok</a>
       </div>
 	  </form>
     </div>

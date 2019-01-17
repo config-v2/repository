@@ -1,4 +1,4 @@
-<? 
+<?php  
 $timezone_array=array(
  '1' => array(
  'options' => 'GMT-12:00 (Анадырь, Камчатка)',

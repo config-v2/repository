@@ -1,4 +1,4 @@
-<?
+<?php 
 //print_r($_POST);
 if (($_POST['valuta']!="") OR ($_POST['product']!="")){
 	$file_bak='../data/value.bak';
@@ -19,10 +19,12 @@ $last_edit="Last edition by ".date('d.m.Y, H:i:s');
 $create="Created for {$_SERVER['SERVER_NAME']}";
 $power1=$config['powered'];
 $power2=$config['site_gg'];
-$text="<?php\n/* {$str_up}\n";
+$ip="ip: {$_SERVER['REMOTE_ADDR']}";
+$text="<?php  \n/* {$str_up}\n";
 $text.=" * ".str_pad($file_conf, 41, " ", STR_PAD_BOTH)." *\n";
 $text.=" * ".str_pad($create, 41, " ", STR_PAD_BOTH)." *\n";
 $text.=" * ".str_pad($last_edit, 41, " ", STR_PAD_BOTH)." *\n";
+$text.=" * ".str_pad($ip, 41, " ", STR_PAD_BOTH)." *\n";
 $text.=" {$str_up}*/\n\n";
 $text2=$text."session_start();\nrequire_once(\"config/class/browser.class.php\");\nrequire_once(\"config/class/functions.class.php\");\nrequire_once(\"config/class/lands.class.php\");\nrequire_once(\"config/data/define.php\");\n";
 
@@ -73,6 +75,7 @@ $text2.="$"."currency=$"."valuta; $"."discount=$"."skidka;\n";
 $text2.='date_default_timezone_set ($timezone);'."\n";
 $text2.="$"."header=\"Content-type: text/html;charset=utf-8\\"."r\\"."nFrom: "."{"."$"."sender"."}"."\\"."r\\"."n\";\n";
 $text2.='if (config::is_ip($remote_addr,$ip_block)==true) {include("config/blockip/index.php"); exit();}';
+$text2.='if ($_GET[\'page\']==\'404\') {include("config/pages/404.php"); exit();}';
 $text2.="\n{$footer}\n?>\n";
 file_put_contents($file_value1, $text);
 file_put_contents($file_config, $text2);

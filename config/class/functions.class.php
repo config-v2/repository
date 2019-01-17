@@ -1,4 +1,4 @@
-<? 
+<?php  
 class Config {
 
 public function GetRealIp() {

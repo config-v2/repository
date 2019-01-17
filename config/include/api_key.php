@@ -1,4 +1,4 @@
-<? // Отправка данных в e-autopay
+<?php  // Отправка данных в e-autopay
 
 		
 $basket[]=array(
@@ -59,6 +59,11 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, array(
 );
 $out = curl_exec($curl);
 curl_close($curl);
+$jout=json_decode($out,true);
+ $m1=$jout['orders']['0']['status']; $m2=$jout['message']['0']; 
+$m2.=", OrderID: {$jout['orders']['0']['order_id']}";
+$mess="<tr><td><b>Статус заказа e-autopay:</b></td><td> {$m1},</td></tr><tr>\n<td><br> {$m2}</td></tr>";
+$crm_tele=	"<b>Статус заказа e-autopay:</b> {$m1}, {$m2}";
 // echo("<br>____________________<br>");
 // print_r($out);	
 	
