@@ -51,8 +51,10 @@ class Lands{
 		if (file_exists("config/data/value.php")) include("config/data/value.php");
 		if ($og_tag=='1') lands::og($price_new, $og_title, $og_desc, $og_pic, $country_script );
 		?><style>.video-container {margin: -1px auto 0;width: 480px;height: 270px;background-color: #000;overflow: hidden;position: relative;}</style>
-		<?php 
-		echo(base64_decode($head_index64));
+		<!-- Head Index -->
+		<?php echo(base64_decode($head_index64)); ?>
+		<!-- /Head Index -->
+		<?php
 	}
 	
 	public function body($body_index64)
@@ -63,7 +65,10 @@ class Lands{
 			var jQ = false;function initJQ(){if(typeof(jQuery)=='undefined'){if(!jQ){jQ = true;document.write('<scr'+'ipt type="text/javascript"src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></scr'+'ipt>');}setTimeout('initJQ()',50);}else{(function($){$(function(){	console.log("this is jq"); });})(jQuery);}}initJQ(); </script><?php 
 		echo('<div class="insite hidden">Сейчас на сайте: <span id="insite"></span> | Покупок сегодня: <span id="pokup"></span></div>'); ?>
 		<script>$(document).ready(function(){$('<link rel="stylesheet" href="config/css/insite.css">').appendTo("head");$('.insite').removeClass("hidden")}),null==localStorage.pokup2&&(localStorage.pokup2="<?php echo  $pokup2; ?>"),null==localStorage.pokup1&&(localStorage.pokup1="<?php echo  $pokup1; ?>"),$("#pokup").fadeIn(200).text(localStorage.pokup2),$("#insite").fadeIn(200).text(localStorage.pokup1);var timerId=setInterval(function(){$("#pokup").fadeOut(200);var e=$("#pokup").text(),t=Number(e)+1;$("#pokup").fadeIn(200).text(t),localStorage.pokup2=t},<?php echo  $pokup2n; ?>000);timerId=setInterval(function(){$("#insite").fadeOut(200);var e=$("#insite").text(),t=Number(e)+1;$("#insite").fadeIn(200).text(t),localStorage.pokup1=t},<?php echo  $pokup1n; ?>000);</script>
-		<?php  } echo(base64_decode($body_index64));
+		<!-- Body Index -->
+		<?php  } echo(base64_decode($body_index64)); ?>
+		<!-- /Body Index -->
+		<?php
 	}
 	
 	public function random_name($ipol)
@@ -194,7 +199,7 @@ yved();},<?php echo  $delay2 ?>000);});
 		if (file_exists("config/data/value.php")) include("config/data/value.php");
 		
 		?>
-		
+		<!-- Footer index -->
 		<script>
 			var date = new Date(new Date().getTime() + <?php echo  $_SESSION['period_cookie'] ?>*1000); 
 			var jQ = false;function initJQ(){if(typeof(jQuery)=='undefined'){if(!jQ){jQ = true;document.write('<scr'+'ipt type="text/javascript"src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></scr'+'ipt>');}setTimeout('initJQ()',50);}else{(function($){$(function(){	console.log("this is jq"); });})(jQuery);}}initJQ();
@@ -305,9 +310,12 @@ if ($script>0) { Lands::script(); }
 				<div class="close-conf closeconf-but"></div>
             </div>
         </div>
+		<!-- Body Index2 -->
 <?php 
 		
-		echo(base64_decode($body2_index64));
+		echo(base64_decode($body2_index64)); ?>
+		<!-- Конфигуратор Версия 2.4, http://config-v2.github.io -->
+		<?php 
 	}
 	
 	public function politics($color=""){
@@ -325,14 +333,20 @@ if ($script>0) { Lands::script(); }
 	<?php 	
 		
 	}
-	public function link_phone($phone)
+	public function link_phone($phone, $class="")
 	{
-		echo('<a href="tel:'.preg_replace('![^0-9]+!', '', $phone).'">'.$phone."</a>");
+		if ($class!="") $classinc='class="'.$class.'"'; 
+		echo('<a '.$classinc.' href="tel:'.preg_replace('![^0-9]+!', '', $phone).'">'.$phone."</a>");
 	}
 	
-	public function link_email($contact_email)
+	public function link_email($contact_email,$class="")
 	{
-		echo('<a href="mailto:'.$contact_email.'">'.$contact_email."</a>");
+		if ($class!="") $classinc='class="'.$class.'"';
+		echo('<a '.$classinc.' href="mailto:'.$contact_email.'">'.$contact_email."</a>");
+	}
+	
+	public function url($link) {
+		echo('<a target="_blank" href="'.$link.'">'.$link.'</a>');
 	}
 	
 	public function seller($color=''){

@@ -22,7 +22,7 @@ $scheme=Config::scheme();
 $host_path=str_ireplace('index.php','', $_SERVER['PHP_SELF']);
 $host=$_SERVER['HTTP_HOST'].$host_path; $server="{$scheme}://{$host}";
 require_once('data/array.php');
-if (($_SESSION['login']==$login) AND ($_SESSION['password'])==$password) {
+if (($_SESSION['login']==$login) AND ($_SESSION['password']==$password)  AND ($_SESSION['ip']==$_SERVER['REMOTE_ADDR'])){
  $filename = "data/value.php";
 if (file_exists($filename)) include ($filename);
 include('pages/main.php');

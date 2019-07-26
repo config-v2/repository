@@ -86,56 +86,23 @@ function insite() {
 	
 }
 
-function crmfunc() {
+function crmfunc(crm) {
+
+if (crm!=""){
 	
-	if ($('#crm').val()=='lpcrm'){
-		$('#key_crm').prop('disabled',false);
-		$('#idcrm').prop('disabled',false);
-		$('#country_crm').prop('disabled',false);
-		$('#product_id_crm').prop('disabled',false);
-		$('#office_crm').prop('disabled',false);
-		$('#delivery_crm').prop('disabled',false);
-		$('#payment_crm').prop('disabled',false);
-		
-		$('#user_api_key').prop('disabled',true);
-		$('#customer_api_key').prop('disabled',true);
-		$('#good_id').prop('disabled',true);
-		
-		$('#lpcrm').removeClass('hidden');
-		$('#eautopay').addClass('hidden');
-	} else {
-		if ($('#crm').val()=='eautopay'){
-			$('#key_crm').prop('disabled',true);
-			$('#idcrm').prop('disabled',true);
-			$('#country_crm').prop('disabled',true);
-			$('#product_id_crm').prop('disabled',true);
-			$('#office_crm').prop('disabled',true);
-			$('#delivery_crm').prop('disabled',true);
-			$('#payment_crm').prop('disabled',true);
-			
-			$('#user_api_key').prop('disabled',false);
-			$('#customer_api_key').prop('disabled',false);
-			$('#good_id').prop('disabled',false);
-			
-			$('#lpcrm').addClass('hidden');
-			$('#eautopay').removeClass('hidden');
-		} else{
-			$('#key_crm').prop('disabled',true);
-			$('#idcrm').prop('disabled',true);
-			$('#country_crm').prop('disabled',true);
-			$('#product_id_crm').prop('disabled',true);
-			$('#office_crm').prop('disabled',true);
-			$('#delivery_crm').prop('disabled',true);
-			$('#payment_crm').prop('disabled',true);
-			
-			$('#user_api_key').prop('disabled',true);
-			$('#customer_api_key').prop('disabled',true);
-			$('#good_id').prop('disabled',true);
-			
-			$('#lpcrm').addClass('hidden');
-			$('#eautopay').addClass('hidden');
-	}
-	
+	$.ajax({
+          type: 'POST',
+          url: 'include/'+crm+'.php',
+          data: crm,
+          success: function(data) {
+            $('#crm_block').html(data);
+          },
+          error:  function(xhr, str){
+    alert('Возникла ошибка: ' + xhr.responseCode);
+          }
+        });
+} else {
+	$('#crm_block').html('');
 }
 }
 

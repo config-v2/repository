@@ -479,7 +479,13 @@ echo('<span id="on_og_pic" onclick="ogpicscr(); return false;" class="btn btn-de
 	 <label class="col-sm-3 control-label" for="contact_phone3">Контактный телефон 3: </label><div class="col-sm-9"><input class="form-control" id="contact_phone3" type="text" name="contact_phone3" value="<?php echo  $contact_phone3 ?>" placeholder="Контактный телефон продавца 3"></div></div>
 	 <div class="form-group">
 	 <label class="col-sm-3 control-label" for="contact_email">Контактный E-mail:<br> </label><div class="col-sm-9"><input class="form-control" id="contact_email" type="text" name="contact_email" value="<?php echo  $contact_email ?>" placeholder="Контактный E-mail продавца"></div></div>
-	 
+	 <div class="form-group">
+	 <label class="col-sm-3 control-label" for="insta">Instagramm:<br> </label><div class="col-sm-9"><input class="form-control" id="insta" type="text" name="insta" value="<?php echo  $insta ?>" placeholder="Страница в Инстаграмм"></div></div>
+	 <div class="form-group">
+	 <label class="col-sm-3 control-label" for="fb">Facebook:<br> </label><div class="col-sm-9"><input class="form-control" id="fb" type="text" name="fb" value="<?php echo  $fb ?>" placeholder="Страница на Facebook"></div></div>
+	 <div class="form-group">
+	 <label class="col-sm-3 control-label" for="vk">Vkontakte:<br> </label><div class="col-sm-9"><input class="form-control" id="vk" type="text" name="vk" value="<?php echo  $vk ?>" placeholder="Страница на ВКонтакте"></div></div>
+
 	 	<div class="form-group">
 	  	<label class="col-sm-3 control-label">Политика конфиденциальности:</label> <div class="col-sm-9"><textarea rows="8" id="polit" name="polit" cols="70">
 		<?php  if ($polit!="") echo $polit; else echo $config['polit']; ?></textarea>
@@ -743,15 +749,16 @@ if ($button=="") echo $config['modal']['button']; else echo $button;	 ?>" placeh
 	     	 <legend><small>Интеграции с СРМ</small></legend>
     <div class="form-group">
     <label class="col-sm-3 control-label" for="crm">Ваша СРМ: </label><div class="col-sm-9">
-	 <select class="form-control" id="crm" name="crm" onchange="crmfunc(); return true;">
+	 <select class="form-control" id="crm" name="crm" onchange="crmfunc(this.value); return true;">
  
   <option <?php  if ($crm=='') echo "selected"; ?> value="">Не используется</option>
   <option <?php  if ($crm=='lpcrm') echo "selected"; ?> value="lpcrm">LP-CRM</option>
+  <option <?php  if ($crm=='crm1top') echo "selected"; ?> value="crm1top">CRM1.TOP</option>
   <option <?php  if ($crm=='eautopay') echo "selected"; ?> value="eautopay">e-autopay</option>
    </select></div></div>
    
-   <div <?php  if ($crm!='lpcrm') echo('class="hidden"'); ?> id="lpcrm"><?php  include('include/lpcrm.php'); ?></div>
-   <div  <?php  if ($crm!='eautopay') echo('class="hidden"'); ?> id="eautopay"><?php  include('include/eautopay.php'); ?> </div>
+   <div  id="crm_block"><?php  if ($crm!='') include('include/'.$crm.'.php'); ?></div>
+   
    
    
 		<!--
